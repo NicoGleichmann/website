@@ -1,6 +1,5 @@
 import './style.css';
 
-
 //Scripts
 import ExternalLink from './mainScrips/links.tsx'
 import InstaSlider from './mainScrips/imageSlider.tsx'
@@ -8,7 +7,7 @@ import HorizontalScroll from './mainScrips/scroll.tsx';
 
 //Global Scripts
 import ThemeToggle from '../darkMode.tsx';
-import CookieBanner from '../../globalScrips/cookie.tsx'
+import CookieBanner from '../cookie.tsx'
 
 const HomePage = () => {
   return (

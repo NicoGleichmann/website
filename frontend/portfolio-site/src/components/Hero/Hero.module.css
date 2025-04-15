@@ -1,0 +1,82 @@
+/* HeroSection.module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap');
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 2rem;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  position: relative;
+  overflow: hidden;
+  font-family: 'Outfit', sans-serif;
+}
+
+.content {
+  max-width: 800px;
+  text-align: center;
+  z-index: 10;
+}
+
+.heading {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.highlight {
+  color: #6fb8e5;
+  /*text-shadow: 0 0 5px rgba(78, 161, 211, 0.3);*/
+}
+
+.subheading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-light);
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin-bottom: 2rem;
+}
+
+.ctaButton {
+  display: inline-block;
+  padding: 0.9rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-bg);
+  background-color: var(--color-accent);
+  border: none;
+  border-radius: 12px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
+}
+
+.ctaButton:hover {
+  background-color: var(--color-accent-hover);
+  transform: scale(1.05);
+}
+
+/* Optional Background Glow Effect */
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--color-accent-glow), transparent 70%);
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.25;
+  filter: blur(120px);
+  z-index: 0;
+}

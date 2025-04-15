@@ -1,0 +1,147 @@
+/* src/components/Projects/Projects.module.css */
+@import '../../styles/global.css';
+
+.projectsSection {
+  background-color: var(--color-surface);
+  padding: 6rem 1rem;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    text-align: center;
+    animation: fadeIn 1.2s ease-out;
+    margin-bottom: 50px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background-color: #18181b;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  padding: 1.5rem;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  position: relative;
+  animation: fadeIn 1.2s ease-out;
+  animation-delay: 0.5s;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card h3 {
+  font-size: var(--font-xl);
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-size: var(--font-base);
+  color: var(--color-muted);
+  margin-bottom: 1rem;
+}
+
+.link {
+  font-size: var(--font-base);
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.link:hover {
+  color: var(--color-accent);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+}
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+}
+@media (max-width: 320px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+}
+
+@media (max-width: 280px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+}
+
+@media (max-width: 240px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+}
+
+@media (max-width: 200px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+}
+
+@media (max-width: 160px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+}
+
+@media (max-width: 120px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+}
+
+/* Optional Animation for Text */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 1.2s ease-out;
+}
+.fadeInUp {
+  animation: fadeIn 1.2s ease-out;
+}
+
+.fadeInUpDelay {
+  animation: fadeIn 1.2s ease-out 0.5s forwards;
+}

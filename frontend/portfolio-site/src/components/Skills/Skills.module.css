@@ -1,0 +1,120 @@
+.skills {
+    width: 100%;
+    padding: 6rem 2rem;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .inner {
+    max-width: 1000px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .heading {
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--color-accent);
+  }
+  
+  .subheading {
+    font-size: 1.2rem;
+    color: var(--color-text-light);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 2rem;
+    padding-top: 2rem;
+  }
+  
+  .skill {
+    background-color: var(--color-card);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 0 transparent;
+  }
+  
+  .skill:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .icon {
+    font-size: 2.5rem;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+  
+  .skill span {
+    font-size: 1.2rem;
+    color: var(--color-text);
+    font-weight: 500;
+    text-align: center;
+  }  
+  
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    }
+  }
+  
+  @media (max-width: 320px) {
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    }
+  }
+  
+  @media (max-width: 240px) {
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    }
+  }
+  
+  /* Optional Animation for Text */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .fadeIn {
+    animation: fadeIn 1.2s ease-out;
+  }
+    .fadeInUp {
+        animation: fadeIn 1.2s ease-out;
+    }
+    .fadeInUpDelay {
+        animation: fadeIn 1.2s ease-out 0.5s forwards;
+    }
+    .fadeInUpDelay2 {
+        animation: fadeIn 1.2s ease-out 0.7s forwards;
+    }   
+    .fadeInUpDelay3 {
+            animation: fadeIn 1.2s ease-out 0.9s forwards;
+        }
