@@ -1,54 +1,72 @@
 .section {
-    padding: 6rem 1rem;
-    background: var(--color-bg);
-  }
-  
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  
-  .heading {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 3rem;
-    text-align: center;
-    color: var(--color-heading);
-  }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-  }
-  
-  .card {
-    background: var(--color-card);
-    border: 1px solid var(--color-border);
-    border-radius: 1.5rem;
-    padding: 2rem;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow-sm);
-    text-decoration: none;
-    color: var(--color-text);
-  }
-  
-  .card h3 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    color: var(--color-accent);
-  }
-  
-  .card p {
-    font-size: 0.95rem;
-    color: var(--color-text-muted);
-    margin-bottom: 1rem;
-    line-height: 1.5;
-  }
-  
-  .date {
-    font-size: 0.85rem;
-    color: var(--color-border);
-  }
-  
+  padding: 7rem 1rem;
+  background: var(--color-bg);
+}
+
+.wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.7rem;
+  font-weight: 800;
+  color: var(--color-heading);
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  margin-bottom: 3.5rem;
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  color: var(--color-text);
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.cardContent h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: var(--color-accent);
+}
+
+.cardContent p {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--color-border);
+}

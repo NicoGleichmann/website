@@ -4,8 +4,8 @@ import About from "./components/About/About.tsx";
 import Skills from "./components/Skills/Skills.tsx";
 import Projects from "./components/Projects/Projects.tsx";
 import Blog from "./components/Blog/Blog.tsx";
-//import Contact from "./components/Contact/Contact.tsx";
-//import Footer from "./components/Footer/Footer.tsx";
+import ContactSection from "./components/Contact/Contact.tsx";
+import Footer from "./components/Footer/Footer.tsx";
 
 import "./styles/global.css";
 
@@ -18,6 +18,8 @@ function App() {
       <Skills />
       <Projects />
       <Blog />
+      <ContactSection />
+      <Footer />
     </>
   );
 }

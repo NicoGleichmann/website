@@ -1,17 +1,18 @@
 import styles from "./Navbar.module.css";
 import { useState } from "react";
+import { FiLogIn, FiMoon, FiSun } from "react-icons/fi";
+import { useDarkMode } from "../DarkModeToggle/DarkModeToggle.tsx";
 
 const navLinks = [
   { label: "Home", href: "#hero" },
-  { label: "Über mich", href: "#about" },
+  { label: "About ME", href: "#about" },
   { label: "Skills", href: "#skills" },
-  { label: "Projekte", href: "#projects" },
-  { label: "Blog", href: "#blog" },
   { label: "Kontakt", href: "#contact" },
 ];
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { darkMode, toggleDarkMode } = useDarkMode();
 
   return (
     <nav className={styles.navbar}>
@@ -27,10 +28,31 @@ export const Navbar = () => {
         ))}
       </ul>
 
-      <button className={styles.burger} onClick={() => setMenuOpen(!menuOpen)}>
-        <span className={menuOpen ? styles.active : ""}></span>
-        <span className={menuOpen ? styles.active : ""}></span>
-        <span className={menuOpen ? styles.active : ""}></span>
+      <div className={styles.iconContainer}>
+        <button
+          className={styles.iconButton}
+          onClick={() => console.log("Login clicked")}
+          aria-label="Login"
+        >
+          <FiLogIn />
+        </button>
+        <button
+          className={styles.iconButton}
+          onClick={toggleDarkMode}
+          aria-label="Toggle Dark Mode"
+        >
+          {darkMode ? <FiSun /> : <FiMoon />}
+        </button>
+      </div>
+
+      <button
+        className={`${styles.burger} ${menuOpen ? styles.openBurger : ""}`}
+        onClick={() => setMenuOpen(!menuOpen)}
+        aria-label="Toggle menu"
+      >
+        <span className={styles.line}></span>
+        <span className={styles.line}></span>
+        <span className={styles.line}></span>
       </button>
     </nav>
   );
