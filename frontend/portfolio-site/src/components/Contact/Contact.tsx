@@ -22,10 +22,10 @@ const ContactSection = () => {
         viewport={{ once: false, amount: 0.2 }} // Animation wird auch bei Scrollen ausgelöst
       >
         <motion.h1 variants={itemVariants}>Let’s talk</motion.h1>
-        <motion.p variants={itemVariants}>Ask us anything or just say hi...</motion.p>
+        <motion.p variants={itemVariants}>Stelle eine Frage oder sage einfach nur „Hallo“ …</motion.p>
         <motion.div className={styles.contactInfo} variants={itemVariants}>
-          <p>📞 1 234 567 890</p>
-          <p>📧 hey@boxletter.media</p>
+          <p>📞 +49 176 44444 856</p>
+          <p>📧 nicogleichmann39@gmail.com</p>
         </motion.div>
       </motion.div>
 
@@ -38,11 +38,11 @@ const ContactSection = () => {
       >
         <motion.form className={styles.form} variants={itemVariants}>
           <div className={styles.inputGroup}>
-            <input type="text" placeholder="Victoria Doe" />
+            <input type="text" placeholder="Name..." />
             <input type="email" placeholder="example@yourdomain.com" />
           </div>
-          <textarea placeholder="Hi there..." />
-          <button type="submit">SEND ➤</button>
+          <textarea placeholder="Hallo du..." />
+          <button type="submit">SENDEN ➤</button>
         </motion.form>
 
         <motion.div className={styles.socials} variants={itemVariants}>

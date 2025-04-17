@@ -9,7 +9,7 @@ export default function Footer() {
           {/* Navigation */}
           <div className={styles["footer-column"]}>
             <h4>Navigation</h4>
-            <a href="#home">Home</a>
+            <a href="#hero">Home</a>
             <a href="#about">About</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
@@ -26,17 +26,17 @@ export default function Footer() {
           {/* Socials */}
           <div className={styles["footer-column"]}>
             <h4>Socials</h4>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">TikTok</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">YouTube</a>
           </div>
 
           {/* Contact */}
           <div className={styles["footer-column"]}>
-            <h4>Contact</h4>
-            <p>nico@example.com</p>
-            <p>+49 123 456789</p>
-            <p>Berlin, Germany</p>
+            <h4>Kontakt</h4>
+            <p>nicogleichmann39@gmail.com</p>
+            <p>+49 176 44444 856</p>
+            <p>Eisench, Germany</p>
           </div>
         </div>
 

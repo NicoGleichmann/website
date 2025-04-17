@@ -49,7 +49,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className={styles.hero}>
+    <section className={styles.hero} id="hero">
       <div className={styles.decorLeft} />
       <div className={styles.decorRight} />
 

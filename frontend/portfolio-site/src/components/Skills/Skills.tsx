@@ -29,6 +29,8 @@ const itemVariants = {
 const Skills = () => {
   return (
     <section className={styles.skills} id="skills">
+      <div className={styles.decorLeft} />
+      <div className={styles.decorRight} />
       <div className={styles.inner}>
         <motion.h2
           className={styles.heading}
