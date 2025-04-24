@@ -1,5 +1,6 @@
 import styles from "./Navbar.module.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FiLogIn, FiMoon, FiSun } from "react-icons/fi";
 import { useDarkMode } from "../DarkModeToggle/DarkModeToggle.tsx";
 
@@ -13,6 +14,7 @@ const navLinks = [
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { darkMode, toggleDarkMode } = useDarkMode();
+  const navigate = useNavigate();
 
   return (
     <nav className={styles.navbar}>
@@ -31,7 +33,7 @@ export const Navbar = () => {
       <div className={styles.iconContainer}>
         <button
           className={styles.iconButton}
-          onClick={() => console.log("Login clicked")}
+          onClick={() => navigate("/login")}
           aria-label="Login"
         >
           <FiLogIn />
@@ -47,7 +49,7 @@ export const Navbar = () => {
 
       <button
         className={`${styles.burger} ${menuOpen ? styles.openBurger : ""}`}
-        onClick={() => setMenuOpen(!menuOpen)}
+        onClick={() => setMenuOpen(false)}
         aria-label="Toggle menu"
       >
         <span className={styles.line}></span>

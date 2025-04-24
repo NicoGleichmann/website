@@ -1,9 +1,22 @@
-import { useEffect, useState } from "react";
+// DarkModeToggle.tsx
+import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 
-export const useDarkMode = () => {
-  const [darkMode, setDarkMode] = useState(
-    () => localStorage.getItem("darkMode") === "true"
-  );
+type DarkModeContextType = {
+  darkMode: boolean;
+  toggleDarkMode: () => void;
+};
+
+const DarkModeContext = createContext<DarkModeContextType>({
+  darkMode: true,
+  toggleDarkMode: () => {},
+});
+
+// 💡 Der Provider, den du um dein App-Layout legen musst
+export const DarkModeProvider = ({ children }: { children: ReactNode }) => {
+  const [darkMode, setDarkMode] = useState(() => {
+    const stored = localStorage.getItem("darkMode");
+    return stored ? stored === "true" : true; // default: dark
+  });
 
   useEffect(() => {
     document.body.classList.toggle("dark", darkMode);
@@ -12,5 +25,12 @@ export const useDarkMode = () => {
 
   const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
-  return { darkMode, toggleDarkMode };
+  return (
+    <DarkModeContext.Provider value={{ darkMode, toggleDarkMode }}>
+      {children}
+    </DarkModeContext.Provider>
+  );
 };
+
+// 👇 Der Hook, den du z. B. in der Navbar verwendest
+export const useDarkMode = () => useContext(DarkModeContext);

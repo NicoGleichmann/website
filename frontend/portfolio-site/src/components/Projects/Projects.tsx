@@ -1,4 +1,4 @@
-// src/components/Projects/Projects.tsx
+import { useState } from 'react';
 import styles from './Projects.module.css';
 import { motion } from 'framer-motion';
 import FadeInWhenVisible from "../ScrollToTop/FadeInWhenVisible";
@@ -18,7 +18,7 @@ const projects = [
   },
   {
     title: 'Projekt 3',
-    description: 'lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.',
+    description: 'Etwas Großes steht bevor – und du willst auf keinen Fall der Letzte sein, der davon erfährt. Mein Newsletter wird mehr als nur Updates liefern: Du bekommst exklusiven Einblick hinter die Kulissen von Lumio, persönliche Learnings, Business-Tipps, Motivation und Tools, die ich selbst nutze – direkt in dein Postfach. Kein Bullshit, nur echter Mehrwert. Du willst früher durchstarten als andere? Dann halt die Augen offen. Der Newsletter kommt bald – und er wird alles verändern.',
     link: 'https://github.com/your-username/project3',
     image: './src/assets/looksgood.jpg',
   },
@@ -28,7 +28,7 @@ const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.3, // Verzögerung zwischen den Container-Elementen
+      staggerChildren: 0.3,
     },
   },
 };
@@ -39,6 +39,12 @@ const itemVariants = {
 };
 
 export default function Projects() {
+  const [expanded, setExpanded] = useState<number | null>(null);
+
+  const toggleExpand = (index: number) => {
+    setExpanded((prev) => (prev === index ? null : index));
+  };
+
   return (
     <section className={styles.projectsSection} id="projects">
       <FadeInWhenVisible direction="up">
@@ -51,22 +57,27 @@ export default function Projects() {
         >
           <h2 className={styles.title}>💻 Meine Projekte</h2>
           <div className={styles.grid}>
-            {projects.map((project, index) => (
-              <motion.div
-                key={index}
-                className={styles.card}
-                variants={itemVariants} // Einzelne Karten werden mit Versatz angezeigt
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              >
-                <img src={project.image} alt={project.title} className={styles.image} />
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                <a href={project.link} target="_blank" rel="noopener noreferrer" className={styles.link}>
-                  Mehr erfahren
-                </a>
-              </motion.div>
-            ))}
+            {projects.map((project, index) => {
+              const isExpanded = expanded === index;
+              const shortText = project.description.slice(0, 200) + '...';
+
+              return (
+                <motion.div
+                  key={index}
+                  className={styles.card}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <img src={project.image} alt={project.title} className={styles.image} />
+                  <h3>{project.title}</h3>
+                  <p>{isExpanded ? project.description : shortText}</p>
+                  <button onClick={() => toggleExpand(index)} className={styles.toggleButton}>
+                    {isExpanded ? 'Weniger anzeigen' : 'Mehr erfahren'}
+                  </button>
+                </motion.div>
+              );
+            })}
           </div>
         </motion.div>
       </FadeInWhenVisible>

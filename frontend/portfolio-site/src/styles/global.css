@@ -24,6 +24,18 @@
     font-family: "Poppins", sans-serif;
   }
   
+  /* index.css */
+  body.dark {
+    background-color: #121212;
+    color: #ffffff;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: #000000;
+  }
+
+
   a {
     text-decoration: none;
     color: inherit;

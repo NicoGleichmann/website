@@ -33,7 +33,7 @@ const About = () => {
           className={styles.ctaButton}
           variants={itemVariants}
         >
-          Get In Touch
+          Kontaktiere mich
         </motion.a>
         <motion.h2 className={styles.heading} variants={itemVariants}>Where Iam NOW</motion.h2>
         <motion.p className={styles.description} variants={itemVariants}>

@@ -1,5 +1,6 @@
 // src/components/Footer/Footer.tsx
 import styles from "./Footer.module.css";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -18,17 +19,17 @@ export default function Footer() {
           {/* Legal */}
           <div className={styles["footer-column"]}>
             <h4>Legal</h4>
-            <a href="#privacy">Privacy Policy</a>
-            <a href="#terms">Terms of Service</a>
-            <a href="#imprint">Imprint</a>
+              <a><Link to="/privacy">Privacy Policy</Link></a>
+              <a><Link to="/terms">Terms of Service</Link></a>
+              <a><Link to="/imprint">Imprint</Link></a>
           </div>
 
           {/* Socials */}
           <div className={styles["footer-column"]}>
             <h4>Socials</h4>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer">Instagram</a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">TikTok</a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <a href="https://www.instagram.com/nico.gleichmann/" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.tiktok.com/@nico.gleichmann" rel="noopener noreferrer">TikTok</a>
+            <a href="https://www.youtube.com/@NicoGleichmann" rel="noopener noreferrer">YouTube</a>
           </div>
 
           {/* Contact */}

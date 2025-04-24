@@ -7,19 +7,19 @@ const posts = [
   {
     title: "Meine Reise in Self-Improvement",
     summary: "Wie ich mit 16 bewusster wurde, meine Routinen aufgebaut habe und mehr Kontrolle über mein Leben gewann.",
-    link: "#",
+    link: "/blog/Blog01.tsx",
     date: "10. April 2025",
   },
   {
     title: "Gym, Ernährung & Dopamin Detox",
     summary: "Trainingsplan, meine Ernährung und wie ich mit Disziplin echte Ergebnisse gesehen habe.",
-    link: "#",
+    link: "/blog/Blog02.tsx",
     date: "5. März 2025",
   },
   {
     title: "Warum ich ein Portfolio mit Vite + React baue",
     summary: "Meine Motivation, meine Vision und wie dieses Projekt mein Denken verändert hat.",
-    link: "#",
+    link: "/blog/Blog03.tsx",
     date: "20. Februar 2025",
   },
 ];

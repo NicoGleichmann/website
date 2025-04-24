@@ -2,6 +2,8 @@ import styles from "./Hero.module.css"
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
 import { fadeInUp, fadeInLeft, fadeInRight } from "../ScrollToTop/scrollAnimations.tsx"
+import Modal from "./Modal.tsx"; 
+
 
 const typingTexts = [
   "Zukunftsorientiert.",
@@ -18,6 +20,7 @@ const HeroSection = () => {
   const [subIndex, setSubIndex] = useState(0);
   const [blink, setBlink] = useState(true);
   const [reverse, setReverse] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (index === typingTexts.length) return;
@@ -74,6 +77,7 @@ const HeroSection = () => {
         </motion.p>
 
         <motion.a
+          onClick={() => setIsModalOpen(true)}
           href="#portfolio"
           className={styles.ctaButton}
           variants={fadeInUp}
@@ -81,6 +85,7 @@ const HeroSection = () => {
           Lebenslauf herunterladen
         </motion.a>
       </motion.div>
+      {isModalOpen && <Modal onClose={() => setIsModalOpen(false)} />}
     </section>
   );
 };

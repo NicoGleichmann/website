@@ -1,5 +1,6 @@
 import styles from './Contact.module.css';
 import { motion } from 'framer-motion';
+import React, { useState } from 'react';
 
 const containerVariants = {
   hidden: { opacity: 0, y: 60 },
@@ -12,6 +13,42 @@ const itemVariants = {
 };
 
 const ContactSection = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const [status, setStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+  
+    try {
+      const response = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        setStatus({ type: 'success', message: 'Nachricht erfolgreich gesendet!' });
+        setFormData({ name: '', email: '', message: '' }); // Formular leeren
+      } else {
+        setStatus({ type: 'error', message: 'Fehler beim Senden der Nachricht.' });
+      }
+      
+    } catch (error) {
+      console.error("Fehler:", error);
+      alert("Serverfehler.");
+    }
+  };
   return (
     <section className={styles.contactSection} id="contact"> 
       <motion.div
@@ -36,13 +73,42 @@ const ContactSection = () => {
         whileInView="visible"
         viewport={{ once: false, amount: 0.2 }} // Animation wird auch bei Scrollen ausgelöst
       >
-        <motion.form className={styles.form} variants={itemVariants}>
+        <motion.form className={styles.form} variants={itemVariants} onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
-            <input type="text" placeholder="Name..." />
-            <input type="email" placeholder="example@yourdomain.com" />
+            <input
+              type="text"
+              name="name"
+              placeholder="Name..."
+              value={formData.name}
+              onChange={handleChange}
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="example@yourdomain.com"
+              value={formData.email}
+              onChange={handleChange}
+            />
           </div>
-          <textarea placeholder="Hallo du..." />
+          <textarea
+            name="message"
+            placeholder="Hallo du..."
+            value={formData.message}
+            onChange={handleChange}
+          />
           <button type="submit">SENDEN ➤</button>
+
+          {/* Statusmeldung */}
+          {status && (
+            <p
+              style={{
+                color: status.type === 'success' ? 'green' : 'red',
+                marginTop: '1rem',
+              }}
+            >
+              {status.message}
+            </p>
+          )}
         </motion.form>
 
         <motion.div className={styles.socials} variants={itemVariants}>
