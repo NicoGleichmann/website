@@ -19,6 +19,22 @@ input {
   overflow: hidden;
 }
 
+
+.successMessage {
+  color: #2ecc71;
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.errorMessage {
+  color: #e74c3c;
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+
 .forms-container {
   position: absolute;
   width: 100%;

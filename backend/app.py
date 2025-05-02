@@ -1,21 +1,26 @@
-from flask import Flask, request
-from flask_cors import CORS
-from auth import register_user, login_user
+from flask import Flask
+from routes import register_user, login_user
+from models import create_user_table
 
 app = Flask(__name__)
-CORS(app)
+create_user_table()
 
 @app.route("/register", methods=["POST"])
 def register():
-    data = request.json
-    return register_user(data)
+    return register_user()
 
 @app.route("/login", methods=["POST"])
 def login():
-    data = request.json
-    return login_user(data)
+    return login_user()
+
+@app.route("/users", methods=["GET"])
+def list_users():
+    import sqlite3
+    with sqlite3.connect("database.db") as conn:
+        users = conn.execute("SELECT id, username, email FROM users").fetchall()
+    return {
+        "users": [{"id": u[0], "username": u[1], "email": u[2]} for u in users]
+    }
 
 if __name__ == "__main__":
-    from db import create_user_table
-    create_user_table()
     app.run(debug=True)
