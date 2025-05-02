@@ -14,34 +14,74 @@
     --muted: #A1A1AA;
     --accent: #38BDF8;
   }
-  
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color var(--transition-speed), color var(--transition-speed);
-    font-family: "Poppins", sans-serif;
-  }
-  
-  /* index.css */
-  body.dark {
-    background-color: #121212;
-    color: #ffffff;
-  }
 
-  body {
-    background-color: #ffffff;
-    color: #000000;
+  /* Responsive Typography */
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
   }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+/* Responsive Container */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Responsive Sections */
+section {
+  padding: var(--section-padding) 0;
+}
+
+@media (max-width: 768px) {
+  :root {
+      --section-padding: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+      --section-padding: 1.5rem;
+  }
+}
 
 
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+  font-family: "Poppins", sans-serif;
+  line-height: 1.6;
+}
+
+/* global.css */
+html.dark body {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
   
-  * {
-    box-sizing: border-box;
-  }
-  
+

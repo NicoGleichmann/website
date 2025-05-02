@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 // Blog Komponenten
 import Home from "./Home";
@@ -15,7 +16,7 @@ import Imprint from "./components/Footer/Imprint.tsx";
 
 // Navbar Komponenten
 import Login from "./components/Login/Login.tsx";
-import { DarkModeProvider } from "./components/DarkModeToggle/DarkModeProvider";
+import { DarkModeProvider } from "./components/DarkModeToggle/DarkModeProvider.tsx";
 
 // App-Komponente (mit allen Routen)
 function App() {
@@ -38,10 +39,10 @@ function App() {
 // App in die Seite einfügen
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <DarkModeProvider>
+    <DarkModeProvider>
+      <BrowserRouter>
         <App />
-      </DarkModeProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </DarkModeProvider>
   </React.StrictMode>
 );

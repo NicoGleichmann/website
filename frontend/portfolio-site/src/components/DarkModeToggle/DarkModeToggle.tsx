@@ -11,6 +11,7 @@ const DarkModeContext = createContext<DarkModeContextType>({
   toggleDarkMode: () => {},
 });
 
+
 // 💡 Der Provider, den du um dein App-Layout legen musst
 export const DarkModeProvider = ({ children }: { children: ReactNode }) => {
   const [darkMode, setDarkMode] = useState(() => {

@@ -21,7 +21,7 @@
 }
 
 .heading {
-  font-size: 3.5rem;
+  font-size: clamp(2.5rem, 8vw, 3.5rem);
   font-weight: 700;
   color: #ffffff;
   margin-bottom: 1rem;
@@ -29,7 +29,7 @@
 }
 
 .subheading {
-  font-size: 1.8rem;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
   font-weight: 600;
   color: #94a3b8;
   margin-bottom: 1rem;
@@ -43,7 +43,7 @@
 }
 
 .description {
-  font-size: 1.125rem;
+  font-size: clamp(1rem, 3vw, 1.125rem);
   line-height: 1.6;
   color: #cbd5e1;
   margin-bottom: 2rem;
@@ -114,17 +114,29 @@
   .description {
     font-size: 1rem;
   }
+  .content {
+    padding: 0.5rem;
+  }
+  .blurBackground {
+    width: 400px;
+    height: 400px;
+  }
+  .decorLeft,
+  .decorRight {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 @media (max-width: 480px) {
   .hero {
-    padding: 3rem 1rem;
+    padding: 2rem 0.5rem;
   }
   .heading {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
   .subheading {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
   .description {
     font-size: 0.9rem;
@@ -133,9 +145,17 @@
     padding: 0.7rem 1.5rem;
     font-size: 0.9rem;
   }
+  .content {
+    padding: 0.25rem;
+  }
+  .decorLeft,
+  .decorRight {
+    width: 30px;
+    height: 30px;
+  }
   .blurBackground {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
   }
 }   
 

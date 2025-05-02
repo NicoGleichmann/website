@@ -17,7 +17,8 @@ export const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className={styles.navbar}>
+    <nav className={`${styles.navbar} ${darkMode ? styles.dark : ""}`}>
+      <p>Aktueller Modus: {darkMode ? "Dark" : "Light"}</p>
       <div className={styles.logo}>Nico</div>
 
       <ul className={`${styles.navLinks} ${menuOpen ? styles.open : ""}`}>
