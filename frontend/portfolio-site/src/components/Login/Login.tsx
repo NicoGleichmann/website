@@ -10,20 +10,21 @@ const Login: React.FC = () => {
     const sign_in_btn = document.querySelector('#sign-in-btn');
     const sign_up_btn = document.querySelector('#sign-up-btn');
     const container = document.querySelector(`.${styles.container}`);
+  
+    const handleSignUp = () => container?.classList.add(styles['sign-up-mode']);
+    const handleSignIn = () => container?.classList.remove(styles['sign-up-mode']);
+  
+    sign_up_btn?.addEventListener('click', handleSignUp);
+    sign_in_btn?.addEventListener('click', handleSignIn);
 
-    if (sign_up_btn && container && sign_in_btn) {
-      sign_up_btn.addEventListener('click', () => {
-        container.classList.add(styles['sign-up-mode']);
-      });
-
-      sign_in_btn.addEventListener('click', () => {
-        container.classList.remove(styles['sign-up-mode']);
-      });
-    }
+    const fetchUsers = async () => {
+      const res = await fetch("http://localhost:5000/users");
+      const data = await res.json();
+    };
 
     return () => {
-      sign_up_btn?.removeEventListener('click', () => {});
-      sign_in_btn?.removeEventListener('click', () => {});
+      sign_up_btn?.removeEventListener('click', handleSignUp);
+      sign_in_btn?.removeEventListener('click', handleSignIn);
     };
   }, []);
 
@@ -63,7 +64,11 @@ const Login: React.FC = () => {
       }),
     });
     const data = await res.json();
-    alert(data.message);
+    if (!res.ok) {
+      alert(data.message || 'Registriere dich zuerst!');
+      return;
+    }
+    alert('Success: ' + data.message);
   };
 
   return (
@@ -74,13 +79,13 @@ const Login: React.FC = () => {
             <h2 className={styles.title}>Sign in</h2>
             <div className={styles['input-field']}>
               <i className="fas fa-user"></i>
-              <input type="text" placeholder="Username" onChange={(e) => setLoginUsername(e.target.value)} />
+              <input type="text" placeholder="Username" onChange={(e) => setLoginUsername(e.target.value)} value={loginUsername}/>
             </div>
             <div className={styles['input-field']}>
               <i className="fas fa-lock"></i>
-              <input type="password" placeholder="Password" onChange={(e) => setLoginPassword(e.target.value)} />
+              <input type="password" placeholder="Password" onChange={(e) => setLoginPassword(e.target.value)} value={loginPassword}/>
             </div>
-            <input type="submit" value="Login" className={`${styles.btn} ${styles.solid}`} />
+            <input type="submit" value="Login" className={`${styles.btn} ${styles.solid}`} id="sign-in-btn" />
             <p className={styles['social-text']}>Or Sign in with social platforms</p>
             <div className={styles['social-media']}>
               <a href="#" className={styles['social-icon']}><i className="fab fa-facebook-f"></i></a>
@@ -104,7 +109,7 @@ const Login: React.FC = () => {
               <i className="fas fa-lock"></i>
               <input type="password" placeholder="Password" value={registerPassword} onChange={(e) => setRegisterPassword(e.target.value)}/>
             </div>
-            <input type="submit" className={styles.btn} value="Sign up" />
+            <input type="submit" className={styles.btn} value="Sign up" id="sign-up-btn" />
             <p className={styles['social-text']}>Or Sign up with social platforms</p>
             <div className={styles['social-media']}>
               <a href="#" className={styles['social-icon']}><i className="fab fa-facebook-f"></i></a>

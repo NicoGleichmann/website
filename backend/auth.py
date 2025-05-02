@@ -4,29 +4,34 @@ import hashlib
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
-def register_user(username, email, password):
+def register_user(data):
+    username = data.get("username")
+    email = data.get("email")
+    password = hash_password(data.get("password"))
+
+    try:
+        conn = sqlite3.connect("database.db")
+        cur = conn.cursor()
+        cur.execute("INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
+                    (username, email, password))
+        conn.commit()
+        return {"message": "User registered successfully"}, 201
+    except sqlite3.IntegrityError:
+        return {"error": "Username or email already exists"}, 409
+    finally:
+        conn.close()
+
+def login_user(data):
+    username = data.get("username")
+    password = hash_password(data.get("password"))
+
     conn = sqlite3.connect("database.db")
     cur = conn.cursor()
-
-    cur.execute("SELECT * FROM users WHERE username = ?", (username,))
-    if cur.fetchone():
-        return {"message": "Username already exists"}, 400
-
-    hashed_pw = hash_password(password)
-    cur.execute("INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
-                (username, email, hashed_pw))
-    conn.commit()
-    conn.close()
-    return {"message": "User registered successfully"}, 200
-
-def login_user(username, password):
-    conn = sqlite3.connect("database.db")
-    cur = conn.cursor()
-    cur.execute("SELECT password FROM users WHERE username = ?", (username,))
-    row = cur.fetchone()
+    cur.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
+    user = cur.fetchone()
     conn.close()
 
-    if row and hash_password(password) == row[0]:
-        return {"message": "Login successful"}, 200
+    if user:
+        return {"message": "Login successful", "username": username}, 200
     else:
-        return {"message": "Invalid credentials"}, 401
+        return {"error": "Invalid username or password"}, 401
