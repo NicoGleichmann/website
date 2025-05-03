@@ -121,6 +121,7 @@ form.sign-in-form {
 .social-text {
   padding: 0.7rem 0;
   font-size: 1rem;
+  color: #333;
 }
 
 .social-media {
@@ -240,6 +241,11 @@ form.sign-in-form {
   height: 41px;
   font-weight: 600;
   font-size: 0.8rem;
+}
+
+.transparent {
+  padding-top: 0.8rem;
+  padding-left: 1.3rem;
 }
 
 .right-panel .image,

@@ -1,3 +1,4 @@
+// main.tsx
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -16,6 +17,8 @@ import Imprint from "./components/Footer/Imprint.tsx";
 
 // Navbar Komponenten
 import Login from "./components/Login/Login.tsx";
+
+// DarkMode Komponenten
 import { DarkModeProvider } from "./components/DarkModeToggle/DarkModeProvider.tsx";
 
 // App-Komponente (mit allen Routen)
@@ -31,6 +34,7 @@ function App() {
       <Route path="/terms" element={<TermsOfService />} />
       <Route path="/imprint" element={<Imprint />} />
 
+      <Route path="/auth" element={<Login />} />
       <Route path="/login" element={<Login />} />
     </Routes>
   );
