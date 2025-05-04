@@ -89,7 +89,7 @@ const Login: React.FC = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        if (data.message === "User already exists") {
+        if (data.message === "Benutzer existiert bereits") {
           setMessage("Du hast bereits ein Konto. Logge dich ein.");
         } else {
           setMessage(data.message || "Fehler bei der Registrierung.");
@@ -128,9 +128,9 @@ const Login: React.FC = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        if (data.message === "User not found") {
+        if (data.message === "Benutzer nicht gefunden") {
           setMessage("Bitte registriere dich zuerst.");
-        } else if (data.message === "Wrong password") {
+        } else if (data.message === "Falsches Passwort") {
           setMessage("Falsches Passwort.");
         } else {
           setMessage(data.message || "Fehler beim Login.");
@@ -150,10 +150,6 @@ const Login: React.FC = () => {
     }
   };
   
-  if (messageType === 'success') {
-    navigate('/');
-  }
-  
 
   return (
     <><div className={styles.container}>
@@ -168,7 +164,6 @@ const Login: React.FC = () => {
             <div className={styles['input-field']}>
               <i className="fas fa-lock"></i>
               <input type="password" placeholder="Password" onChange={(e) => setLoginPassword(e.target.value)} value={loginPassword} />
-              
             </div>
             <input type="submit" value="Login" className={`${styles.btn} ${styles.solid}`} id="sign-in-btn"/>
             {message && (
@@ -178,7 +173,7 @@ const Login: React.FC = () => {
             <p className={styles['social-text']}>Oder melde dich über soziale Plattformen an</p>
             <div className={styles['social-media']}>
               <a href="#" className={styles['social-icon']}><i className="fab fa-facebook-f"></i></a>
-              <a href="#" className={styles['social-icon']}><i className="fab fa-twitter"></i></a>
+              <a href="#" className={styles['social-icon']}><i className="fab fa-instagram"></i></a>
               <a href="#" className={styles['social-icon']}><i className="fab fa-google"></i></a>
               <a href="#" className={styles['social-icon']}><i className="fab fa-linkedin-in"></i></a>
             </div>
@@ -202,7 +197,7 @@ const Login: React.FC = () => {
             <p className={styles['social-text']}>Oder registriere dich über soziale Plattformen</p>
             <div className={styles['social-media']}>
               <a href="#" className={styles['social-icon']}><i className="fab fa-facebook-f"></i></a>
-              <a href="#" className={styles['social-icon']}><i className="fab fa-twitter"></i></a>
+              <a href="#" className={styles['social-icon']}><i className="fab fa-instagram"></i></a>
               <a href="#" className={styles['social-icon']}><i className="fab fa-google"></i></a>
               <a href="#" className={styles['social-icon']}><i className="fab fa-linkedin-in"></i></a>
             </div>

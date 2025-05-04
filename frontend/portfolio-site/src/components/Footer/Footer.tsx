@@ -19,9 +19,9 @@ export default function Footer() {
           {/* Legal */}
           <div className={styles["footer-column"]}>
             <h4>Legal</h4>
-              <a><Link to="/privacy">Privacy Policy</Link></a>
-              <a><Link to="/terms">Terms of Service</Link></a>
-              <a><Link to="/imprint">Imprint</Link></a>
+              <Link to="/privacy">Privacy Policy</Link>
+              <Link to="/terms">Terms of Service</Link>
+              <Link to="/imprint">Imprint</Link>
           </div>
 
           {/* Socials */}
