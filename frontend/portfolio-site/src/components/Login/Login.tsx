@@ -5,6 +5,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import logImg from './log.svg';
 import registerImg from './register.svg';
 import { useNavigate } from 'react-router-dom';
+import { GoogleLogin } from "@react-oauth/google" ;
 
 const Login: React.FC = () => {
 

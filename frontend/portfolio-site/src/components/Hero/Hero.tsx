@@ -72,7 +72,7 @@ const HeroSection = () => {
         </motion.p>
 
         <motion.p className={styles.description} variants={fadeInUp}>
-          16 Jahre jung, fokussiert auf Fortschritt. Ich entwickle mein Portfolio weiter,
+          16 Jahre jung, fokussiert auf Fortschritt. Ich entwickle mein Portfolio stetig weiter,
           tauche tief in JavaScript ein & lebe bewusst.
         </motion.p>
 
