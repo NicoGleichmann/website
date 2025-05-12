@@ -12,6 +12,7 @@
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* === Logo === */
@@ -22,6 +23,10 @@
   font-family: 'Inter', sans-serif;
   letter-spacing: 0.5px;
   transition: color 0.3s ease;
+}
+
+body.light-mode .logo {
+  color: #333333;
 }
 
 .logo:hover {
@@ -45,6 +50,10 @@
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease-in-out;
+}
+
+body.light-mode .navLinks li a {
+  color: #333333;
 }
 
 .navLinks li a:hover {
@@ -97,6 +106,11 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+body.light-mode .iconButton {
+  border-color: #666;
+  color: #333333;
 }
 
 .iconButton:hover {

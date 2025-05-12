@@ -1,8 +1,9 @@
 const fs = require("fs");
 const express = require("express");
-const app = express();
-
 const cors = require("cors");
+const bcrypt = require("bcrypt");
+
+const app = express();
 app.use(cors());
 app.use(express.json());
 
@@ -55,6 +56,3 @@ app.post("/login", async (req, res) => {
 
   res.status(200).json({ message: "Login successful" });
 });
-
-const bcrypt = require("bcrypt");
-// beim Login: await bcrypt.compare(password, user.password)

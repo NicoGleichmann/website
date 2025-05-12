@@ -27,20 +27,28 @@ function ThemeToggle() {
 
   // Theme wechseln
   const toggleTheme = () => {
-    setIsDarkMode(prevMode => {
-      const newMode = !prevMode; // Den Modus umkehren
-      document.body.classList.toggle('dark-mode', newMode); // dark-mode-Klasse setzen
-      document.body.classList.toggle('white-mode', !newMode); // white-mode-Klasse entfernen oder setzen
+    const newMode = !isDarkMode; // Den Modus umkehren
+    
+    // Ensure both classes are properly toggled
+    document.body.classList.remove(isDarkMode ? 'white-mode' : 'dark-mode');
+    document.body.classList.add(newMode ? 'dark-mode' : 'white-mode');
 
-      setThemeSymbol(newMode ? '☀️' : '🌙'); // Symbol ändern
-      toggleImages(); // Bilder je nach Mode anpassen
-      return newMode; // Rückgabewert für setIsDarkMode
-    });
+    setIsDarkMode(newMode);
+    setThemeSymbol(newMode ? '☀️' : '🌙'); // Symbol ändern
+    toggleImages(); // Bilder je nach Mode anpassen
+    
+    // Optional: Save theme preference in localStorage
+    localStorage.setItem('theme', newMode ? 'dark' : 'white');
   };
 
   useEffect(() => {
-    document.body.classList.add('dark-mode');
-    setThemeSymbol('☀️');
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    const initialMode = savedTheme === 'white' ? false : true;
+    
+    setIsDarkMode(initialMode);
+    document.body.classList.add(initialMode ? 'dark-mode' : 'white-mode');
+    setThemeSymbol(initialMode ? '☀️' : '🌙');
     toggleImages(); // Initiale Bilder setzen
   }, []);
 

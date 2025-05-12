@@ -144,3 +144,41 @@
     .fadeInUpDelay3 {
             animation: fadeIn 1.2s ease-out 0.9s forwards;
         }
+
+/* Light Mode Adjustments */
+body.light-mode .skills {
+  background-color: #f4f4f4;
+  color: #1a1a1a;
+}
+
+body.light-mode .heading {
+  color: #1565C0;
+}
+
+body.light-mode .subheading {
+  color: #475569;
+}
+
+body.light-mode .skill {
+  background-color: #ffffff;
+  box-shadow: 0 0 0 transparent;
+  border: 1px solid #e0e0e0;
+}
+
+body.light-mode .skill:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .icon {
+  color: #1565C0;
+}
+
+body.light-mode .skill span {
+  color: #1a1a1a;
+}
+
+body.light-mode .decorLeft,
+body.light-mode .decorRight {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), transparent);
+  border-color: rgba(0, 0, 0, 0.05);
+}

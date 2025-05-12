@@ -2,7 +2,7 @@ import styles from "./Navbar.module.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiLogIn, FiMoon, FiSun } from "react-icons/fi";
-import { useDarkMode } from "../DarkModeToggle/DarkModeToggle.tsx";
+import { useTheme } from "../DarkModeToggle/DarkModeProvider";
 
 const navLinks = [
   { label: "Home", href: "#hero" },
@@ -13,12 +13,11 @@ const navLinks = [
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { darkMode, toggleDarkMode } = useDarkMode();
+  const { isDarkMode, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   return (
-    <nav className={`${styles.navbar} ${darkMode ? styles.dark : ""}`}>
-      <p>Aktueller Modus: {darkMode ? "Dark" : "Light"}</p>
+    <nav className={`${styles.navbar} ${isDarkMode ? styles.dark : ""}`}>
       <div className={styles.logo}>Nico</div>
 
       <ul className={`${styles.navLinks} ${menuOpen ? styles.open : ""}`}>
@@ -41,10 +40,10 @@ export const Navbar = () => {
         </button>
         <button
           className={styles.iconButton}
-          onClick={toggleDarkMode}
-          aria-label="Toggle Dark Mode"
+          onClick={toggleTheme}
+          aria-label="Toggle Theme"
         >
-          {darkMode ? <FiSun /> : <FiMoon />}
+          {isDarkMode ? <FiSun /> : <FiMoon />}
         </button>
       </div>
 

@@ -2,23 +2,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-    --bg-color: #0d0d0d;
-    --text-color: #f5f5f5;
-    --accent-color: #4ade80;
-    --section-padding: 4rem;
-    --transition-speed: 0.3s;
+  /* Default theme variables */
+  --background: #121212;
+  --text: #ffffff;
+  --accent: #1E88E5;
+  --border: #1E1E1E;
+  --surface: #1E1E1E;
+}
 
-    --primary: #7C3AED;
-    --surface: #1A1A1D;
-    --text: #F3F4F6;
-    --muted: #A1A1AA;
-    --accent: #38BDF8;
-  }
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  /* Responsive Typography */
+/* Responsive Typography */
 html {
   font-size: 16px;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+section {
+  padding: var(--section-padding) 0;
+}
+
 
 @media (max-width: 768px) {
   html {
@@ -30,18 +46,6 @@ html {
   html {
     font-size: 12px;
   }
-}
-
-/* Responsive Container */
-.container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-/* Responsive Sections */
-section {
-  padding: var(--section-padding) 0;
 }
 
 @media (max-width: 768px) {
@@ -57,31 +61,89 @@ section {
 }
 
 
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Dark Mode */
+body.dark-mode {
+  background-color: var(--background);
+  color: var(--text);
+}
+
+/* Light Mode */
+body.light-mode {
+  --background: #FFFFFF;
+  --text: #000000;
+  --accent: #1565C0;
+  --border: #E0E0E0;
+  --surface: #FFFFFF;
+
+  background-color: var(--background);
+  color: var(--text);
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: background-color var(--transition-speed), color var(--transition-speed);
+  background-color: var(--background);
+  color: var(--text);
+  transition: background-color 0.3s, color 0.3s;
   font-family: "Poppins", sans-serif;
   line-height: 1.6;
 }
 
-/* global.css */
-html.dark body {
-  background-color: #121212;
-  color: #ffffff;
+
+
+/* Light Mode Adjustments */
+body.light-mode .hero {
+  background-color: #f4f4f4;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+body.light-mode .heading {
+  color: #1a1a1a;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-  
 
+body.light-mode .subheading {
+  color: #475569;
+}
+
+body.light-mode .description {
+  color: #334155;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .ctaButton {
+  color: white;
+  background: linear-gradient(135deg, #6b7280, #374151);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+body.light-mode .ctaButton:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+body.light-mode .blurBackground {
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.05), transparent 70%);
+}
+
+body.light-mode .decorLeft,
+body.light-mode .decorRight {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.05), transparent);
+  border-color: rgba(0,0,0,0.05);
+}
+
+
+/* Light Mode Navbar */
+.light-mode .navbar {
+  background-color: #bb0505;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Light Mode Debug Styles */
+body.light-mode {
+  background-color: red !important;
+  color: white !important;
+}
+
+body.light-mode * {
+  outline: 2px solid green !important;
+}

@@ -19,7 +19,8 @@ import Imprint from "./components/Footer/Imprint.tsx";
 import Login from "./components/Login/Login.tsx";
 
 // DarkMode Komponenten
-import { DarkModeProvider } from "./components/DarkModeToggle/DarkModeProvider.tsx";
+import { ThemeProvider } from "./components/DarkModeToggle/DarkModeProvider";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 // App-Komponente (mit allen Routen)
 function App() {
@@ -43,10 +44,13 @@ function App() {
 // App in die Seite einfügen
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <DarkModeProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </DarkModeProvider>
+    <GoogleOAuthProvider clientId="419203612481-rfkutpmsa9hms5rm66g5sq8oc23ar3or.apps.googleusercontent.com">
+      <ThemeProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
+    </GoogleOAuthProvider>
   </React.StrictMode>
 );
+    

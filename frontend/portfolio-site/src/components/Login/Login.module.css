@@ -420,3 +420,9 @@ form.sign-in-form {
     left: 50%;
   }
 }
+
+.googleLoginWrapper {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}

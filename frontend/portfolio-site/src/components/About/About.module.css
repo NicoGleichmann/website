@@ -109,6 +109,41 @@
   border-left: 1px solid rgba(255,255,255,0.05);
 }
 
+/* Light Mode Adjustments */
+body.light-mode .about {
+  background-color: #f4f4f4;
+}
+
+body.light-mode .heading {
+  color: #1565C0;
+}
+
+body.light-mode .description {
+  color: #334155;
+}
+
+body.light-mode .ctaButton {
+  color: #ffffff;
+  background-color: #1565C0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .ctaButton:hover {
+  background-color: #0D47A1;
+}
+
+body.light-mode .imageWrapper {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .blurBackground {
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.05), transparent 70%);
+}
+
+body.light-mode .decorLeft,
+body.light-mode .decorRight {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), transparent);
+}
 
   /* Optional Animation for Text */
   @keyframes fadeIn {

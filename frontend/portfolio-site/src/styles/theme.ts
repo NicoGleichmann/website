@@ -1,16 +1,30 @@
 // src/styles/theme.ts
 
 export const theme = {
-    colors: {
-      background: "#0a0f1c",       // Mitternachtsblau
-      text: "#f1f1f1",             // Eisweiß
-      accent: "#4ea1d3",           // Akzentfarbe
-      accentHover: "#6fb8e5",      // Hoverfarbe
-      border: "#1b1f2a",           // dunkle Trennlinien
-      lightGray: "#2a2f40",        // z. B. für leichte Abgrenzungen
-    },
-    fonts: {
-      primary: "'Inter', sans-serif",
-    },
+  dark: {
+    background: '#121212',
+    text: '#ffffff',
+    accent: '#1E88E5',
+    border: '#1E1E1E',
+    surface: '#1E1E1E',
+  },
+  light: {
+    background: '#FFFFFF',
+    text: '#000000',
+    accent: '#1565C0',
+    border: '#E0E0E0',
+    surface: '#FFFFFF',
   }
-  
+};
+
+export const setTheme = (isDarkMode: boolean) => {
+  const root = document.documentElement;
+  const currentTheme = isDarkMode ? theme.dark : theme.light;
+
+  Object.entries(currentTheme).forEach(([key, value]) => {
+    root.style.setProperty(`--${key}`, value);
+  });
+
+  document.body.classList.remove('light-mode', 'dark-mode');
+  document.body.classList.add(isDarkMode ? 'dark-mode' : 'light-mode');
+};
