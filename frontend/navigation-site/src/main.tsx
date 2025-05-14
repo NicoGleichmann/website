@@ -1,4 +1,6 @@
 import './style.css';
+//import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 //Scripts
 import ExternalLink from './mainScrips/links.tsx'
@@ -6,10 +8,11 @@ import InstaSlider from './mainScrips/imageSlider.tsx'
 import HorizontalScroll from './mainScrips/scroll.tsx';
 
 //Global Scripts
-import ThemeToggle from './darkMode.tsx';
-import CookieBanner from './cookie.tsx'
+import ThemeToggle from './mainScrips/darkMode.tsx';
+import CookieBanner from './mainScrips/cookie.tsx'
 
 const HomePage = () => {
+  //const navigate = useNavigate();
 
   return (
     <>
@@ -18,7 +21,12 @@ const HomePage = () => {
         <ThemeToggle />
       </div>
       <div className="main container">
-        <div className="box1 box slide-in" onClick={() => window.location.href = '/portfolio-site/'}>
+        <motion.div 
+          className="box1 box slide-in" 
+          //onClick={() => navigate('/portfolio')}
+          whileHover={{ scale: 1.008 }}
+          whileTap={{ scale: 1 }}
+        >
             <div className="top">
               <img src="/public/img/Profil.jpg" alt="Logo" loading="lazy"/>
               <h4>Nico Gleichmann</h4>
@@ -31,7 +39,7 @@ const HomePage = () => {
               <h4>📍 Sitz in Eisenach, Thüringen, Deutschland</h4>
               <p>🕒 Mitteleuropäische Zeit (MEZ)</p>
             </div>
-        </div>
+        </motion.div>
 
         <div className="box2 slide-in">
          <ExternalLink/>
@@ -52,8 +60,8 @@ const HomePage = () => {
 
           <div className="case" id="youtube" data-link="https://www.youtube.com/@NicoGleichmann">
             <div className="icon">
-              <img id="youtube-w" className="dark-mode" src="/img/youtube_w.png" alt="Logo" loading="lazy"/>
-              <img id="youtube-d" className="white-mode" src="/img/youtube_d.png" alt="Logo" loading="lazy"/>
+              <img id="youtube-w" className="dark-mode" src="/img/youtube_w.png" alt="Logo" loading="lazy" style={{display: 'block'}}/>
+              <img id="youtube-d" className="white-mode" src="/img/youtube_d.png" alt="Logo" loading="lazy" style={{display: 'none'}}/>
             </div>
             <div className="text">
               <div className="username">@NicoGleichmann</div>
@@ -74,8 +82,8 @@ const HomePage = () => {
 
           <div className="case" id="facebook" data-link="https://www.facebook.com/profile.php?id=61571706736157">
             <div className="icon">
-              <img id="facebook-w" className="dark-mode" src="/img/facebook_w.png" alt="Logo" loading="lazy"/>
-              <img id="facebook-d" className="white-mode" src="/img/facebook_d.png" alt="Logo" loading="lazy"/>
+              <img id="facebook-w" className="dark-mode" src="/img/facebook_w.png" alt="Logo" loading="lazy" style={{display: 'block'}}/>
+              <img id="facebook-d" className="white-mode" src="/img/facebook_d.png" alt="Logo" loading="lazy" style={{display: 'none'}}/>
             </div>
             <div className="text">
               <div className="username">@Nico Gleichmann</div>
@@ -150,45 +158,52 @@ const HomePage = () => {
         </div>
       </div>
       {/* Footer */}
-      <div className="footer">
-        <p>
-          © 2025 by{" "}
+          <motion.div
+      className="footer"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <p>
+        2025 by{" "}
+        <a
+          href="https://www.instagram.com/nico.gleichmann/"
+          className="hover-effect instagram_link"
+          id="instagram_link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Nico Gleichmann
+        </a>
+        {" "}|
+      </p>
+
+      <span className="info-container">
+        Weitere Infos
+        <span className="info-dropdown">
+          <a href="links.html" className="hover-effect">
+            Nutzungslinks
+          </a>
           <a
             href="https://www.instagram.com/nico.gleichmann/"
-            className="hover-effect instagram_link"
-            id="instagram_link"
+            className="hover-effect"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Nico Gleichmann
-          </a>{" "}
-          |{" "}
-          <span className="info-container">
-            Weitere Infos
-            <div className="info-dropdown">
-              <a href="links.html" className="hover-effect">
-                Nutzungslinks
-              </a>
-              <a
-                href="https://www.instagram.com/nico.gleichmann/"
-                className="hover-effect"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Impressum
-              </a>
-              <a
-                href="https://www.instagram.com/nico.gleichmann/"
-                className="hover-effect"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Datenschutz
-              </a>
-            </div>
-          </span>
-        </p>
-      </div>
+            Impressum
+          </a>
+          <a
+            href="https://www.instagram.com/nico.gleichmann/"
+            className="hover-effect"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Datenschutz
+          </a>
+        </span>
+      </span>
+    </motion.div>
+    
 
       <CookieBanner />
     </>

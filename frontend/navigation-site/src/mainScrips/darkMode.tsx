@@ -4,19 +4,19 @@ function ThemeToggle() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [themeSymbol, setThemeSymbol] = useState('☀️');
 
-  // Update styles und Bilder nach jedem Wechsel des Modus
-  const toggleImages = () => {
+  // Bilder umschalten, abhängig vom Modus
+  const updateImages = (darkMode: boolean) => {
     const toggleDisplay = (darkId: string, lightId: string) => {
       const darkEl = document.getElementById(darkId);
       const lightEl = document.getElementById(lightId);
       if (darkEl && lightEl) {
-        darkEl.style.display = isDarkMode ? 'block' : 'none';
-        lightEl.style.display = isDarkMode ? 'none' : 'block';
+        darkEl.style.display = darkMode ? 'block' : 'none';
+        lightEl.style.display = darkMode ? 'none' : 'block';
       }
     };
 
-    toggleDisplay('facebookW', 'facebookD');
-    toggleDisplay('youtubeW', 'youtubeD');
+    toggleDisplay('facebookD', 'facebookW');
+    toggleDisplay('youtubeD', 'youtubeW');
     toggleDisplay('black_01', 'white_01');
     toggleDisplay('black_02', 'white_02');
     toggleDisplay('black_03', 'white_03');
@@ -25,39 +25,34 @@ function ThemeToggle() {
     toggleDisplay('black_06', 'white_06');
   };
 
-  // Theme wechseln
+  // Theme umschalten
   const toggleTheme = () => {
-    const newMode = !isDarkMode; // Den Modus umkehren
-    
-    // Ensure both classes are properly toggled
-    document.body.classList.remove(isDarkMode ? 'white-mode' : 'dark-mode');
+    const newMode = !isDarkMode;
+    document.body.classList.remove(isDarkMode ? 'dark-mode' : 'white-mode');
     document.body.classList.add(newMode ? 'dark-mode' : 'white-mode');
-
     setIsDarkMode(newMode);
-    setThemeSymbol(newMode ? '☀️' : '🌙'); // Symbol ändern
-    toggleImages(); // Bilder je nach Mode anpassen
-    
-    // Optional: Save theme preference in localStorage
+    setThemeSymbol(newMode ? '☀️' : '🌙');
     localStorage.setItem('theme', newMode ? 'dark' : 'white');
   };
 
+  // Beim Laden: Theme setzen
   useEffect(() => {
-    // Check for saved theme preference
     const savedTheme = localStorage.getItem('theme');
     const initialMode = savedTheme === 'white' ? false : true;
-    
     setIsDarkMode(initialMode);
     document.body.classList.add(initialMode ? 'dark-mode' : 'white-mode');
     setThemeSymbol(initialMode ? '☀️' : '🌙');
-    toggleImages(); // Initiale Bilder setzen
   }, []);
 
+  // Immer wenn sich isDarkMode ändert → Bilder aktualisieren
+  useEffect(() => {
+    updateImages(isDarkMode);
+  }, [isDarkMode]);
+
   return (
-    <div>
-      <button id="theme-toggle" onClick={toggleTheme} className="theme-button">
-        {themeSymbol}
-      </button>
-    </div>
+    <button onClick={toggleTheme} className="theme-button">
+      {themeSymbol}
+    </button>
   );
 }
 
