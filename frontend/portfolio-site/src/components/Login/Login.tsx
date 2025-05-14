@@ -5,8 +5,12 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import logImg from './log.svg';
 import registerImg from './register.svg';
 import { useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
 import { GoogleLogin } from "@react-oauth/google";
 
+=======
+import { GoogleLogin } from "@react-oauth/google" ;
+>>>>>>> 7270211a49f0e61c371289af01050c4663b49db9
 
 const Login: React.FC = () => {
 

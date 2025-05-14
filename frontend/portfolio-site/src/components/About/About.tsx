@@ -25,8 +25,8 @@ const About = () => {
       >
         <motion.h2 className={styles.heading} variants={itemVariants}>About Me</motion.h2>
         <motion.p className={styles.description} variants={itemVariants}>
-          Hallo, ich bin Nico! Ich bin ein leidenschaftlicher Webentwickler und Unternehmer. Ich konzentriere mich besonders auf die Gestaltung 
-          ansprechender und funktionaler digitaler Erlebnisse. Ich interessiere mich sehr für Selbstoptimierung, Performance-Optimierung und die Entwicklung intuitiver Benutzeroberflächen. Lasst uns gemeinsam etwas Großartiges schaffen!
+          Hallo, ich bin Nico! Ich bin ein leidenschaftlicher Webentwickler, Unternehmer und natürlich auch noch Schüler. Ich konzentriere mich besonders auf die Gestaltung 
+          ansprechender und funktionaler digitaler Erlebnisse. Ich interessiere mich sehr für Selbstoptimierung (engl.Self Improvement), Coding und das die Welt des Unternehmertums. Lasst uns gemeinsam etwas Großartiges schaffen!
         </motion.p>
         <motion.a
           href="#contact"

@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "backend",
   "version": "1.0.0",
   "main": "server.js",
@@ -10,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "description": "",
+=======
+>>>>>>> 7270211a49f0e61c371289af01050c4663b49db9
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",

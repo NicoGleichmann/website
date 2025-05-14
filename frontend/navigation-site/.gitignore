@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Im Root-Ordner deiner Website:
+echo "node_modules/" >> .gitignore
