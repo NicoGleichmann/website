@@ -124,7 +124,7 @@ const HomePage = () => {
         </div>
 
         <div className="post-container box6 box insta slide-in">
-          <InstaSlider />
+          <InstaSlider /> 
         </div>
 
         <div className="box7 slide-in">
@@ -170,7 +170,6 @@ const HomePage = () => {
           href="https://www.instagram.com/nico.gleichmann/"
           className="hover-effect instagram_link"
           id="instagram_link"
-          target="_blank"
           rel="noopener noreferrer"
         >
           Nico Gleichmann
@@ -187,7 +186,6 @@ const HomePage = () => {
           <a
             href="https://www.instagram.com/nico.gleichmann/"
             className="hover-effect"
-            target="_blank"
             rel="noopener noreferrer"
           >
             Impressum
@@ -195,7 +193,6 @@ const HomePage = () => {
           <a
             href="https://www.instagram.com/nico.gleichmann/"
             className="hover-effect"
-            target="_blank"
             rel="noopener noreferrer"
           >
             Datenschutz

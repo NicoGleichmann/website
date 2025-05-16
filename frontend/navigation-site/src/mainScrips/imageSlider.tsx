@@ -1,19 +1,18 @@
-import React from "react";
 import { useRef, useState } from "react";
 
 // Scripts
 import '../style.css';
 
 const InstaSlider = () => {
-  const sliderRef = useRef(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
   const images = [
     "/img/insta_post1.jpg",
     "/img/insta_post2.jpg",
     "/img/insta_post3.jpg"
   ];
 
-  const scrollTo = (index) => {
+  const scrollTo = (index: number) => {
     const slider = sliderRef.current;
     if (slider) {
       const width = slider.clientWidth;
