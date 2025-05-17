@@ -6,10 +6,12 @@ import { motion } from 'framer-motion';
 import ExternalLink from './mainScrips/links.tsx'
 import InstaSlider from './mainScrips/imageSlider.tsx'
 import HorizontalScroll from './mainScrips/scroll.tsx';
+//import Credits from './mainScrips/copyright.tsx'
 
 //Global Scripts
 import ThemeToggle from './mainScrips/darkMode.tsx';
 import CookieBanner from './mainScrips/cookie.tsx'
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   //const navigate = useNavigate();
@@ -28,7 +30,7 @@ const HomePage = () => {
           whileTap={{ scale: 1 }}
         >
             <div className="top">
-              <img src="/public/img/Profil.jpg" alt="Logo" loading="lazy"/>
+              <img src="/img/Profil.jpg" alt="Logo" loading="lazy"/>
               <h4>Nico Gleichmann</h4>
               <p><span className="point"></span>Entrepreneur | Digital Creator | Innovator</p>
             </div>
@@ -178,11 +180,11 @@ const HomePage = () => {
       </p>
 
       <span className="info-container">
-        Weitere Infos
+        <p style={{paddingLeft: "0.36rem"}}>Weitere Infos</p>
         <span className="info-dropdown">
-          <a href="links.html" className="hover-effect">
+          <Link to="/nutzungslinks">
             Nutzungslinks
-          </a>
+          </Link>
           <a
             href="https://www.instagram.com/nico.gleichmann/"
             className="hover-effect"
@@ -208,3 +210,9 @@ const HomePage = () => {
 };
 
 export default HomePage;
+/* TODO: 
+1. Responsive Design
+2. Sicherheitslücken schließen
+
+
+*/
