@@ -23,28 +23,29 @@ const HomePage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setResponseMsg("...lädt");
-
+  
     try {
-      const res = await fetch("/api/newsletter", {
+      const res = await fetch("http://localhost:5000/api/newsletter", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email }),
       });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        setResponseMsg(data.message || "Danke fürs Abonnieren!");
-        setEmail(""); // Formular zurücksetzen
-      } else {
-        setResponseMsg(data.message || "Fehler beim Abonnieren");
+  
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(errorText || "Unbekannter Fehler");
       }
-    } catch (err) {
-      setResponseMsg("Netzwerkfehler. Bitte später erneut versuchen.");
+  
+      const text = await res.text();
+      setResponseMsg(text);
+      setEmail("");
+    } catch (error: any) {
+      setResponseMsg("Fehler: " + error.message);
     }
   };
+
 
   return (
     <>
