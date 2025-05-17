@@ -1,9 +1,12 @@
-from flask import Flask
 from routes import register_user, login_user
+from routes_newsletter import create_newsletter_table, newsletter_subscribe
 from models import create_user_table
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
+
 create_user_table()
+create_newsletter_table()  # Newsletter Tabelle anlegen
 
 @app.route("/register", methods=["POST"])
 def register():
@@ -21,6 +24,10 @@ def list_users():
     return {
         "users": [{"id": u[0], "username": u[1], "email": u[2]} for u in users]
     }
+
+@app.route("/api/newsletter", methods=["POST"])
+def newsletter():
+    return newsletter_subscribe()
 
 if __name__ == "__main__":
     app.run(debug=True)

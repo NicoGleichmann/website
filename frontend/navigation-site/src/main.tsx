@@ -1,3 +1,4 @@
+// main.tsx
 import './style.css';
 //import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -12,9 +13,38 @@ import HorizontalScroll from './mainScrips/scroll.tsx';
 import ThemeToggle from './mainScrips/darkMode.tsx';
 import CookieBanner from './mainScrips/cookie.tsx'
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const HomePage = () => {
   //const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [responseMsg, setResponseMsg] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setResponseMsg("...lädt");
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setResponseMsg(data.message || "Danke fürs Abonnieren!");
+        setEmail(""); // Formular zurücksetzen
+      } else {
+        setResponseMsg(data.message || "Fehler beim Abonnieren");
+      }
+    } catch (err) {
+      setResponseMsg("Netzwerkfehler. Bitte später erneut versuchen.");
+    }
+  };
 
   return (
     <>
@@ -30,7 +60,7 @@ const HomePage = () => {
           whileTap={{ scale: 1 }}
         >
             <div className="top">
-              <img src="/img/Profil.jpg" alt="Logo" loading="lazy"/>
+              <img src="public/Profil.jpg" alt="Logo" loading="lazy"/>
               <h4>Nico Gleichmann</h4>
               <p><span className="point"></span>Entrepreneur | Digital Creator | Innovator</p>
             </div>
@@ -146,16 +176,20 @@ const HomePage = () => {
         {/* Newsletter Box */}
         <div className="box8 box slide-in">
           <div className="form-box newsletter-box">
-            <h2>Abonniere meinen Newsletter</h2>
+            <h2>Abonniere meinen Newsletter!</h2>
             <p>Erhalte die neuesten Updates direkt in dein Postfach!</p>
-            <form id="newsletter-form">
+            <form id="newsletter-form" onSubmit={handleSubmit}>
               <input
-                type="search"
+                type="email"
                 placeholder="Deine E-Mail-Adresse"
                 id="textInput"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <button type="submit">Abonnieren</button>
             </form>
+            <p id="response-msg">{responseMsg}</p>
           </div>
         </div>
       </div>
