@@ -15,33 +15,34 @@ html, body {
     font-family: "Poppins", serif;
     background: linear-gradient(270deg,#9b9494, #000); /* von schwarz zu weiss */
     color: #ffffff; /* Weißer Text */
-    overflow-y: auto; /* Vertikal Scrollen erlauben */
-    overflow-x: hidden; /* Horizontal Scrollen erlauben */
+    overflow-y: hidden; /* Vertikal Scrollen erlauben */
+    overflow-x: auto; /* Horizontal Scrollen erlauben */
     cursor: grab;
 
     display: flex;
     align-items: center; /* Vertikale Zentrierung */
     justify-content: center; /* Horizontale Zentrierung */
+    -webkit-overflow-scrolling: touch; /* Smooth Scrolling auf iOS */
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
 }
 
-body {
+/*body {
     display: flex;
     flex-direction: row;
-    width: max-content; /* Wichtig für horizontalen Scrollbereich */
+    width: max-content;
+    min-height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+    align-items: stretch; /* Alle Boxen gleich hoch */
+    /*touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
 }
+*/
+
 
 body:active {
     cursor: grabbing;
-}
-  
-/* Base hover styles */
-.box1:hover,
-.case:hover,
-.box6:hover,
-.lite:hover,
-.box8:hover {
-    cursor: pointer;
-    transition: all 0.3s ease;
 }
 
 /* ========== */
@@ -1427,6 +1428,15 @@ body.white-mode .lite {
     }
 }
 
+@media (max-width: 768px) {
+    .box1,
+    .box2,
+    .box3 {
+        padding: 1rem;
+        font-size: 0.95rem;
+    }
+}
+
 @media (max-width: 480px) {
     .main.container {
         padding: 10px;
@@ -1534,8 +1544,93 @@ body.white-mode .lite {
     }
 }
 
+/* Base hover styles */
+.box1:hover,
+.case:hover,
+.box6:hover,
+.lite:hover,
+.box8:hover {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
+.box7
+{
+    min-width: 280px; /* genug Platz für Mobile */
+    max-width: 95vw;  /* verhindert zu breite Boxen */
+    padding: 1.5rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
 
+.box1 {
+    max-width: 100%;
+    word-break: break-word;
+}
 
+@media (max-width: 600px) {
+    .box1,
+    .box2,
+    .box3 {
+        font-size: 0.9rem;
+        padding: 0.75rem;
+    }
+}
 
+@media (max-width: 768px) {
+    body {
+        display: block; /* Zentrierung aufheben */
+        overflow-x: auto; /* horizontal scrollen erlauben */
+        padding: 1rem;
+    }
+
+    #container {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        width: max-content;
+    }
+
+    .box1,
+    .box2,
+    .box3,
+    .box4,
+    .box5,
+    .box6,
+    .box7,
+    .box8 {
+        min-width: 280px;
+        height: 380px; /* Einheitliche, moderate Höhe */
+        flex-shrink: 0; /* verhindert automatisches Schrumpfen */
+        padding: 1rem;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+        word-wrap: break-word;
+    }
+
+    .box1 h2,
+    .box1 p,
+    .box2 h2,
+    .box2 p,
+    .box3 h2,
+    .box3 p,
+    .box4 h2,
+    .box4 p,
+    .box5 h2,
+    .box5 p,
+    .box6 h2,
+    .box6 p,
+    .box7 h2,
+    .box7 p,
+    .box8 h2,
+    .box8 p {
+        font-size: 0.9rem;
+        line-height: 1.2rem;
+        overflow-wrap: break-word;
+    }
+}
 
