@@ -5,10 +5,17 @@ import SibApiV3Sdk from "@sendinblue/client";
 import dotenv from "dotenv";
 dotenv.config();
 
-const client = SibApiV3Sdk.ApiClient.instance;
-client.authentications['api-key'].apiKey = process.env.API_KEY;
+// API-Key Konfiguration
+const apiKey = process.env.API_KEY;
+if (!apiKey) {
+    console.error("FEHLER: Kein API-Key gefunden. Bitte überprüfen Sie die .env-Datei.");
+    process.exit(1);
+}
 
 const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+
+// Authentifizierung
+apiInstance.authentications['apiKey'].apiKey = apiKey;
 
 const app = express();
 app.use(cors());
@@ -27,7 +34,7 @@ app.post("/api/newsletter", async (req, res) => {
   try {
     const sendSmtpEmail = {
       to: [{ email: safeEmail }],
-      templateId: 1, // Hier deine Template-ID rein
+      templateId: 1, // Ersetzen Sie dies mit Ihrer tatsächlichen Template-ID
       params: { name: "Newsletter-Abonnent" },
       sender: {
         name: "Dein Projektname",
@@ -37,10 +44,9 @@ app.post("/api/newsletter", async (req, res) => {
 
     const response = await apiInstance.sendTransacEmail(sendSmtpEmail);
     console.log("Brevo Response:", response);
-
-    res.status(200).send("Erfolgreich für den Newsletter angemeldet!");
+    res.status(200).send("Vielen, vielen Dank für Ihre Anmeldung! :D");
   } catch (error) {
-    console.error("Fehler beim E-Mail-Versand:", error);
+    console.error("Fehler beim E-Mail-Versand:", error.response?.body || error.message);
     res.status(500).send("Fehler beim Versenden der E-Mail.");
   }
 });
