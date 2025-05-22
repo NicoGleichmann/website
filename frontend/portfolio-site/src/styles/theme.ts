@@ -1,8 +1,7 @@
 // src/styles/theme.ts
-
 export const theme = {
   dark: {
-    background: '#121212',
+    background: '#1a1a2e',
     text: '#ffffff',
     accent: '#1E88E5',
     border: '#1E1E1E',
@@ -17,14 +16,3 @@ export const theme = {
   }
 };
 
-export const setTheme = (isDarkMode: boolean) => {
-  const root = document.documentElement;
-  const currentTheme = isDarkMode ? theme.dark : theme.light;
-
-  Object.entries(currentTheme).forEach(([key, value]) => {
-    root.style.setProperty(`--${key}`, value);
-  });
-
-  document.body.classList.remove('light-mode', 'dark-mode');
-  document.body.classList.add(isDarkMode ? 'dark-mode' : 'light-mode');
-};

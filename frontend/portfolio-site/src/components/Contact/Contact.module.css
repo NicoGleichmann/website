@@ -1,138 +1,248 @@
+:root {
+  /* Light Mode Colors (Standard) */
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --text-secondary: #666666;
+  --input-bg: #f5f5f5;
+  --input-border: #e0e0e0;
+  --input-placeholder: #999999;
+  --input-focus: rgba(30, 98, 242, 0.2);
+  --button-bg: #1e62f2;
+  --button-text: #ffffff;
+  --button-hover: #1a56d4;
+}
+
+/* Dark Mode Styles */
+[data-theme="dark"] {
+  --bg-color: var(--color-surface);
+  --text-color: var(--color-text);
+  --text-secondary: #dce4ff;
+  --input-bg: rgba(255, 255, 255, 0.1);
+  --input-border: transparent;
+  --input-placeholder: rgba(255, 255, 255, 0.7);
+  --input-focus: rgba(255, 255, 255, 0.4);
+  --button-bg: #ffffff;
+  --button-text: #1e62f2;
+  --button-hover: #dce4ff;
+}
+
 .contactSection {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 4rem;
     padding: 5rem 10%;
-    color: #ffffff;
-    font-family: 'Segoe UI', sans-serif;
-    transition: background-color 0.4s ease;
-  }
-  
-  .left {
+    color: var(--text-color);
+    font-family: 'Segoe UI', sans-serif;    
+    transition: background-color 0.4s ease, color 0.4s ease;
+    background-color: var(--bg-color);
+}
+
+.left {
     flex: 1;
     min-width: 280px;
-  }
+}
   
-  .left h1 {
+.left h1 {
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 1rem;
     letter-spacing: -0.5px;
-  }
+    color: var(--text-color);
+}
   
-  .left p {
+.left p {
     font-size: 1.1rem;
-    color: #dce4ff;
+    color: var(--text-secondary);
     margin-bottom: 2rem;
     line-height: 1.6;
-  }
+}
   
-  .contactInfo p {
+.contactInfo p {
     font-size: 1rem;
     margin-bottom: 0.75rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-  }
-  
-  .right {
+    color: var(--text-secondary);
+}
+
+.right {
     flex: 1;
     min-width: 280px;
-  }
+}
   
-  .form {
+.form {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-  }
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
   
-  .inputGroup {
+.inputGroup {
     display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
+    gap: 1.5rem;
+    width: 100%;
+}
   
-  .inputGroup input {
+.inputGroup input {
     flex: 1;
-    padding: 0.9rem 1.1rem;
-    border: none;
-    border-radius: 10px;
-    background-color: #ffffff;
-    color: #1e62f2;
+    min-width: 0;
+    padding: 1rem 1.2rem;
+    border: 2px solid var(--input-border);
+    border-radius: 12px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
     font-size: 1rem;
     outline: none;
-    transition: all 0.25s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  }
-  
-  .inputGroup input:focus {
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
-  }
-  
-  textarea {
-    resize: none;
-    padding: 0.9rem 1.1rem;
-    min-height: 130px;
-    border: none;
-    border-radius: 10px;
-    background-color: #ffffff;
-    color: #1e62f2;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.inputGroup input::placeholder {
+    color: var(--input-placeholder);
+    font-weight: 300;
+}
+
+.inputGroup input:focus {
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 4px rgba(30, 98, 242, 0.1);
+    background-color: var(--input-bg);
+}
+
+textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 1.1rem 1.3rem;
+    border: 2px solid var(--input-border);
+    border-radius: 12px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
     font-size: 1rem;
+    line-height: 1.6;
     outline: none;
-    transition: all 0.25s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  }
-  
-  textarea:focus {
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
-  }
-  
-  button {
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    resize: vertical;
+}
+
+textarea::placeholder {
+    color: var(--input-placeholder);
+    font-weight: 300;
+}
+
+textarea:focus {
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 4px rgba(30, 98, 242, 0.1);
+    background-color: var(--input-bg);
+}
+
+.submitBtn {
     align-self: flex-start;
-    padding: 0.9rem 2.2rem;
-    background-color: #ffffff;
-    color: #1e62f2;
+    padding: 1rem 2.5rem;
+    background-color: var(--button-bg);
+    color: var(--button-text);
     font-weight: 700;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  button:hover {
-    background-color: #dce4ff;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    width: auto;
+    min-width: 150px;
+}
+
+.submitBtn:hover {
+    background-color: var(--button-hover);
     transform: translateY(-3px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-  }
-  
-  button:active {
-    transform: scale(0.97);
-  }
-  
-  .socials {
+}
+
+.submitBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #89d4cf, #6e45e2);
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  border-radius: 50px;
+}
+
+.submitBtn:hover::before {
+  opacity: 1;
+}
+
+.submitBtn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 8px rgba(110, 69, 226, 0.3);
+}
+
+/* Loading Animation */
+.submitBtn.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.submitBtn.loading::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-left: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.socials {
     display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-  
-  .socials a {
-    color: #ffffff;
-    font-size: 1.4rem;
-    transition: color 0.2s ease, transform 0.2s ease;
-  }
-  
-  .socials a:hover {
-    color: #dce4ff;
-    transform: scale(1.1);
-  }
-  
-  /* Responsive Tweak */
-  @media (max-width: 768px) {
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-left: 11%;
+}
+
+.socials a {
+    color: var(--text-color);
+    font-size: 1.6rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--input-bg);
+    backdrop-filter: blur(5px);
+}
+
+.socials a:hover {
+    transform: translateY(-3px) scale(1.1);
+    color: var(--button-bg);
+    background: rgba(110, 69, 226, 0.1);
+}
+
+/* Responsive Tweak */
+@media (max-width: 768px) {
     .contactSection {
       flex-direction: column;
-      padding: 4rem 5%;
+      padding: 3rem 5%;
     }
   
     .left h1 {
@@ -141,53 +251,36 @@
   
     .inputGroup {
       flex-direction: column;
+      gap: 1rem;
     }
   
-    button {
+    .inputGroup input {
+      width: 100%;
+    }
+  
+    .submitBtn {
       width: 100%;
       text-align: center;
+      justify-content: center;
     }
-  }
   
-  /* Light Mode Adjustments */
-  body.light-mode .contactSection {
-    background-color: #f4f4f4;
-    color: #1a1a1a;
-  }
+    .socials {
+      justify-content: center;
+      margin-top: 2rem;
+    }
+}
 
-  body.light-mode .left h1 {
-    color: #1565C0;
-  }
-
-  body.light-mode .left p {
-    color: #334155;
-  }
-
-  body.light-mode .contactInfo p {
-    color: #475569;
-  }
-
-  body.light-mode .inputGroup input,
-  body.light-mode textarea {
-    background-color: #ffffff;
-    color: #1565C0;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  }
-
-  body.light-mode .inputGroup input:focus,
-  body.light-mode textarea:focus {
-    box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.2);
-    border-color: #1565C0;
-  }
-
-  body.light-mode button {
-    background-color: #1565C0;
-    color: #ffffff;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  body.light-mode button:hover {
-    background-color: #0D47A1;
-    transform: translateY(-2px);
-  }
+/* Tablet Ansicht */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .form {
+      max-width: 100%;
+    }
+    
+    .inputGroup {
+      flex-wrap: wrap;
+    }
+    
+    .inputGroup input {
+      min-width: calc(50% - 0.75rem);
+    }
+}

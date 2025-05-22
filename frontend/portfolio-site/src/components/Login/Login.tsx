@@ -5,12 +5,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import logImg from './log.svg';
 import registerImg from './register.svg';
 import { useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
 import { GoogleLogin } from "@react-oauth/google";
-
-=======
-import { GoogleLogin } from "@react-oauth/google" ;
->>>>>>> 7270211a49f0e61c371289af01050c4663b49db9
 
 const Login: React.FC = () => {
 
@@ -180,17 +175,20 @@ const Login: React.FC = () => {
             <div className={styles['social-media']}>
               <a href="#" className={styles['social-icon']}><i className="fab fa-facebook-f"></i></a>
               <a href="#" className={styles['social-icon']}><i className="fab fa-instagram"></i></a>
-              <a href="#" className={styles['social-icon']}><i className="fab fa-google"></i></a>
-              <div className={styles.googleLoginWrapper}>
-                <GoogleLogin
-                  onSuccess={(credentialResponse) => {
-                    console.log(credentialResponse);
-                    setIsLoggedIn(true);
-                  }}
-                  onError={() => {
-                    console.log("Login mit Google fehlgeschlagen");
-                  }}
-                />
+              <div className={`${styles['social-icon']} ${styles['google-login']}`}>
+                <div className={styles['google-button-container']}>
+                  <GoogleLogin
+                    onSuccess={(credentialResponse) => {
+                      console.log(credentialResponse);
+                      setIsLoggedIn(true);
+                    }}
+                    onError={() => {
+                      console.log("Login mit Google fehlgeschlagen");
+                    }}
+                    useOneTap
+                  />
+                </div>
+                <i className="fab fa-google"></i>
               </div>
               <a href="#" className={styles['social-icon']}><i className="fab fa-linkedin-in"></i></a>
             </div>

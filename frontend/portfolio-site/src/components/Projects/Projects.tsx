@@ -2,11 +2,12 @@ import { useState } from 'react';
 import styles from './Projects.module.css';
 import { motion } from 'framer-motion';
 import FadeInWhenVisible from "../ScrollToTop/FadeInWhenVisible";
+import { useTheme } from '../DarkModeToggle/DarkModeProvider';
 
 const projects = [
   {
     title: 'Projekt 1',
-    description: 'Der nächste Schritt auf meinem Weg ist Social Media. Ich arbeite dem nächst daran, meine Kanäle strategisch aufzubauen und sie als Plattform für meine Ideen, Inhalte und meine Marke zu nutzen. Ziel ist es, Sichtbarkeit zu schaffen – für Lumio, für die Themen, die mich bewegen, und für den Mehrwert, den ich bieten will. Dabei geht es nicht nur um Reichweite, sondern auch um echte Verbindung. Ich möchte Inhalte teilen, die inspirieren, motivieren und Einblicke in meinen Weg als junger Gründer geben. Der Aufbau läuft Schritt für Schritt – mit Plan, Geduld und Fokus.',
+    description: 'Der nächste Schritt auf meinem Weg ist Social Media. Ich arbeite demnächst daran, meine Kanäle strategisch aufzubauen und sie als Plattform für meine Ideen, Inhalte und meine Marke zu nutzen. Ziel ist es, Sichtbarkeit zu schaffen – für Lumio, für die Themen, die mich bewegen, und für den Mehrwert, den ich bieten will. Dabei geht es nicht nur um Reichweite, sondern auch um echte Verbindung. Ich möchte Inhalte teilen, die inspirieren, motivieren und Einblicke in meinen Weg als junger Gründer geben. Der Aufbau läuft Schritt für Schritt – mit Plan, Geduld und Fokus.',
     link: 'https://github.com/your-username/project1',
     image: './src/assets/disciplin.jpg',
   },
@@ -25,7 +26,7 @@ const projects = [
 ];
 
 const containerVariants = {
-  hidden: {},
+  hidden: {},     
   visible: {
     transition: {
       staggerChildren: 0.3,
@@ -40,22 +41,30 @@ const itemVariants = {
 
 export default function Projects() {
   const [expanded, setExpanded] = useState<number | null>(null);
+  const { isDarkMode } = useTheme();
 
   const toggleExpand = (index: number) => {
     setExpanded((prev) => (prev === index ? null : index));
   };
 
   return (
-    <section className={styles.projectsSection} id="projects">
+    <section 
+      className={styles.projectsSection} 
+      id="projects" 
+      data-theme={isDarkMode ? 'dark' : 'light'}
+    >
       <FadeInWhenVisible direction="up">
         <motion.div
           className={styles.container}
+          variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          variants={containerVariants}
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true }}
         >
-          <h2 className={styles.title}>💻 Meine Projekte</h2>
+          <motion.h2 className={`${styles.title} fadeIn`} variants={itemVariants}>
+            💻 Meine Projekte
+          </motion.h2>
+          
           <div className={styles.grid}>
             {projects.map((project, index) => {
               const isExpanded = expanded === index;
@@ -64,15 +73,23 @@ export default function Projects() {
               return (
                 <motion.div
                   key={index}
-                  className={styles.card}
+                  className={`${styles.card} fadeInUp`}
                   variants={itemVariants}
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <img src={project.image} alt={project.title} className={styles.image} />
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className={styles.image} 
+                    loading="lazy"
+                  />
                   <h3>{project.title}</h3>
                   <p>{isExpanded ? project.description : shortText}</p>
-                  <button onClick={() => toggleExpand(index)} className={styles.toggleButton}>
+                  <button 
+                    onClick={() => toggleExpand(index)} 
+                    className={styles.toggleButton}
+                  >
                     {isExpanded ? 'Weniger anzeigen' : 'Mehr erfahren'}
                   </button>
                 </motion.div>

@@ -2,7 +2,8 @@ import styles from "./Hero.module.css"
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
 import { fadeInUp, fadeInLeft, fadeInRight } from "../ScrollToTop/scrollAnimations.tsx"
-import Modal from "./Modal.tsx"; 
+import Modal from "./Modal.tsx"
+import { useTheme } from "../DarkModeToggle/DarkModeProvider"
 
 
 const typingTexts = [
@@ -15,6 +16,7 @@ const typingTexts = [
 ]
 
 const HeroSection = () => {
+  const { isDarkMode } = useTheme()
   const [text, setText] = useState("");
   const [index, setIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);
@@ -52,7 +54,11 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className={styles.hero} id="hero">
+    <section 
+      className={styles.hero} 
+      id="home"
+      data-theme={isDarkMode ? 'dark' : 'light'}
+    >
       <div className={styles.decorLeft} />
       <div className={styles.decorRight} />
 
@@ -63,7 +69,7 @@ const HeroSection = () => {
         transition={{ staggerChildren: 0.2 }}
       >
         <motion.h1 className={styles.heading} variants={fadeInLeft}>
-          Hi, ich bin Nico 👋
+          Hi, ich bin Nico <span className={styles.wave}>👋</span>
         </motion.h1>
 
         <motion.p className={styles.subheading} variants={fadeInRight}>
@@ -76,14 +82,24 @@ const HeroSection = () => {
           tauche tief in JavaScript ein & lebe bewusst.
         </motion.p>
 
-        <motion.a
-          onClick={() => setIsModalOpen(true)}
-          href="#portfolio"
-          className={styles.ctaButton}
-          variants={fadeInUp}
-        >
-          Lebenslauf herunterladen
-        </motion.a>
+        <motion.div className={styles.buttons} variants={fadeInUp}>
+          <motion.a
+            href="#contact"
+            className={styles.primaryButton}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Kontakt aufnehmen
+          </motion.a>
+          <motion.button
+            onClick={() => setIsModalOpen(true)}
+            className={styles.secondaryButton}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Lebenslauf herunterladen
+          </motion.button>
+        </motion.div>
       </motion.div>
       {isModalOpen && <Modal onClose={() => setIsModalOpen(false)} />}
     </section>

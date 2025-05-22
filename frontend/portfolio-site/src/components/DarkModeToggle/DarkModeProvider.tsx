@@ -1,6 +1,5 @@
 // src/components/DarkModeToggle/DarkModeProvider.tsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { setTheme } from '../../styles/theme';
 
 type ThemeContextType = {
   isDarkMode: boolean;
@@ -16,12 +15,18 @@ export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
+    if (typeof window === 'undefined') return true;
     const savedTheme = localStorage.getItem('theme');
     return savedTheme === null ? true : savedTheme === 'dark';
   });
 
   useEffect(() => {
-    setTheme(isDarkMode);
+    const root = document.documentElement;
+    
+    // Setze das data-theme Attribut am html-Element
+    root.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+    
+    // Speichere das Theme im localStorage
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
   }, [isDarkMode]);
 

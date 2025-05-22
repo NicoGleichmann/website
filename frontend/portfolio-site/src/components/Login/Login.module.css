@@ -19,7 +19,6 @@ input {
   overflow: hidden;
 }
 
-
 .successMessage {
   color: #2ecc71;
   margin-top: 1rem;
@@ -33,7 +32,6 @@ input {
   text-align: center;
   font-weight: 500;
 }
-
 
 .forms-container {
   position: absolute;
@@ -142,11 +140,56 @@ form.sign-in-form {
   text-decoration: none;
   font-size: 1.1rem;
   transition: 0.3s;
+  background: transparent;
+  padding: 0;
 }
 
 .social-icon:hover {
   color: #4481eb;
   border-color: #4481eb;
+}
+
+.google-login {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.google-button-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1; /* Make it almost transparent but still clickable */
+  z-index: 1;
+  cursor: pointer;
+}
+
+.google-button-container > div {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative;
+}
+
+.google-button-container button {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.google-button-container div[role="button"] {
+  visibility: hidden;
+}
+
+.google-login i.fa-google {
+  position: relative;
+  z-index: 0;
+  pointer-events: none; /* Make sure clicks go through to the hidden button */
 }
 
 .btn {
@@ -167,6 +210,7 @@ form.sign-in-form {
 .btn:hover {
   background-color: #4d84e2;
 }
+
 .panels-container {
   position: absolute;
   height: 100%;

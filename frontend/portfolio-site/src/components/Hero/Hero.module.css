@@ -1,6 +1,57 @@
 /* Hero.module.css */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap');
 
+/* Default Dark Theme */
+.hero {
+  /* Modal Theme Variables */
+  --modal-bg: #111111;
+  --modal-text: #f5f6fa;
+  --modal-border: #313131;
+  --modal-button-bg: #f5f6fa;
+  --modal-button-text: #1a1e1f;
+  --modal-button-hover: #d1d8e0;
+  --hero-bg: #111111;
+  --hero-text: #f5f6fa;
+  --hero-subtext: #d1d8e0;
+  --hero-desc: #e1e9f5;
+  --hero-button-bg: #f5f6fa;
+  --hero-button-text: #1a1e1f;
+  --hero-button-hover: #d1d8e0;
+  --hero-button-outline: #f5f6fa;
+  --hero-button-outline-hover: #d1d8e0;
+  --hero-button-outline-text: #f5f6fa;
+  --hero-button-outline-hover-text: #1a1e1f;
+  --hero-cursor: #f5f6fa;
+}
+
+/* Light Theme (wenn umgeschaltet) */
+.hero[data-theme="light"] {
+  /* Modal Light Theme */
+  --modal-bg: #ffffff;
+  --modal-text: #1a1e1f;
+  --modal-border: #dfe6e9;
+  --modal-button-bg: #2d3436;
+  --modal-button-text: #ffffff;
+  --modal-button-hover: #1a1e1f;
+  --hero-bg: #ffffff;
+  --hero-text: #1a1e1f;
+  --hero-subtext: #4a4f52;
+  --hero-desc: #2d3436;
+  --hero-button-bg: #2d3436;
+  --hero-button-text: #ffffff;
+  --hero-button-hover: #1a1e1f;
+  --hero-button-outline: #2d3436;
+  --hero-button-outline-hover: #1a1e1f;
+  --hero-button-outline-text: #2d3436;
+  --hero-button-outline-hover-text: #ffffff;
+  --hero-cursor: #2d3436;
+}
+
+/* Apply theme to all elements in the hero section */
+.hero * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
 .hero {
   display: flex;
   align-items: center;
@@ -10,6 +61,25 @@
   position: relative;
   overflow: hidden;
   font-family: 'Outfit', sans-serif;
+  background-color: var(--hero-bg);
+  color: var(--hero-text);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.wave span {    
+  animation: wave 2s infinite;
+}
+
+@keyframes wave {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .content {
@@ -23,49 +93,89 @@
 .heading {
   font-size: clamp(2.5rem, 8vw, 3.5rem);
   font-weight: 700;
-  color: #ffffff;
+  color: var(--hero-text);
   margin-bottom: 1rem;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: color 0.4s ease;
 }
 
 .subheading {
   font-size: clamp(1.2rem, 4vw, 1.8rem);
   font-weight: 600;
-  color: #94a3b8;
+  color: var(--hero-subtext);
   margin-bottom: 1rem;
   min-height: 2.5rem;
+  transition: color 0.4s ease;
 }
 
 .cursor {
   display: inline-block;
   width: 1ch;
-  color: #6fb8e5;
+  color: var(--hero-cursor);
+  transition: color 0.4s ease;
 }
 
 .description {
   font-size: clamp(1rem, 3vw, 1.125rem);
   line-height: 1.6;
-  color: #cbd5e1;
+  color: var(--hero-desc);
   margin-bottom: 2rem;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: color 0.4s ease;
 }
 
-.ctaButton {
-  display: inline-block;
+.buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.primaryButton {
+  background-color: var(--hero-button-bg);
+  color: var(--hero-button-text);
+  border: none;
   padding: 0.9rem 2rem;
+  border-radius: 50px;
   font-size: 1rem;
   font-weight: 600;
-  color: white;
-  background: linear-gradient(135deg, #9a99aa, #61757e);
-  border-radius: 99px;
-  box-shadow: 0 4px 14px rgba(182, 200, 207, 0.3);
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.ctaButton:hover {
-  padding: 1.0rem 2.2rem;
-  margin: 0 -0.2rem;
-  box-shadow: 0 8px 24px rgba(109, 141, 155, 0.5);
+.primaryButton:hover {
+  background-color: var(--hero-button-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.secondaryButton {
+  background-color: transparent;
+  color: var(--hero-button-outline-text);
+  border: 2px solid var(--hero-button-outline);
+  padding: calc(0.9rem - 2px) 2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondaryButton:hover {
+  background-color: var(--hero-button-outline-hover);
+  color: var(--hero-button-outline-hover-text);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .blurBackground {
@@ -74,10 +184,17 @@
   left: 50%;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 70%);
+  background: radial-gradient(circle, rgba(45, 52, 54, 0.08), transparent 70%);
   transform: translateX(-50%);
   filter: blur(100px);
   z-index: 1;
+  opacity: 0.8;
+  transition: background 0.4s ease;
+}
+
+/* Default Dark Mode Styles */
+.blurBackground {
+  background: radial-gradient(circle, rgba(245, 246, 250, 0.08), transparent 70%);
 }
 
 .decorLeft,
@@ -86,18 +203,37 @@
   top: 0;
   bottom: 0;
   width: 60px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.05), transparent);
+  background: linear-gradient(to bottom, rgba(245, 246, 250, 0.04), transparent);
   z-index: 2;
+  transition: background 0.4s ease, border-color 0.4s ease;
 }
 
 .decorLeft {
   left: 0;
-  border-right: 1px solid rgba(255,255,255,0.05);
+  border-right: 1px solid rgba(245, 246, 250, 0.05);
 }
 
 .decorRight {
   right: 0;
-  border-left: 1px solid rgba(255,255,255,0.05);
+  border-left: 1px solid rgba(245, 246, 250, 0.05);
+}
+
+/* Light Mode Overrides */
+.hero[data-theme="light"] .blurBackground {
+  background: radial-gradient(circle, rgba(45, 52, 54, 0.08), transparent 70%);
+}
+
+.hero[data-theme="light"] .decorLeft,
+.hero[data-theme="light"] .decorRight {
+  background: linear-gradient(to bottom, rgba(45, 52, 54, 0.04), transparent);
+}
+
+.hero[data-theme="light"] .decorLeft {
+  border-right-color: rgba(45, 52, 54, 0.05);
+}
+
+.hero[data-theme="light"] .decorRight {
+  border-left-color: rgba(45, 52, 54, 0.05);
 }
 
 /* Media Queries */

@@ -1,6 +1,7 @@
 import styles from './Contact.module.css';
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
+import { useTheme } from '../DarkModeToggle/DarkModeProvider';
 
 const containerVariants = {
   hidden: { opacity: 0, y: 60 },
@@ -13,6 +14,7 @@ const itemVariants = {
 };
 
 const ContactSection = () => {
+  const { isDarkMode } = useTheme();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -39,7 +41,7 @@ const ContactSection = () => {
   
       if (response.ok) {
         setStatus({ type: 'success', message: 'Nachricht erfolgreich gesendet!' });
-        setFormData({ name: '', email: '', message: '' }); // Formular leeren
+        setFormData({ name: '', email: '', message: '' });
       } else {
         setStatus({ type: 'error', message: 'Fehler beim Senden der Nachricht.' });
       }
@@ -49,16 +51,21 @@ const ContactSection = () => {
       alert("Serverfehler.");
     }
   };
+
   return (
-    <section className={styles.contactSection} id="contact"> 
+    <section 
+      className={styles.contactSection} 
+      id="contact"
+      data-theme={isDarkMode ? 'dark' : 'light'}
+    >
       <motion.div
         className={styles.left}
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: false, amount: 0.2 }} // Animation wird auch bei Scrollen ausgelöst
+        viewport={{ once: false, amount: 0.2 }}
       >
-        <motion.h1 variants={itemVariants}>Let’s talk</motion.h1>
+        <motion.h1 variants={itemVariants}>Let's talk</motion.h1>
         <motion.p variants={itemVariants}>Stelle eine Frage oder sage einfach nur „Hallo“ …</motion.p>
         <motion.div className={styles.contactInfo} variants={itemVariants}>
           <p>📞 +49 176 44444 856</p>
@@ -71,7 +78,7 @@ const ContactSection = () => {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: false, amount: 0.2 }} // Animation wird auch bei Scrollen ausgelöst
+        viewport={{ once: false, amount: 0.2 }}
       >
         <motion.form className={styles.form} variants={itemVariants} onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
@@ -85,7 +92,7 @@ const ContactSection = () => {
             <input
               type="email"
               name="email"
-              placeholder="example@yourdomain.com"
+              placeholder="beispiel@domain.de"
               value={formData.email}
               onChange={handleChange}
             />
@@ -96,25 +103,19 @@ const ContactSection = () => {
             value={formData.message}
             onChange={handleChange}
           />
-          <button type="submit">SENDEN ➤</button>
+          <button type="submit" className={styles.submitBtn}>SENDEN ➤</button>
 
-          {/* Statusmeldung */}
           {status && (
-            <p
-              style={{
-                color: status.type === 'success' ? 'green' : 'red',
-                marginTop: '1rem',
-              }}
-            >
+            <div className={status.type === 'success' ? styles.successMessage : styles.errorMessage}>
               {status.message}
-            </p>
+            </div>
           )}
         </motion.form>
 
         <motion.div className={styles.socials} variants={itemVariants}>
-          <a href="#">📘</a>
-          <a href="#">🐦</a>
-          <a href="#">▶️</a>
+          <a href="https://www.instagram.com/nico.gleichmann/">📘</a>
+          <a href="https://twitter.com/nicogleichmann">🐦</a>
+          <a href="https://www.youtube.com/@nicogleichmann">▶️</a>
         </motion.div>
       </motion.div>
     </section>
