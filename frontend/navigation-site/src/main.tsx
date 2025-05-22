@@ -56,7 +56,7 @@ const HomePage = () => {
       <div className="main container">
         <motion.div 
           className="box1 box slide-in" 
-          //onClick={() => navigate('/portfolio')}
+          onClick={() => window.location.href = 'www.google.com'}
           whileHover={{ scale: 1.008 }}
           whileTap={{ scale: 1 }}
         >
