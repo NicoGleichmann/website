@@ -2,6 +2,7 @@
 import './style.css';
 //import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 //Scripts
 import ExternalLink from './mainScrips/links.tsx'
@@ -13,36 +14,61 @@ import HorizontalScroll from './mainScrips/scroll.tsx';
 import ThemeToggle from './mainScrips/darkMode.tsx';
 import CookieBanner from './mainScrips/cookie.tsx'
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+
+
 
 const HomePage = () => {
   //const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [responseMsg, setResponseMsg] = useState("");
+  const [responseMsg, setResponseMsg] = useState({
+    text: "",
+    type: ""
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setResponseMsg("...lädt");
+    setIsLoading(true);
+    setResponseMsg({
+      text: "...lädt",
+      type: "loading"
+    });
   
     try {
+      const token = await recaptchaRef.current?.executeAsync();
       const res = await fetch("http://localhost:5000/api/newsletter", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, recaptchaToken: token }),
       });
   
       if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(errorText || "Unbekannter Fehler");
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(
+          errorData.error || 
+          errorData.message || 
+          `Server-Fehler: ${res.status} ${res.statusText}`
+        );
       }
   
-      const text = await res.text();
-      setResponseMsg(text);
+      const data = await res.json();
+      setResponseMsg({
+        text: data.message || "Vielen Dank für deine Anmeldung!",
+        type: "success"
+      });
       setEmail("");
     } catch (error: any) {
-      setResponseMsg("Fehler: " + error.message);
+      setResponseMsg({ 
+        text: `Fehler: ${error.message || "Ein unerwarteter Fehler ist aufgetreten"}`,
+        type: "error"
+      });
+    } finally {
+      setIsLoading(false);
+      recaptchaRef.current?.reset();
     }
   };
 
@@ -56,9 +82,10 @@ const HomePage = () => {
       <div className="main container">
         <motion.div 
           className="box1 box slide-in" 
-          onClick={() => window.location.href = 'www.google.com'}
+          onClick={() => window.location.href = 'http://localhost:5174/'}
           whileHover={{ scale: 1.008 }}
           whileTap={{ scale: 1 }}
+          style={{ cursor: 'pointer' }}
         >
             <div className="top">
               <img src="public/Profil.jpg" alt="Logo" loading="lazy"/>
@@ -187,10 +214,24 @@ const HomePage = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                disabled={isLoading}
               />
-              <button type="submit">Abonnieren</button>
+              <button 
+              type="submit" 
+              disabled={isLoading}
+              className={isLoading ? 'loading' : ''}
+              >
+              {isLoading ? 'Wird gesendet...' : 'Abonnieren'}
+              </button>
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                size="invisible"
+                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || 'Ihr_Backup_Key'}
+              />
             </form>
-            <p id="response-msg">{responseMsg}</p>
+            {responseMsg.text && (
+              <p id="response-msg" className={`response-${responseMsg.type}`}>{responseMsg.text}</p>
+            )}
           </div>
         </div>
       </div>
@@ -245,9 +286,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-/* TODO: 
-1. Responsive Design
-2. Sicherheitslücken schließen
-
-
-*/

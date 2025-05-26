@@ -6,23 +6,43 @@ function ThemeToggle() {
 
   // Bilder umschalten, abhängig vom Modus
   const updateImages = (darkMode: boolean) => {
-    const toggleDisplay = (darkId: string, lightId: string) => {
-      const darkEl = document.getElementById(darkId);
-      const lightEl = document.getElementById(lightId);
-      if (darkEl && lightEl) {
-        darkEl.style.display = darkMode ? 'block' : 'none';
-        lightEl.style.display = darkMode ? 'none' : 'block';
-      }
-    };
+    console.log('Aktualisiere Bilder, Modus:', darkMode ? 'dunkel' : 'hell');
 
-    toggleDisplay('facebookD', 'facebookW');
-    toggleDisplay('youtubeD', 'youtubeW');
-    toggleDisplay('black_01', 'white_01');
-    toggleDisplay('black_02', 'white_02');
-    toggleDisplay('black_03', 'white_03');
-    toggleDisplay('black_04', 'white_04');
-    toggleDisplay('black_05', 'white_05');
-    toggleDisplay('black_06', 'white_06');
+    // Alle Elemente mit den Klassen dark-mode und white-mode finden
+    const darkElements = document.querySelectorAll('.dark-mode');
+    const lightElements = document.querySelectorAll('.white-mode');
+
+    // Dark-Mode Elemente anzeigen/verstecken
+    darkElements.forEach(el => {
+      if (el instanceof HTMLElement) {
+        el.style.display = darkMode ? 'block' : 'none';
+      }
+    });
+
+    // Light-Mode Elemente anzeigen/verstecken
+    lightElements.forEach(el => {
+      if (el instanceof HTMLElement) {
+        el.style.display = darkMode ? 'none' : 'block';
+      }
+    });
+
+    // Spezielle Behandlung für die Icons in Box 2
+    // Im Dark-Mode: dunkle Icons anzeigen, helle ausblenden
+    // Im Light-Mode: helle Icons anzeigen, dunkle ausblenden
+    const facebookDark = document.getElementById('facebook-d');
+    const facebookLight = document.getElementById('facebook-w');
+    const youtubeDark = document.getElementById('youtube-d');
+    const youtubeLight = document.getElementById('youtube-w');
+
+    if (facebookDark && facebookLight) {
+      facebookDark.style.display = darkMode ? 'none' : 'block';
+      facebookLight.style.display = darkMode ? 'block' : 'none';
+    }
+
+    if (youtubeDark && youtubeLight) {
+      youtubeDark.style.display = darkMode ? 'none' : 'block';
+      youtubeLight.style.display = darkMode ? 'block' : 'none';
+    }
   };
 
   // Theme umschalten
