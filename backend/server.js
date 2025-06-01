@@ -1,125 +1,49 @@
+// server.js - Minimal version to test basic functionality
+
 import express from 'express';
-import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import dotenv from 'dotenv';
-import { securityMiddleware, rateLimiter, verifyRecaptcha } from './security.js';
-import { sendNewsletterEmail } from './sendEmail.js';
-import axios from 'axios';
 
-// Konfiguration
+// Load environment variables
 dotenv.config();
+
+console.log('Environment variables:', {
+  API_KEY: process.env.API_KEY ? '***' + String(process.env.API_KEY).slice(-4) : 'Not set',
+  SENDER_EMAIL: process.env.SENDER_EMAIL || 'Not set',
+  NODE_ENV: process.env.NODE_ENV || 'development',
+  PORT: process.env.PORT || 5000
+});
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const app = express();
 
-// Middleware
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://ihre-domain.de'] 
-    : ['http://localhost:3000'],
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
-}));
-
+// Basic middleware
 app.use(express.json());
-app.use(express.static(join(__dirname, '../frontend/build')));
+app.use(express.urlencoded({ extended: true }));
 
-// Sicherheits-Middleware
-app.use(securityMiddleware);
-
-// API Routes
-app.post('/api/newsletter', 
-  rateLimiter,
-  verifyRecaptcha,
-  async (req, res) => {
-    try {
-      const { email, name = 'Nutzer' } = req.body;
-      
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        return res.status(400).json({ error: 'Ungültige E-Mail-Adresse' });
-      }
-
-      await sendNewsletterEmail(email, name);
-      res.json('Danke für deine Anmeldung!');
-    } catch (error) {
-      console.error('Newsletter Error:', error);
-      const status = error.status || 500;
-      const message = error.message || 'Ein Fehler ist aufgetreten';
-      res.status(status).json({ error: message });
-    }
-  }
-);
-
-// Frontend ausliefern
-app.get('*', (req, res) => {
-  res.sendFile(join(__dirname, '../frontend/build/index.html'));
+// Simple CORS for development
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
 });
 
-// Fehlerbehandlung 
+// Test route
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'Test route is working!' });
+});
+
+// Simple error handling
 app.use((err, req, res, next) => {
-  console.error('Unbehandelter Fehler:', err);
-  res.status(500).json({ 
-    error: 'Ein unerwarteter Fehler ist aufgetreten',
-    ...(process.env.NODE_ENV === 'development' && { details: err.message })
-  });
+  console.error('Error:', err);
+  res.status(500).json({ error: 'Something went wrong!' });
 });
 
-// Server starten
+// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server läuft auf Port ${PORT} (${process.env.NODE_ENV})`);
-});  
-
-// Aktuelle Zeile:
-res.json('Danke für deine Anmeldung!');
-
-// Besser (konsistentes Antwortformat):
-res.json({ 
-  success: true, 
-  message: 'Danke für deine Anmeldung!' 
+  console.log(`Server running on port ${PORT} (${process.env.NODE_ENV})`);
+  console.log(`Test the server at: http://localhost:${PORT}/api/test`);
 });
-
-app.post('/api/newsletter', 
-  rateLimiter,
-  verifyRecaptcha,
-  async (req, res) => {
-    try {
-      const { email, name = 'Nutzer', recaptchaToken } = req.body;
-      
-      // 1. E-Mail-Validierung
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        return res.status(400).json({ error: 'Ungültige E-Mail-Adresse' });
-      }
-
-      // 2. reCAPTCHA-Validierung
-      if (process.env.NODE_ENV === 'production') {
-        const recaptchaResponse = await axios.post(
-          `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`
-        );
-
-        if (!recaptchaResponse.data.success) {
-          return res.status(400).json({ 
-            error: 'reCAPTCHA-Validierung fehlgeschlagen' 
-          });
-        }
-      }
-
-      // 3. E-Mail versenden
-      await sendNewsletterEmail(email, name);
-      
-      // 4. Erfolgsantwort
-      res.json({ 
-        success: true, 
-        message: 'Danke für deine Anmeldung!' 
-      });
-    } catch (error) {
-      console.error('Newsletter Error:', error);
-      res.status(500).json({ 
-        error: 'Ein Fehler ist aufgetreten',
-        ...(process.env.NODE_ENV === 'development' && { details: error.message })
-      });
-    }
-  }
-);
