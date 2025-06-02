@@ -23,16 +23,62 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Simple CORS for development
+// CORS configuration
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  // Allow requests from the frontend development server
+  const allowedOrigins = ['http://localhost:5173', 'http://127.0.0.1:5173'];
+  const origin = req.headers.origin;
+  
+  if (allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  
   next();
 });
 
 // Test route
 app.get('/api/test', (req, res) => {
   res.json({ message: 'Test route is working!' });
+});
+
+// Newsletter subscription route
+app.post('/api/newsletter', async (req, res) => {
+  try {
+    const { email, token } = req.body;
+    
+    // Validate input
+    if (!email || !token) {
+      return res.status(400).json({ error: 'Email and reCAPTCHA token are required' });
+    }
+
+    // Here you would typically:
+    // 1. Verify the reCAPTCHA token with Google
+    // 2. Save the email to your database
+    // 3. Send a confirmation email
+
+    // For now, just log and return success
+    console.log('New subscription:', email);
+    res.status(200).json({ 
+      success: true, 
+      message: 'Thank you for subscribing!',
+      email: email
+    });
+    
+  } catch (error) {
+    console.error('Error in newsletter subscription:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: 'An error occurred while processing your subscription' 
+    });
+  }
 });
 
 // Simple error handling

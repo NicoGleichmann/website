@@ -26,10 +26,32 @@ const HomePage = () => {
     type: ""
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  // Temporäre Problemumgehung: Direkte Zuweisung des Schlüssels
+  const siteKey = '6LcBGFErAAAAABnKFKdfxPx5uq7WS2gJNyFMmneJ';
+  
+  // Debug-Ausgabe
+  console.log('Verwende reCAPTCHA Site Key:', siteKey);
+  
+  // Später können wir zur Umgebungsvariable zurückkehren:
+  // const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+
+  const handleRecaptchaChange = (token: string | null) => {
+    setRecaptchaToken(token);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!recaptchaToken) {
+      setResponseMsg({
+        text: "Bitte bestätige, dass du kein Roboter bist!",
+        type: "error"
+      });
+      return;
+    }
+
     setIsLoading(true);
     setResponseMsg({
       text: "...lädt",
@@ -37,33 +59,35 @@ const HomePage = () => {
     });
   
     try {
-      const token = await recaptchaRef.current?.executeAsync();
-      const res = await fetch("http://localhost:5000/api/newsletter", {
-        method: "POST",
+      const response = await fetch('http://localhost:5000/api/newsletter', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, recaptchaToken: token }),
+        body: JSON.stringify({
+          email,
+          token: recaptchaToken
+        }),
       });
-  
-      if (!res.ok) {
-        const errorData = await res.json().catch(() => ({}));
-        throw new Error(
-          errorData.error || 
-          errorData.message || 
-          `Server-Fehler: ${res.status} ${res.statusText}`
-        );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setResponseMsg({
+          text: data.message || "Erfolgreich für den Newsletter angemeldet!",
+          type: "success"
+        });
+        setEmail("");
+        recaptchaRef.current?.reset();
+        setRecaptchaToken(null);
+      } else {
+        throw new Error(data.error || "Ein Fehler ist aufgetreten");
       }
-  
-      const data = await res.json();
+    } catch (error) {
+      console.error("Error:", error);
+      const errorMessage = error instanceof Error ? error.message : "Ein unerwarteter Fehler ist aufgetreten";
       setResponseMsg({
-        text: data.message || "Vielen Dank für deine Anmeldung!",
-        type: "success"
-      });
-      setEmail("");
-    } catch (error: any) {
-      setResponseMsg({ 
-        text: `Fehler: ${error.message || "Ein unerwarteter Fehler ist aufgetreten"}`,
+        text: `Fehler: ${errorMessage}`,
         type: "error"
       });
     } finally {
@@ -225,8 +249,8 @@ const HomePage = () => {
               </button>
               <ReCAPTCHA
                 ref={recaptchaRef}
-                size="invisible"
-                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || 'Ihr_Backup_Key'}
+                sitekey={siteKey}
+                onChange={handleRecaptchaChange}
               />
             </form>
             {responseMsg.text && (

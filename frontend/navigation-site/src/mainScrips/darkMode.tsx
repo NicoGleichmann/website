@@ -6,8 +6,6 @@ function ThemeToggle() {
 
   // Bilder umschalten, abhängig vom Modus
   const updateImages = (darkMode: boolean) => {
-    console.log('Aktualisiere Bilder, Modus:', darkMode ? 'dunkel' : 'hell');
-
     // Alle Elemente mit den Klassen dark-mode und white-mode finden
     const darkElements = document.querySelectorAll('.dark-mode');
     const lightElements = document.querySelectorAll('.white-mode');

@@ -10,9 +10,6 @@ const HorizontalScroll = () => {
     const container = document.querySelector('.main.container') as HTMLDivElement;
     containerRef.current = container;
 
-    // Log für Container
-    console.log('Container:', container);
-
     // Verhindere Textmarkierung und andere Störungen
     document.body.style.userSelect = 'none'; // Verhindert die Markierung
 
@@ -24,7 +21,6 @@ const HorizontalScroll = () => {
       // Mehr Geschwindigkeit und größere Distanz pro Scroll
       const scrollSpeed = 4; // Anpassung der Scroll-Geschwindigkeit (mehr als 1 macht es schneller)
       container.scrollLeft += e.deltaY * scrollSpeed; // Multiplizieren, um es schneller zu machen
-      console.log('Wheel Event:', e.deltaY, 'Scroll Speed:', scrollSpeed);
     };
 
     // Drag-to-Scroll Funktionen
@@ -32,7 +28,6 @@ const HorizontalScroll = () => {
       isDragging.current = true;
       startX.current = e.pageX - container.getBoundingClientRect().left;
       scrollLeft.current = container.scrollLeft;
-      console.log('Mouse Down: Start Position:', startX.current); // Log für Mouse Down
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -41,12 +36,10 @@ const HorizontalScroll = () => {
       const x = e.pageX - container.getBoundingClientRect().left;
       const walk = (x - startX.current) * 1.5; // Geschwindigkeit des Scrollens
       container.scrollLeft = scrollLeft.current - walk;
-      console.log('Mouse Move: Walk Distance:', walk); // Log für Mouse Move
     };
 
     const handleMouseUpOrLeave = () => {
       isDragging.current = false;
-      console.log('Mouse Up or Leave: Dragging Ended');
     };
 
     // Event Listeners hinzufügen
