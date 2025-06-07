@@ -35,7 +35,6 @@ function blockIPs(req, res, next) {
   const clientIp = req.ip || req.connection.remoteAddress; // Holt die IP-Adresse des Clients
 
   if (ipRangeCheck(clientIp, blockedRanges)) {
-    console.warn(`Blocked request from blacklisted IP: ${clientIp}`);
     return res.status(403).json({ error: 'Zugriff verweigert' });
   }
   next(); // Gehe zur nächsten Middleware
@@ -57,7 +56,6 @@ function checkUserAgent(req, res, next) {
   );
 
   if (isBlocked) {
-    console.warn(`Blocked suspicious User-Agent: ${userAgent}`);
     return res.status(403).json({ error: 'Zugriff verweigert' });
   }
   next(); // Gehe zur nächsten Middleware
@@ -76,7 +74,6 @@ async function rateLimitMiddleware(req, res, next) { // Removed 'export' keyword
     // Wenn das Limit überschritten wurde
     if (rlRejected instanceof Error) {
       // Dies sollte nur bei internen Fehlern des Rate Limiters passieren
-      console.error('Rate Limiter internal error:', rlRejected);
       return res.status(500).json({ error: 'Interner Serverfehler beim Rate Limiting.' });
     }
     // Rate Limit überschritten (rlRejected ist ein Objekt vom RateLimiter)
@@ -96,12 +93,10 @@ async function verifyRecaptcha(req, res, next) { // Removed 'export' keyword her
   const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY; // Holt den geheimen Schlüssel aus den Umgebungsvariablen
 
   if (!recaptchaToken) {
-    console.warn('reCAPTCHA-Token fehlt in der Anfrage.');
     return res.status(400).json({ error: 'reCAPTCHA-Token fehlt.' });
   }
 
   if (!RECAPTCHA_SECRET_KEY) {
-    console.error('RECAPTCHA_SECRET_KEY ist nicht in den Umgebungsvariablen festgelegt.');
     return res.status(500).json({ error: 'Serverkonfigurationsfehler: reCAPTCHA-Schlüssel fehlt.' });
   }
 
@@ -115,14 +110,11 @@ async function verifyRecaptcha(req, res, next) { // Removed 'export' keyword her
     // Überprüfe das Ergebnis der reCAPTCHA-Verifizierung
     // Ein Score von 0.5 ist ein gängiger Schwellenwert für reCAPTCHA v3, kann aber angepasst werden.
     if (success && score >= 0.5) { // >= 0.5 bedeutet, dass es wahrscheinlich ein Mensch ist
-      console.log(`reCAPTCHA-Verifizierung erfolgreich. Score: ${score}`);
       next(); // Gehe zur nächsten Middleware/Route, wenn erfolgreich
     } else {
-      console.warn(`reCAPTCHA-Verifizierung fehlgeschlagen. Erfolg: ${success}, Score: ${score}`);
       return res.status(403).json({ error: 'reCAPTCHA-Überprüfung fehlgeschlagen. Bitte versuchen Sie es erneut.' });
     }
   } catch (error) {
-    console.error('Fehler bei der reCAPTCHA-Verifizierung:', error.response?.data || error.message);
     // Gib eine generische Fehlermeldung zurück, um interne Details zu verbergen
     return res.status(500).json({ error: 'Ein Fehler bei der reCAPTCHA-Überprüfung ist aufgetreten.' });
   }

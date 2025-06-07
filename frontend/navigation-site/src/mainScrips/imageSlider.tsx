@@ -67,7 +67,8 @@ const InstaSlider = () => {
       </div>
 
       <div className="lower_section">
-        <span id="insta2">@nico.gleichmann</span>
+        <span id="insta2" onClick={() => {
+      window.open("https://www.instagram.com/nico.gleichmann/", "_self", "noopener,noreferrer");}}>@nico.gleichmann</span>
       </div>
     </div>
   );

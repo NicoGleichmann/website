@@ -1398,31 +1398,48 @@ body.white-mode .lite {
 }
 
 /* Dropdown-Link */
+.info-dropdown {
+    background-color: #333;
+    border-radius: 10px;
+    padding: 5px 0;
+    min-width: 150px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    pointer-events: auto; /* Ermöglicht Klicks auf die Links */
+}
+
 .info-dropdown a {
     display: block;
     margin: 5px 0;
     color: #fff;
     text-decoration: none;
+    transition: background-color 0.2s;
 }
 
 .info-dropdown a:hover {
-    text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Verbindungslinie */
-.info-dropdown hr {
-    margin: 0;
-    border: 0;
-    height: 2px;
-    background-color: white;
-    width: 80%; /* Passe die Breite an */
-    margin-bottom: 10px; /* Abstand zwischen Strich und Links */
+/* Weißer Modus */
+body.white-mode .info-dropdown {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Dropdown anzeigen beim Hover */
-.info-container:hover .info-dropdown {
-    display: block;
+body.white-mode .info-dropdown a {
+    color: #333;
 }
+
+body.white-mode .info-dropdown a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Verhindert, dass das Menü verschwindet, wenn man zur Maus darüber bewegt */
+.info-container {
+    display: inline-block;
+}
+
 
 
 @media screen and (min-width: 1200px) {

@@ -10,7 +10,6 @@ const SENDER_EMAIL = process.env.SENDER_EMAIL;
 
 // Check if the API Key is set
 if (!BREVO_API_KEY) {
-  console.error('API_KEY is not set in environment variables. Emails cannot be sent.');
   process.exit(1);
 }
 
@@ -29,14 +28,12 @@ apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, BREVO_AP
  */
 export async function sendNewsletterEmail(toEmail, userName = 'Nutzer') {
   if (!toEmail) {
-    console.error('Recipient email is required.');
     return { success: false, error: 'Recipient email is required' };
   }
 
   const SENDER_EMAIL = process.env.SENDER_EMAIL; 
 
   if (!SENDER_EMAIL) {
-    console.error('SENDER_EMAIL is not set in environment variables. Emails cannot be sent.');
     return { success: false, error: 'Sender email is not configured' };
   }
 
@@ -60,10 +57,8 @@ export async function sendNewsletterEmail(toEmail, userName = 'Nutzer') {
   try {
     const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
     
-    console.log(`Email sent to ${toEmail}. Brevo Response:`, data);
     return { success: true, messageId: data.messageId || 'Brevo send successful' };
   } catch (error) {
-    console.error('Error sending email via Brevo:', error.response ? error.response.text : error.message);
     let errorMessage = 'Email could not be sent';
     if (error.response && error.response.text) {
         try {

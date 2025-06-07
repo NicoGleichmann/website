@@ -30,9 +30,7 @@ const HomePage = () => {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   // Temporäre Problemumgehung: Direkte Zuweisung des Schlüssels
   const siteKey = '6LcBGFErAAAAABnKFKdfxPx5uq7WS2gJNyFMmneJ';
-  
-  // Debug-Ausgabe
-  console.log('Verwende reCAPTCHA Site Key:', siteKey);
+  const [isHovered, setIsHovered] = useState(false);
   
   // Später können wir zur Umgebungsvariable zurückkehren:
   // const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
@@ -44,7 +42,11 @@ const HomePage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    console.log('Form submitted with email:', email);
+    console.log('reCAPTCHA token:', recaptchaToken);
+    
     if (!recaptchaToken) {
+      console.log('No reCAPTCHA token found');
       setResponseMsg({
         text: "Bitte bestätige, dass du kein Roboter bist!",
         type: "error"
@@ -59,40 +61,72 @@ const HomePage = () => {
     });
   
     try {
-      const response = await fetch('http://localhost:5000/api/newsletter', {
+      const requestBody = {
+        email: email.trim()
+      };
+      
+      console.log('Sending request to /api/subscribe with email:', requestBody.email);
+      
+      const response = await fetch('http://localhost:5000/api/subscribe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email,
-          token: recaptchaToken
-        }),
+        body: JSON.stringify(requestBody),
       });
+      
+      console.log('Response status:', response.status);
 
       const data = await response.json();
 
       if (response.ok) {
         setResponseMsg({
-          text: data.message || "Erfolgreich für den Newsletter angemeldet!",
+          text: data.message || "Danke für deinen Support! Kuss!!",
           type: "success"
         });
         setEmail("");
         recaptchaRef.current?.reset();
         setRecaptchaToken(null);
+
+        // Nachricht nach 5 Sekunden automatisch ausblenden
+        setTimeout(() => {
+          setResponseMsg({ text: "", type: "" });
+        }, 5000);
       } else {
-        throw new Error(data.error || "Ein Fehler ist aufgetreten");
+        // Handle specific reCAPTCHA errors
+        if (data.error === 'missing-token') {
+          throw new Error("reCAPTCHA-Token fehlt. Bitte bestätige, dass du kein Roboter bist.");
+        } else if (data.error === 'recaptcha-failed') {
+          console.error('reCAPTCHA Fehlercodes:', data.errorCodes);
+          
+          // More specific error messages based on the error code
+          if (data.errorCodes && data.errorCodes.includes('invalid-input-secret')) {
+            throw new Error("Konfigurationsproblem mit reCAPTCHA. Bitte den Administrator benachrichtigen.");
+          } else if (data.errorCodes && (data.errorCodes.includes('missing-input-response') || data.errorCodes.includes('invalid-input-response'))) {
+            throw new Error("reCAPTCHA-Validierung fehlgeschlagen. Bitte versuche es erneut.");
+          } else if (data.errorCodes && data.errorCodes.includes('timeout-or-duplicate')) {
+            throw new Error("reCAPTCHA-Sitzung abgelaufen. Bitte lade die Seite neu.");
+          } else {
+            throw new Error("reCAPTCHA-Validierung fehlgeschlagen. Bitte versuche es erneut.");
+          }
+        } else if (data.error === 'recaptcha-error') {
+          throw new Error("Fehler bei der reCAPTCHA-Validierung. Bitte versuche es später erneut.");
+        } else {
+          throw new Error(data.message || data.error || "Ein unerwarteter Fehler ist aufgetreten");
+        }
       }
     } catch (error) {
-      console.error("Error:", error);
       const errorMessage = error instanceof Error ? error.message : "Ein unerwarteter Fehler ist aufgetreten";
       setResponseMsg({
         text: `Fehler: ${errorMessage}`,
         type: "error"
       });
+      
+      // Reset reCAPTCHA on error
+      recaptchaRef.current?.reset();
+      setRecaptchaToken(null);
     } finally {
       setIsLoading(false);
-      recaptchaRef.current?.reset();
     }
   };
 
@@ -279,16 +313,37 @@ const HomePage = () => {
         {" "}|
       </p>
 
-      <span className="info-container">
-        <p style={{paddingLeft: "0.36rem"}}>Weitere Infos</p>
-        <span className="info-dropdown">
-          <Link to="/nutzungslinks">
+      <div 
+        className="info-container"
+        style={{position: "relative", display: "inline-block"}}
+      >
+        <div 
+          onMouseEnter={() => setIsHovered(true)}
+          style={{display: "inline-block", cursor: "pointer"}}
+        >
+          <p style={{paddingLeft: "0.36rem", margin: 0}}>Weitere Infos</p>
+        </div>
+        <div 
+          className="info-dropdown" 
+          style={{ 
+            display: isHovered ? 'block' : 'none',
+            position: 'absolute',
+            bottom: '100%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 1000
+          }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <Link to="/nutzungslinks" style={{display: 'block', padding: '5px 10px'}}>
             Nutzungslinks
           </Link>
           <a
             href="https://www.instagram.com/nico.gleichmann/"
             className="hover-effect"
             rel="noopener noreferrer"
+            style={{display: 'block', padding: '5px 10px'}}
           >
             Impressum
           </a>
@@ -296,11 +351,12 @@ const HomePage = () => {
             href="https://www.instagram.com/nico.gleichmann/"
             className="hover-effect"
             rel="noopener noreferrer"
+            style={{display: 'block', padding: '5px 10px'}}
           >
             Datenschutz
           </a>
-        </span>
-      </span>
+        </div>
+      </div>
     </motion.div>
     
 
