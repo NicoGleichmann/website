@@ -339,22 +339,12 @@ const HomePage = () => {
           <Link to="/nutzungslinks" style={{display: 'block', padding: '5px 10px'}}>
             Nutzungslinks
           </Link>
-          <a
-            href="https://www.instagram.com/nico.gleichmann/"
-            className="hover-effect"
-            rel="noopener noreferrer"
-            style={{display: 'block', padding: '5px 10px'}}
-          >
+          <Link to="/imprint" style={{display: 'block', padding: '5px 10px'}}>
             Impressum
-          </a>
-          <a
-            href="https://www.instagram.com/nico.gleichmann/"
-            className="hover-effect"
-            rel="noopener noreferrer"
-            style={{display: 'block', padding: '5px 10px'}}
-          >
+          </Link>
+          <Link to="/privacy-policy" style={{display: 'block', padding: '5px 10px'}}>
             Datenschutz
-          </a>
+          </Link>
         </div>
       </div>
     </motion.div>
