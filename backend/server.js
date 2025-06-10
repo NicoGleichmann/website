@@ -10,9 +10,17 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
 import fetch from 'node-fetch';
+import { sendContactMessage } from './controllers/contactController.js';
 
 // Load environment variables as early as possible
 dotenv.config();
+
+// Initialize the Express app
+const app = express();
+
+// Express middleware for parsing JSON and urlencoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Brevo API-URLs
 const BREVO_API_URL = 'https://api.brevo.com/v3/smtp/email';
@@ -53,7 +61,6 @@ async function getSubscribers() {
         
         return JSON.parse(data);
     } catch (error) {
-        console.error('Fehler beim Lesen der Abonnenten:', error);
         // Return empty array as fallback
         return [];
     }
@@ -68,7 +75,6 @@ async function saveSubscriber(email) {
 
         const subscribers = await getSubscribers();
         if (!Array.isArray(subscribers)) {
-            console.error('Ungültiges Abonnentenformat, initialisiere neue Liste');
             await fs.writeFile(subscribersPath, JSON.stringify([], null, 2), 'utf-8');
             return saveSubscriber(email); // Try again with fresh file
         }
@@ -100,14 +106,12 @@ async function saveSubscriber(email) {
                 data: newSubscriber 
             };
         } catch (writeError) {
-            console.error('Fehler beim Speichern der Abonnentenliste:', writeError);
             return { 
                 success: false, 
                 message: 'Fehler beim Speichern. Bitte versuchen Sie es später erneut.' 
             };
         }
     } catch (error) {
-        console.error('Kritischer Fehler in saveSubscriber:', error);
         return { 
             success: false, 
             message: 'Ein unerwarteter Fehler ist aufgetreten.',
@@ -116,16 +120,19 @@ async function saveSubscriber(email) {
     }
 }
 
-// Initialize the Express app
-const app = express();
-
-// CORS Konfiguration
+// CORS configuration
 const corsOptions = {
     origin: ['http://localhost:5173', 'http://127.0.0.1:5173', 'https://deine-domain.de'],
-    methods: ['GET', 'POST', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
 };
+
+// Enable CORS with the specified options
+app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options('*', cors(corsOptions));
 
 // --- Core Middleware ---
 app.use(express.json()); // Parses incoming requests with JSON payloads
@@ -153,16 +160,9 @@ app.get('/api/newsletter', (req, res) => {
 
 // POST-Route zur Newsletter-Anmeldung (für Abwärtskompatibilität)
 app.post('/api/newsletter', async (req, res) => {
-    console.log('Incoming request body:', req.body);
     const { email, token } = req.body;
     
-    // Log the presence of required fields
-    console.log('Email present:', !!email);
-    console.log('Token present:', !!token);
-    console.log('reCAPTCHA secret key present:', !!process.env.RECAPTCHA_SECRET_KEY);
-
     // Temporarily disable reCAPTCHA for testing
-    console.log('reCAPTCHA validation is temporarily disabled for testing');
     /*
     // Re-enable this block after testing
     if (process.env.RECAPTCHA_SECRET_KEY) {
@@ -195,10 +195,8 @@ app.post('/api/newsletter', async (req, res) => {
             });
 
             const recaptchaData = await recaptchaResponse.json();
-            console.log('reCAPTCHA Antwort:', recaptchaData);
 
             if (!recaptchaData.success) {
-                console.warn('reCAPTCHA-Validierung fehlgeschlagen:', recaptchaData['error-codes']);
                 let errorMessage = 'reCAPTCHA-Validierung fehlgeschlagen';
                 if (recaptchaData['error-codes'] && recaptchaData['error-codes'].length > 0) {
                     const errorCode = recaptchaData['error-codes'][0];
@@ -221,7 +219,6 @@ app.post('/api/newsletter', async (req, res) => {
                 });
             }
         } catch (error) {
-            console.error('reCAPTCHA-Validierungsfehler:', error);
             return res.status(500).json({
                 success: false,
                 message: 'Fehler bei der reCAPTCHA-Validierung',
@@ -259,17 +256,17 @@ app.post('/api/newsletter', async (req, res) => {
 
         if (!brevoResponse.ok) {
             const brevoErrorText = await brevoResponse.text();
-            console.error('Fehler bei der Brevo API-Integration:', brevoResponse.status, brevoErrorText);
-            // You might choose to return an error here or just log it
-            // return res.status(500).json({ success: false, message: 'Anmeldung erfolgreich, aber Brevo-Integration fehlgeschlagen.' });
+            return res.status(500).json({ success: false, message: 'Anmeldung erfolgreich, aber Brevo-Integration fehlgeschlagen.' });
         }
 
         return res.json(result);
     } catch (error) {
-        console.error('Serverfehler bei der Newsletter-Anmeldung:', error);
         return res.status(500).json({ success: false, message: 'Serverfehler bei der Anmeldung.' });
     }
 });
+
+// Route für das Kontaktformular
+app.post('/api/contact', sendContactMessage);
 
 // Route zur Newsletter-Anmeldung (neue Route, identical functionality to /api/newsletter post)
 app.post('/api/subscribe', async (req, res) => {
@@ -288,65 +285,73 @@ app.post('/api/subscribe', async (req, res) => {
 
         // Integration mit Brevo (Kontakt hinzufügen)
         if (!process.env.API_KEY) {
-            console.warn('Brevo API key is not configured. Skipping Brevo integration.');
+            return res.status(500).json({ success: false, message: 'Brevo API key is not configured. Skipping Brevo integration.' });
         } else {
-            console.log('Brevo API Key gefunden, versuche Kontakt zu erstellen...');
             try {
-                const brevoResponse = await fetch('https://api.brevo.com/v3/contacts', {
-                    method: 'POST',
-                    headers: {
-                        'api-key': process.env.API_KEY,
-                        'Content-Type': 'application/json',
+                const brevoPayload = {
+                    email,
+                    updateEnabled: true,
+                    attributes: {
+                        NEWSLETTER: true,
+                        SIGNUP_DATE: new Date().toISOString()
                     },
-                    body: JSON.stringify({
-                        email,
-                        updateEnabled: true, // Änderung: updateEnabled auf true, um bestehende E-Mails zu aktualisieren
-                        attributes: {
-                            NEWSLETTER: true,
-                            SIGNUP_DATE: new Date().toISOString()
-                        },
-                        listIds: [2] // Wichtig: Diese ID muss mit deiner tatsächlichen Listen-ID in Brevo übereinstimmen
-                    }),
-                });
-
-
-                const brevoData = await brevoResponse.json();
-                console.log('Brevo API Response:', brevoData);
+                    listIds: [3]
+                };
                 
-                if (!brevoResponse.ok) {
-                    console.error('Fehler bei der Brevo-API:', brevoData);
-                    // Wir fahren trotzdem fort, da die lokale Speicherung erfolgreich war
-                } else {
-                    console.log('Kontakt erfolgreich in Brevo erstellt/aktualisiert');
-                    return res.status(200).json({
-                        success: true,
-                        message: 'Erfolgreich für den Newsletter angemeldet!',
-                        data: result.data,
-                        brevoData: brevoData
+                try {
+                    const brevoResponse = await fetch('https://api.brevo.com/v3/contacts', {
+                        method: 'POST',
+                        headers: {
+                            'accept': 'application/json',
+                            'api-key': process.env.API_KEY,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(brevoPayload),
                     });
+
+                    let brevoData;
+                    try {
+                        brevoData = await brevoResponse.json();
+                    } catch (jsonError) {
+                        const responseText = await brevoResponse.text();
+                        throw new Error(`Invalid JSON response from Brevo API: ${responseText}`);
+                    }
+                    
+                    if (!brevoResponse.ok) {
+                        return res.status(500).json({ success: false, message: 'Kontakt konnte nicht in Brevo erstellt/aktualisiert werden.' });
+                    } else {
+                        return res.status(200).json({
+                            success: true,
+                            message: 'Erfolgreich für den Newsletter angemeldet!',
+                            data: result.data,
+                            brevoData: brevoData
+                        });
+                    }
+                } catch (apiError) {
+                    // Wir fahren trotzdem fort, da die lokale Speicherung erfolgreich war
                 }
             } catch (brevoError) {
-                console.error('Fehler bei der Kommunikation mit der Brevo-API:', brevoError);
                 // Wir fahren trotzdem fort, da die lokale Speicherung erfolgreich war
             }
         }
 
         // Wenn wir hier ankommen, war die lokale Speicherung erfolgreich, aber Brevo nicht verfügbar
-        return res.status(200).json({
+        return res.json({
             success: true,
-            message: 'Erfolgreich angemeldet! (Brevo-Integration fehlgeschlagen)',
-            data: result.data
+            message: 'Erfolgreich für den Newsletter angemeldet!',
+            data: result.data,
+            brevoData: brevoData
         });
-
-        return res.json(result);
     } catch (error) {
-        console.error('Serverfehler bei der Anmeldung:', error);
         return res.status(500).json({ success: false, message: 'Serverfehler bei der Anmeldung.' });
     }
 });
 
 // --- Security Middleware (Apply after API routes but before static files/catch-all) ---
 app.use(helmet());
+
+// Kontakt-Route
+app.post('/api/contact', sendContactMessage);
 
 // CSP-Konfiguration
 app.use((req, res, next) => {
@@ -383,10 +388,6 @@ app.use(limiter);
 const staticPath = path.join(__dirname, '../frontend/navigation-site/dist');
 app.use(express.static(staticPath, { index: false })); // 'index: false' ensures the catch-all handles index.html explicitly
 
-// Debug-Ausgabe
-console.log('Statische Dateien werden aus folgendem Verzeichnis bereitgestellt:');
-console.log(staticPath);
-
 // Alle nicht definierten GET-Routen auf die Hauptseite umleiten
 // THIS MUST BE THE ABSOLUTE LAST ROUTE DEFINITION IN YOUR FILE
 app.get('/*', (req, res) => {
@@ -395,11 +396,140 @@ app.get('/*', (req, res) => {
 });
 
 
-// Server starten
+// --- Middleware Setup ---
+// CORS configuration is now at the top of the file
+
+// Parse JSON request bodies. This is crucial for receiving the formData sent from the frontend.
+app.use(express.json());
+
+// --- Routes ---
+
+// Define the contact form submission endpoint
+app.post('/api/contact', (req, res) => {
+  // Extract data from the request body
+  const { name, email, message } = req.body;
+
+  // Basic server-side validation
+  if (!name || !email || !message) {
+    return res.status(400).json({ success: false, message: 'Bitte fülle alle Felder aus.' });
+  }
+
+  // --- Placeholder for actual email sending or database storage ---
+  // In a real application, you would integrate an email sending service here,
+  // for example, using a library like Nodemailer to send an email to yourself.
+  // Or, you might save the data to a database (e.g., MongoDB, PostgreSQL).
+
+  // Example of how you might send an email (requires Nodemailer and configuration)
+  /*
+  const nodemailer = require('nodemailer');
+  let transporter = nodemailer.createTransport({
+    service: 'gmail', // or 'smtp.mailtrap.io' for testing, or your own SMTP server
+    auth: {
+      user: 'your_email@gmail.com', // your email address
+      pass: 'your_email_password_or_app_password' // your email password or app password
+    }
+  });
+
+  let mailOptions = {
+    from: email, // Sender's email from the form
+    to: 'your_email@example.com', // Your email address to receive messages
+    subject: `New Contact Form Message from ${name}`,
+    text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return res.status(500).json({ success: false, message: 'Fehler beim Senden der Nachricht.' });
+    } else {
+      return res.status(200).json({ success: true, message: 'Nachricht erfolgreich gesendet!' });
+    }
+  });
+  */
+
+  // For this example, we'll just send a success response immediately.
+  res.status(200).json({ success: true, message: 'Nachricht erfolgreich gesendet!' });
+});
+
+// Basic root route for testing if the server is running
+app.get('/', (req, res) => {
+  res.send('Contact form backend is running!');
+});
+
+
+// Login & Register
+
+// Benutzer-Routen
+app.get('/users', async (req, res) => {
+    try {
+        const users = await getUsers();
+        res.json(users);
+    } catch (error) {
+        console.error('Fehler beim Abrufen der Benutzer:', error);
+        res.status(500).json({ error: 'Fehler beim Abrufen der Benutzer' });
+    }
+});
+
+app.post('/register', async (req, res) => {
+    try {
+        const { username, email, password } = req.body;
+        // Validierung und Registrierungslogik hier
+        res.status(201).json({ message: 'Benutzer erfolgreich registriert' });
+    } catch (error) {
+        res.status(500).json({ error: 'Registrierung fehlgeschlagen' });
+    }
+});
+
+app.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        // Validierung und Anmeldelogik hier
+        res.json({ message: 'Anmeldung erfolgreich', token: 'IHR_JWT_TOKEN' });
+    } catch (error) {
+        res.status(401).json({ error: 'Anmeldung fehlgeschlagen' });
+    }
+});
+
+const getUsers = async () => {
+    try {
+        const filePath = path.join(__dirname, 'users.json');
+        // Create users.json if it doesn't exist
+        try {
+            await fs.access(filePath);
+        } catch (error) {
+            if (error.code === 'ENOENT') {
+                await fs.writeFile(filePath, JSON.stringify([], null, 2), 'utf8');
+                return [];
+            }
+            throw error;
+        }
+        
+        const data = await fs.promises.readFile(filePath, 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('Fehler in getUsers:', error.message);
+        return [];
+    }
+};
+
+// Users route
+app.get('/users', async (req, res) => {
+    try {
+        const users = await getUsers();
+        res.json(users);
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        res.status(500).json({ error: 'Failed to fetch users' });
+    }
+});
+
+
+// Error handling middleware should be the last piece of middleware
+app.use((err, req, res, next) => {
+    console.error('Unhandled error:', err);
+    res.status(500).json({ error: 'Internal server error' });
+});
+
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server läuft auf Port ${PORT}`);
-    console.log(`API-Endpunkte:
-    - GET  /api/newsletter  Test-API-Endpunkt
-    - POST /api/newsletter  Newsletter-Anmeldung`);
 });

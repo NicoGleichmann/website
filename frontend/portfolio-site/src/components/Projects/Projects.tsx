@@ -6,19 +6,19 @@ import { useTheme } from '../DarkModeToggle/DarkModeProvider';
 
 const projects = [
   {
-    title: 'Projekt 1',
+    title: 'Social Media',
     description: 'Der nächste Schritt auf meinem Weg ist Social Media. Ich arbeite demnächst daran, meine Kanäle strategisch aufzubauen und sie als Plattform für meine Ideen, Inhalte und meine Marke zu nutzen. Ziel ist es, Sichtbarkeit zu schaffen – für Lumio, für die Themen, die mich bewegen, und für den Mehrwert, den ich bieten will. Dabei geht es nicht nur um Reichweite, sondern auch um echte Verbindung. Ich möchte Inhalte teilen, die inspirieren, motivieren und Einblicke in meinen Weg als junger Gründer geben. Der Aufbau läuft Schritt für Schritt – mit Plan, Geduld und Fokus.',
     link: 'https://github.com/your-username/project1',
     image: './src/assets/disciplin.jpg',
   },
   {
-    title: 'Projekt 2',
+    title: 'Meine App',
     description: 'Der nächste große Meilenstein: Ich arbeite derzeit an meiner ersten eigenen App – einer Spiele-App, die voraussichtlich Anfang nächsten Jahres erscheinen wird. Im Vordergrund steht der Spaßfaktor – mit einfachen, unterhaltsamen Games, die leicht zugänglich sind und auf jedem Smartphone funktionieren. Die App soll ein Einstieg in die Welt der App-Entwicklung sein und gleichzeitig erste Erfahrungen im Mobile-Gaming-Bereich ermöglichen. Dies ist nur der Anfang – weitere Features und Ideen sind bereits in Planung.',
     link: 'https://github.com/your-username/project2',
     image: './src/assets/coding.jpg',
   },
   {
-    title: 'Projekt 3',
+    title: 'Newsletter',
     description: 'Etwas Großes steht bevor – und du willst auf keinen Fall der Letzte sein, der davon erfährt. Mein Newsletter wird mehr als nur Updates liefern: Du bekommst exklusiven Einblick hinter die Kulissen von Lumio, persönliche Learnings, Business-Tipps, Motivation und Tools, die ich selbst nutze – direkt in dein Postfach. Kein Bullshit, nur echter Mehrwert. Du willst früher durchstarten als andere? Dann halt die Augen offen. Der Newsletter kommt bald – und er wird alles verändern.',
     link: 'https://github.com/your-username/project3',
     image: './src/assets/looksgood.jpg',

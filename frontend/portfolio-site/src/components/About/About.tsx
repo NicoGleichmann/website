@@ -31,7 +31,8 @@ const About = () => {
         
         <motion.p className={styles.description} variants={itemVariants}>
           Hallo, ich bin Nico! Ich bin ein leidenschaftlicher Webentwickler, Unternehmer und natürlich auch noch Schüler. 
-          Ich konzentriere mich besonders auf die Gestaltung ansprechender und funktionaler digitaler Erlebnisse. 
+          Ich arbeite leidenschaftlich daran, eigene Produkte zu entwickeln und meine Marke Lumio Schritt für Schritt 
+          aufzubauen – mit einem klaren Fokus auf E-Commerce, starkem Design und einer authentischen Präsenz auf Social Media.
           Ich interessiere mich sehr für Selbstoptimierung (engl. Self Improvement), Coding und die Welt des Unternehmertums. 
           Lasst uns gemeinsam etwas Großartiges schaffen!
         </motion.p>

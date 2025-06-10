@@ -2,6 +2,7 @@ import styles from './Contact.module.css';
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import { useTheme } from '../DarkModeToggle/DarkModeProvider';
+import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 
 const containerVariants = {
   hidden: { opacity: 0, y: 60 },
@@ -15,13 +16,9 @@ const itemVariants = {
 
 const ContactSection = () => {
   const { isDarkMode } = useTheme();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,11 +27,17 @@ const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
   
+    if (!formData.name || !formData.email || !formData.message) {
+      setStatus({ type: 'error', message: 'Bitte fülle alle Felder aus.' });
+      return;
+    }
+  
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
-        method: "POST",
+      setIsLoading(true);
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/contact`, {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
@@ -45,16 +48,17 @@ const ContactSection = () => {
       } else {
         setStatus({ type: 'error', message: 'Fehler beim Senden der Nachricht.' });
       }
-      
     } catch (error) {
-      console.error("Fehler:", error);
-      alert("Serverfehler.");
+      console.error('Fehler:', error);
+      setStatus({ type: 'error', message: 'Serverfehler beim Senden.' });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <section 
-      className={styles.contactSection} 
+    <section
+      className={styles.contactSection}
       id="contact"
       data-theme={isDarkMode ? 'dark' : 'light'}
     >
@@ -66,7 +70,7 @@ const ContactSection = () => {
         viewport={{ once: false, amount: 0.2 }}
       >
         <motion.h1 variants={itemVariants}>Let's talk</motion.h1>
-        <motion.p variants={itemVariants}>Stelle eine Frage oder sage einfach nur „Hallo“ …</motion.p>
+        <motion.p variants={itemVariants}>Stelle eine Frage oder sag einfach nur „Hallo“ …</motion.p>
         <motion.div className={styles.contactInfo} variants={itemVariants}>
           <p>📞 +49 176 44444 856</p>
           <p>📧 nicogleichmann39@gmail.com</p>
@@ -88,6 +92,8 @@ const ContactSection = () => {
               placeholder="Name..."
               value={formData.name}
               onChange={handleChange}
+              aria-label="Name"
+              required
             />
             <input
               type="email"
@@ -95,6 +101,8 @@ const ContactSection = () => {
               placeholder="beispiel@domain.de"
               value={formData.email}
               onChange={handleChange}
+              aria-label="E-Mail"
+              required
             />
           </div>
           <textarea
@@ -102,20 +110,49 @@ const ContactSection = () => {
             placeholder="Hallo du..."
             value={formData.message}
             onChange={handleChange}
+            aria-label="Nachricht"
+            required
           />
-          <button type="submit" className={styles.submitBtn}>SENDEN ➤</button>
+          <button type="submit" className={styles.submitBtn} disabled={isLoading}>
+            {isLoading ? 'Sende...' : 'SENDEN ➤'}
+          </button>
 
           {status && (
-            <div className={status.type === 'success' ? styles.successMessage : styles.errorMessage}>
+            <div
+              className={
+                status.type === 'success' ? styles.successMessage : styles.errorMessage
+              }
+            >
               {status.message}
             </div>
           )}
         </motion.form>
 
         <motion.div className={styles.socials} variants={itemVariants}>
-          <a href="https://www.instagram.com/nico.gleichmann/">📘</a>
-          <a href="https://twitter.com/nicogleichmann">🐦</a>
-          <a href="https://www.youtube.com/@nicogleichmann">▶️</a>
+          <a
+            href="https://www.instagram.com/nico.gleichmann/"
+            aria-label="Instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaInstagram />
+          </a>
+          <a
+            href="https://twitter.com/nicogleichmann"
+            aria-label="Twitter"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaTwitter />
+          </a>
+          <a
+            href="https://www.youtube.com/@nicogleichmann"
+            aria-label="YouTube"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaYoutube />
+          </a>
         </motion.div>
       </motion.div>
     </section>

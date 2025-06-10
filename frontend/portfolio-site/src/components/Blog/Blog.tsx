@@ -5,20 +5,20 @@ import { ArrowRight } from "lucide-react";
 
 const posts = [
   {
-    title: "Meine Reise in Self-Improvement",
-    summary: "Wie ich mit 16 bewusster wurde, meine Routinen aufgebaut habe und mehr Kontrolle über mein Leben gewann.",
+    title: "Warum ich mit E-Commerce angefangen habe – und was du daraus lernen kannst",
+    summary: "Vom Wunsch nach Freiheit zur eigenen Marke: Wie E-Commerce mein Denken verändert hat.",
     link: "/blog/Blog01.tsx",
-    date: "10. April 2025",
+    date: "20. Februar 2025",
   },
   {
-    title: "Gym, Ernährung & Dopamin Detox",
-    summary: "Trainingsplan, meine Ernährung und wie ich mit Disziplin echte Ergebnisse gesehen habe.",
+    title: "Schule & Business – Wie ich beides unter einen Hut bekomme",
+    summary: "Wenn du denkst, du hast keine Zeit – dann fang erst recht an.",
     link: "/blog/Blog02.tsx",
     date: "5. März 2025",
   },
   {
-    title: "Warum ich ein Portfolio mit Vite + React baue",
-    summary: "Meine Motivation, meine Vision und wie dieses Projekt mein Denken verändert hat.",
+    title: "Was ist eigentlich ein Startup? – Und warum ich eins gründen will",
+    summary: "Mehr als nur ein „kleines Unternehmen“ – Startups verändern Denken, Leben und Zukunft.",
     link: "/blog/Blog03.tsx",
     date: "20. Februar 2025",
   },
