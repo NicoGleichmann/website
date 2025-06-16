@@ -9,12 +9,15 @@ import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
 import fetch from 'node-fetch';
 import { sendContactMessage } from './controllers/contactController.js'; // Ensure this file exists and exports sendContactMessage
+import { securityMiddleware, rateLimitMiddleware, verifyRecaptcha } from './security.js';
 
 // Load environment variables as early as possible
 dotenv.config();
 
 // Initialize the Express app
 const app = express();
+
+app.use(securityMiddleware);
 
 // Globale Pfadvariablen für ES Modules
 const __filename = fileURLToPath(import.meta.url);
@@ -201,7 +204,7 @@ app.get('/api/newsletter', (req, res) => {
 });
 
 // POST-Route zur Newsletter-Anmeldung (Brevo integration)
-app.post('/api/newsletter', async (req, res) => {
+app.post('/api/newsletter', rateLimitMiddleware, verifyRecaptcha, async (req, res) => {
     const { email, token } = req.body;
 
     // Temporarily disable reCAPTCHA for testing if needed

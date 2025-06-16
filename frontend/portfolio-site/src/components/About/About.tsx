@@ -1,5 +1,7 @@
 import styles from './About.module.css';
 import { motion } from 'framer-motion';
+import NicoImg from '../../assets/Nico.jpg'; // <-- Bild importieren
+import React from 'react';
 
 const containerVariants = {
   hidden: { opacity: 0, y: 60 },
@@ -71,7 +73,7 @@ const About = () => {
       >
         <motion.img
           className={styles.image}
-          src="./src/assets/nico.jpg"
+          src={NicoImg}
           alt="Nico"
           variants={itemVariants}
           loading="lazy"
