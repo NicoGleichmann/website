@@ -146,7 +146,7 @@ const HomePage = () => {
           style={{ cursor: 'pointer' }}
         >
             <div className="top">
-              <img src="public/Profil.jpg" alt="Logo" loading="lazy"/>
+              <img src="public/img/Profil.JPG" alt="Logo" loading="lazy"/>
               <h4>Nico Gleichmann</h4>
               <p><span className="point"></span>Entrepreneur | Digital Creator | Innovator</p>
             </div>
