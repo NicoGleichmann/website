@@ -1,0 +1,249 @@
+.aboutPage {
+  padding: 2rem 0;
+}
+
+.pageTitle {
+  font-size: 2.8rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: var(--heading-color);
+}
+
+.intro {
+  text-align: center;
+  margin-bottom: 3rem;
+  background-color: var(--secondary-background-color);
+  padding: 2.5rem;
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-medium);
+  color: var(--text-color);
+}
+
+.intro p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+}
+
+.intro p strong {
+  color: var(--primary-color-light);
+}
+
+.teamImage {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+  margin-top: 1rem;
+  box-shadow: var(--shadow-small);
+}
+
+.milestones {
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.milestones h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2.5rem;
+  color: var(--heading-color);
+}
+
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  padding: 20px 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  background-color: var(--primary-color);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -2px;
+}
+
+.timelineItem {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.timelineItem:nth-child(odd) {
+  left: 0;
+  text-align: right;
+  padding-right: 60px; /* Platz für den Punkt */
+}
+
+.timelineItem:nth-child(even) {
+  left: 50%;
+  padding-left: 60px; /* Platz für den Punkt */
+}
+
+.timelineItem::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: -12px; /* Position des Punktes */
+  background-color: white;
+  border: 4px solid var(--primary-color);
+  top: 15px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timelineItem:nth-child(even)::after {
+  left: -12px; /* Position des Punktes auf der linken Seite */
+}
+
+.timelineItem h3 {
+  color: var(--primary-color-light);
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.timelineItem p {
+  background-color: var(--secondary-background-color);
+  padding: 15px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-small);
+  color: var(--text-color-light);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.ourValues {
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.ourValues h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2.5rem;
+  color: var(--heading-color);
+}
+
+.valuesList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.valuesList li {
+  background-color: var(--secondary-background-color);
+  padding: 2rem;
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-medium);
+  flex: 1;
+  min-width: 280px;
+  max-width: 350px;
+  color: var(--text-color);
+  text-align: left;
+}
+
+.valuesList li strong {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+.valuesList li p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-color-light);
+}
+
+.ourTeam {
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.ourTeam h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2.5rem;
+  color: var(--heading-color);
+}
+
+.teamMembers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.memberCard {
+  background-color: var(--secondary-background-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-small);
+  padding: 1.5rem;
+  text-align: center;
+  width: 280px;
+  color: var(--text-color);
+}
+
+.memberPhoto {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 3px solid var(--primary-color);
+  box-shadow: var(--shadow-small);
+}
+
+.memberCard h3 {
+  margin-bottom: 0.5rem;
+  color: white;
+  font-size: 1.3rem;
+}
+
+.memberCard p {
+  color: var(--text-color-light);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 768px) {
+  .pageTitle, .milestones h2, .ourValues h2, .ourTeam h2 {
+    font-size: 2.2rem;
+  }
+
+  .timeline::before {
+    left: 18px; /* Timeline-Linie links positionieren */
+  }
+
+  .timelineItem {
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 10px;
+    left: 0 !important;
+    text-align: left !important; /* Alles linksbündig auf Mobil */
+  }
+
+  .timelineItem::after {
+    left: 10px !important;
+    right: auto !important;
+  }
+
+  .valuesList li {
+    min-width: unset;
+    width: 100%;
+    text-align: center; /* Werte-Liste auf Mobil zentrieren */
+  }
+
+  .valuesList li strong {
+    text-align: center;
+  }
+}

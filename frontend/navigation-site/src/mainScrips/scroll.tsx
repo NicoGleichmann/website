@@ -1,3 +1,4 @@
+// Scroll.tsx
 import { useEffect, useRef } from 'react';
 
 const HorizontalScroll = () => {

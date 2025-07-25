@@ -1,0 +1,119 @@
+.homePage {
+  /* Grundlegende Stil-Anpassungen für die Seite */
+    background-color: var(--background-color);
+}
+
+.heroSection {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #4a4a4a, #2a2a2a); /* Dunkler Farbverlauf */
+  color: white;
+  margin-bottom: 2rem;
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-large);
+}
+
+.heroSection h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color-light);
+}
+
+.heroSection p {
+  font-size: 1.2rem;
+  margin-bottom: 2.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.aboutPreview,
+.featuredProducts,
+.callToAction {
+  padding: 2rem 0;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.aboutPreview h2,
+.featuredProducts h2,
+.callToAction h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--heading-color);
+}
+
+.aboutPreview p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--text-color-light);
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  justify-content: center; /* Zentriert die Karten, wenn sie nicht die volle Breite einnehmen */
+}
+
+.callToAction {
+  background-color: var(--secondary-background-color);
+  padding: 3rem 2rem;
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-medium);
+  color: white;
+}
+
+.callToAction h2 {
+  color: var(--primary-color);
+}
+
+.callToAction p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  color: var(--text-color-light);
+}
+
+
+/* Responsive Anpassungen */
+@media (max-width: 1024px) {
+  .heroSection h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 3rem 1rem;
+  }
+
+  .heroSection h1 {
+    font-size: 2rem;
+  }
+
+  .heroSection p {
+    font-size: 1rem;
+  }
+
+  .aboutPreview h2,
+  .featuredProducts h2,
+  .callToAction h2 {
+    font-size: 2rem;
+  }
+
+  .aboutPreview p,
+  .callToAction p {
+    font-size: 1rem;
+  }
+
+  .productGrid {
+    grid-template-columns: 1fr; /* Eine Spalte auf kleineren Bildschirmen */
+  }
+}

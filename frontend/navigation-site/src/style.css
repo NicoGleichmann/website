@@ -17,13 +17,15 @@ html, body {
     color: #ffffff; /* Weißer Text */
     
     cursor: grab;
+    overflow-x: hidden; /* Verhindert horizontales Scrollen */
 
+    /*
     display: flex;
     align-items: center; /* Vertikale Zentrierung */
-    justify-content: center; /* Horizontale Zentrierung */
-    -webkit-overflow-scrolling: touch; /* Smooth Scrolling auf iOS */
-    touch-action: pan-x;
-    -webkit-overflow-scrolling: touch;
+    /*justify-content: center; /* Horizontale Zentrierung */
+    /*-webkit-overflow-scrolling: touch; /* Smooth Scrolling auf iOS */
+    /*touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;*/
 }
 
 

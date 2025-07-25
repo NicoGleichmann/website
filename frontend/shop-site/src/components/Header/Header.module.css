@@ -1,0 +1,122 @@
+.header {
+  background-color: #333;
+  color: white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.navbarNav {
+  display: flex;
+  gap: 20px;
+}
+
+.navbarNav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.navbarNav a:hover {
+  color: var(--primary-color); /* Nutzt CSS-Variable aus _variables.css */
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.cartIcon {
+  color: white;
+  font-size: 1.4rem;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.cartIcon:hover {
+  color: var(--primary-color);
+}
+
+.cartCount {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: var(--accent-color); /* Nutzt CSS-Variable */
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  min-width: 18px; /* Für einheitliche Kreisform */
+  text-align: center;
+}
+
+/* Mobile Menü Toggle */
+.mobileMenuToggle {
+  display: none; /* Standardmäßig ausblenden auf Desktop */
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 5px;
+}
+
+/* Responsive Design für den Header */
+@media (max-width: 768px) {
+  .navbarNav {
+    display: none; /* Navigation auf Mobil ausblenden */
+    flex-direction: column;
+    position: absolute;
+    top: 60px; /* Unter dem Header */
+    left: 0;
+    width: 100%;
+    background-color: #444;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    padding: 1rem 0;
+  }
+
+  .navbarNav.mobileMenuOpen {
+    display: flex; /* Menü anzeigen, wenn offen */
+  }
+
+  .navbarNav a {
+    padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .mobileMenuToggle {
+    display: block; /* Hamburger-Menü anzeigen auf Mobil */
+  }
+
+  .container {
+    flex-wrap: wrap; /* Erlaubt das Umbrechen von Elementen */
+    justify-content: space-between;
+  }
+
+  .headerActions {
+    order: 3; /* Positioniert Aktionen am Ende auf Mobil */
+    width: 100%;
+    justify-content: flex-end; /* Rechts ausrichten */
+    padding-top: 10px;
+  }
+}

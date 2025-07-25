@@ -1,0 +1,161 @@
+.contactPage {
+  padding: 2rem 0;
+}
+
+.pageTitle {
+  font-size: 2.8rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: var(--heading-color);
+}
+
+.contactInfo {
+  text-align: center;
+  margin-bottom: 3rem;
+  background-color: var(--secondary-background-color);
+  padding: 2.5rem;
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-medium);
+  color: var(--text-color);
+}
+
+.contactInfo p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-color-light);
+}
+
+.infoList {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+}
+
+.infoList li {
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+  color: white;
+}
+
+.infoList li strong {
+  color: var(--primary-color-light);
+  margin-right: 0.5rem;
+}
+
+.infoList a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: text-decoration 0.3s ease;
+}
+
+.infoList a:hover {
+  text-decoration: underline;
+}
+
+.contactFormSection {
+  background-color: var(--secondary-background-color);
+  padding: 2.5rem;
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-medium);
+  max-width: 650px;
+  margin: 0 auto 3rem;
+  color: white;
+}
+
+.contactFormSection h2 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: var(--heading-color);
+  font-size: 2rem;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-weight: bold;
+  color: var(--primary-color-light);
+  font-size: 1.1rem;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="email"],
+.formGroup textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--input-background-color);
+  color: white;
+  font-size: 1rem;
+  box-sizing: border-box; /* Wichtig für korrekte Breite */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.formGroup textarea {
+  resize: vertical; /* Erlaubt nur vertikale Größenänderung */
+  min-height: 120px;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.3);
+}
+
+.submitButton {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1.2rem;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: var(--primary-color-dark);
+}
+
+.mapSection {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.mapSection h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2.5rem;
+  color: var(--heading-color);
+}
+
+.mapFrame {
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-large);
+  max-width: 100%;
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 768px) {
+  .pageTitle, .contactFormSection h2, .mapSection h2 {
+    font-size: 2.2rem;
+  }
+
+  .contactInfo, .contactFormSection {
+    padding: 1.5rem;
+  }
+
+  .formGroup label {
+    font-size: 1rem;
+  }
+
+  .submitButton {
+    font-size: 1.1rem;
+    padding: 12px 20px;
+  }
+}

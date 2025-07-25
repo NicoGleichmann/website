@@ -1,0 +1,69 @@
+.productCard {
+  background-color: var(--secondary-background-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow-small);
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%; /* Sorgt für gleiche Höhe in Grid */
+}
+
+.productCard:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
+}
+
+.productImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.productInfo {
+  padding: 1rem;
+  flex-grow: 1; /* Sorgt dafür, dass der Textbereich den restlichen Platz einnimmt */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Elemente gleichmäßig verteilen */
+}
+
+.productName {
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.productDescription {
+  font-size: 0.9rem;
+  color: var(--text-color-light);
+  margin-bottom: 1rem;
+}
+
+.productPrice {
+  font-weight: bold;
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.detailsButton {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Füllt die Breite der Karte aus */
+  box-sizing: border-box; /* Padding in der Breite enthalten */
+}
+
+.detailsButton:hover {
+  background-color: var(--primary-color-dark);
+}
