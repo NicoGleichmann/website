@@ -1,0 +1,10 @@
+.category-section {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  position: absolute;
+  bottom: 5rem; /* Positioniert die Karten am unteren Rand des Viewports */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
