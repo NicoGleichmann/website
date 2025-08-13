@@ -89,5 +89,5 @@ document.addEventListener('DOMContentLoaded', () => {
         heroSliderTrack.style.transform = `translateX(-${currentHeroIndex * 100}vw)`;
     };
 
-    setInterval(autoSlide, 3000); // Wechselt alle 5 Sekunden
+    setInterval(autoSlide, 5000); // Wechselt alle 5 Sekunden
 });
