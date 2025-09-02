@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import React, { useState } from 'react'
+//import { motion } from 'framer-motion' 
 import { Button } from '@/components/ui/button'
 import { ShoppingCart, ExternalLink, Star } from 'lucide-react'
 import tshirtMockup from '../assets/tshirt_mockup.jpg'
