@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+//import { motion } from 'framer-motion'
 import { Lightbulb, Leaf, Users } from 'lucide-react'
 import innovationIcon from '../assets/innovation_icon.png'
 import sustainabilityIcon from '../assets/sustainability_icon.jpg'

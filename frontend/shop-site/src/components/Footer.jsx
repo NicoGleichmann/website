@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+//import { motion } from 'framer-motion'
 import { Instagram, Youtube, Heart, ArrowUp } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import lumioLogo from '../assets/lumio_logo.png'

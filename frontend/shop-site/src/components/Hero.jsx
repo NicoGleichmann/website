@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Sparkles } from 'lucide-react'
-import { motion } from 'framer-motion'
+//import { motion } from 'framer-motion'
 import lumioLogo from '../assets/lumio_logo.png'
 import heroBackground from '../assets/hero_background.png'
 
