@@ -1,11 +1,13 @@
-//import React, { useState } from 'react'
-//import { motion } from 'framer-motion' 
+import React, { useState } from 'react'
+import { motion } from 'framer-motion' 
 import { Button } from '@/components/ui/button'
 import { ShoppingCart, ExternalLink, Star } from 'lucide-react'
 import tshirtMockup from '../assets/tshirt_mockup.jpg'
 import ledGadget from '../assets/led_gadget.jpg'
 
 const Products = () => {
+  const [selectedCategory, setSelectedCategory] = useState("Alle") // <-- Kategorie-State
+
   const products = [
     {
       id: 1,
@@ -89,6 +91,11 @@ const Products = () => {
 
   const categories = ["Alle", "Fashion", "LED-Gadgets", "Accessoires"]
 
+  // Filter-Logik
+  const filteredProducts = selectedCategory === "Alle"
+    ? products
+    : products.filter(product => product.category === selectedCategory)
+
   return (
     <section id="products" className="py-20">
       <div className="container mx-auto px-4">
@@ -120,8 +127,11 @@ const Products = () => {
           {categories.map((category, index) => (
             <Button
               key={index}
-              variant={index === 0 ? "default" : "outline"}
-              className="hover:scale-105 transition-all duration-300"
+              variant={selectedCategory === category ? "default" : "outline"}
+              className={`hover:scale-105 transition-all duration-300 ${
+                selectedCategory === category ? "ring-2 ring-primary" : ""
+              }`}
+              onClick={() => setSelectedCategory(category)} // <-- Kategorie wechseln
             >
               {category}
             </Button>
@@ -130,7 +140,7 @@ const Products = () => {
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product, index) => (
+          {filteredProducts.map((product, index) => (
             <motion.div
               key={product.id}
               initial={{ opacity: 0, y: 30 }}

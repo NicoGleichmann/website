@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Sparkles } from 'lucide-react'
-//import { motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import lumioLogo from '../assets/lumio_logo.png'
 import heroBackground from '../assets/hero_background.png'
 
@@ -60,8 +60,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto text-balance"
           >
-            Entdecke die perfekte Verbindung von Mode, Innovation und Licht. 
-            Moderne Designs, die deinen Stil zum Leuchten bringen.
+            Wie Mode & Licht dein Outfit revolutionieren.
           </motion.p>
 
           {/* CTA Buttons */}

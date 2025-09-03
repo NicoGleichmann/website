@@ -1,4 +1,4 @@
-//import { motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Recycle, Palette, Users, Award } from 'lucide-react'
 
 const Features = () => {
