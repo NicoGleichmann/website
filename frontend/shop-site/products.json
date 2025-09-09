@@ -1,0 +1,114 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Led Stehlampe Wohnzimmer Smart",
+      "description": "Eckige RGB LED Stehlampe mit App- und Sprachsteuerung (Alexa, Google Home). 16 Mio. Farben, dimmbar, Timer-Funktion. Perfekt für Wohnzimmer, Schlafzimmer, Büro.",
+      "price": "39,99",
+      "currency": "EUR",
+      "affiliate_link": "https://www.amazon.de/rhinowisdom-Wohnzimmer-Standleuchte-Fernbedienung-Schlafzimmer/dp/B0F6Y8P54Q/ref=sr_1_1_sspa?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=36TL3SZKND8TW&dib=eyJ2IjoiMSJ9.FzsZThXRxftlTOssJAzPM3aft6bNijJPK9CqLLcFMrJdGn3ZqBSWTGrGzs8uXUH1yYuLDdcQKcjBhGanFrL9WE71eyXDhSqd68VJcbBT741rFpZPY3O7xK4R9GxH_-cI6DT4epJMxX9o0szs_6tMxVYjVDtL1BP2S8TZipeqTuzp6CgQUQ9j45pjKSoOXTvMMljmCFfUAnVRkZGqzHwEFPds1rAwv4dKv8xBVMsGNbjIf6QWUntIXBoqpxhh8o1swLf3DzbavE9f_gqHTjxxbKTY3Ep8LT9PC_al6HddsQI.zDHxGI0ZHvuBSP-3p_g8nYEwoCsX4vr5ZdOh42bx5Kw&dib_tag=se&keywords=smart%2BRGB%2BLED%2BCorner%2BLamp&qid=1757438110&sprefix=smart%2Brgb%2Bled%2Bcorner%2Blamp%2Caps%2C119&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1",
+      "category": "Beleuchtung",
+      "hero_product": true
+    },
+    {
+      "id": 2,
+      "name": "Lumio Galaxy Projektor",
+      "description": "Multifunktionaler LED-Projektor mit Sternenhimmel-, Nebel- und Galaxy-Effekten. Perfektes Hero-Produkt für stimmungsvolle Räume.",
+      "price": "36,99",
+      "currency": "EUR",
+      "affiliate_link": "https://www.amazon.de/Macchiatto-sternenhimmel-Sternenhimmel-Sternenprojektor-Erwachsene-Schwarz/dp/B0F38JWXGG/ref=sr_1_7?crid=1YFYQGDGYWKBL&dib=eyJ2IjoiMSJ9.iQv0Qke-s8Xc0IO5iwBdusguKNzfnmSpEc7WH_B3IjefDiMH9rLZYu-JErssnEXtflE2gaflyNwscQg8ZCm_UlOGPPWKC-6wqjdeEqfPADRxzhvQKTftmKBESZ7YzTeSUUqsDxX_6pegiXnfoHKMx2BcH_I2ehFrUl3kikri30Qk-XZ1G5BRZvnkzZxLV6dyCiKJyQ54SezO9NkdGyQRFxO9l4C_iyvPsJJmUXq0LkH_-ZjH4BzrMaO-P3Kvr1dg6nfijbeIrrkY8sx34BZLdp9c43--0Q_WOtdEV5nKu1o.4Fae7_cj0eAGkl3w7C2nylfpaww0lfmK1l3Zd6aGwM0&dib_tag=se&keywords=galaxy%2Bprojektor&qid=1757438573&refinements=p_72%3A225442031&rnid=225441031&sprefix=galxy%2Bp%2Caps%2C126&sr=8-7&th=1",
+      "category": "Beleuchtung",
+      "hero_product": true
+    },
+    {
+      "id": 3,
+      "name": "LuminexDesigns RGB Lightbar",
+      "description": "RGB Light Bars mit App-Steuerung und Musik-Sync. Ideal für Gaming- oder Wohnzimmer-Atmosphäre.",
+      "price": "30,77",
+      "currency": "EUR",
+      "affiliate_link": "https://www.amazon.de/LuminexDesigns-Hintergrundbeleuchtung-Lichtleisten-Musikmodus-Sprachsteuerung/dp/B0DN5SGBXW/ref=sr_1_2_sspa?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=1H43WJXPMEF6D&dib=eyJ2IjoiMSJ9.DXC6d3kQdIYE1Br7NWvwmOiAeK-mZMyLxYaWjTpOqhQP_ylwZIGgUqHhHv3F1jKizHEuF8QMsBUN00XpdWC42LCU8TLMzTSDLaB-mjlJ6Fm-AX97CSfR5pNJikg7KaXe6zhCZKogwPUpHFShvJBVkdo_Vb_aMo_AqoY5DMp-_hOJ10Mu9sTuiRHb72_oKTlNjl-B5BLXdKkR9FHGTgheSRziVKxlaw5RViXzbbUTEKeqI3sibAFGJJBL1x4NLzN4_g-jhm06BqY4iUwDZppUjsh_V5vwNJPYsFeOaNpFC48.tazmCVQGxWQtmnCJdaIaYfsCDv_aqMqTlY-jUMHEl9U&dib_tag=se&keywords=LED%2BLight%2BBars%2B(Set)&qid=1757438663&sprefix=led%2Blight%2Bbars%2Bset%2B%2Caps%2C142&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1",
+      "category": "Beleuchtung",
+      "hero_product": false
+    },
+    {
+      "id": 4,
+      "name": "Govee LED Strip RGBIC Pro 5m",
+      "description": "RGB LED Streifen mit WiFi/App-Steuerung und Alexa/Google Home Kompatibilität.",
+      "price": "39,99",
+      "currency": "EUR",
+      "affiliate_link": "https://www.amazon.de/Govee-funktioniert-beschichtes-App-Steuerung-Schlafzimmer/dp/B09BN2PSR8/ref=sr_1_9?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=1X5ZJJOOC2PJ7&dib=eyJ2IjoiMSJ9.gajYy4J4L_5tRUUCl5s6ajSxvNvTFneqjwNIghRLSy0JCBlqk4XKOWEfMyKvKUcR_g0kFagRZr27vWIEPLZamZ1I3mdE0ulvNI04BYcFNqrv4QpcKWz0WyhA4cgLmHOMebUY65X3Fl6YIsncPPsV2zBsz8HCefQetIuKWGA2Y3vHFdEasmEj0iXzYeGVmebt6RiYgk3p1ziiyXmtgzH3nFhVlCPBHOKVEzGaTQPRIKFzXKIwM2tyX44dyqjJ_bwExIXRN4X8tkd_AIE5L1AJ_-HPnVjtdyQ7ArbXQuZT0SQ.o9SvZta_tQE3aQp6DLSXq0gotSqzHbJY_OIi8AM3jFk&dib_tag=se&keywords=Smart%2BLED%2BStrip%2B(5m)&qid=1757438950&sprefix=smart%2Bled%2Bstrip%2B5m%2B%2Caps%2C162&sr=8-9&th=1",
+      "category": "Beleuchtung",
+      "hero_product": false
+    },
+    {
+      "id": 5,
+      "name": "Lepro Schreibtischlampe LED Tischlampe",
+      "description": "Minimalistische LED-Lampe mit warmweißem und kaltweißem Licht, dimmbar.",
+      "price": "29.99",
+      "currency": "EUR",
+      "affiliate_link": "https://www.amazon.de/Schreibtischlampe-Tageslichtlampe-Helligkeitsstufen-3000K-6500K-Nachttischlampe/dp/B095RK965V/ref=sr_1_5_sspa?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=CFX1ZPMUXTC8&dib=eyJ2IjoiMSJ9.Y3568HmnLqLNVEDqd_Sw97oTO80uyQSZP_plo0aAJmvCC0O23UGKjsFRsE3uDXlMAci6HPDI2Xr0z_j1wsiiKInFInQ332WgCtA9gc40i6MxQo-BfmScOSvybYX1WmD7NGwhW1xbWf275R1sAsNDfddWF3W3dJ80xRxO9W1_I011BTbKXr0C5ptslAX-205beqelzQ0gvBIfuuoc_noKz8aFGwcEYzeMy6nhW0g2m6CN6KFjpMjzNX0weCzsIDtGZi3yDwMVwFnOo5Gzx3X2osdgU67ug3W8vGV_DvRK5vY.dLHFXjbKaWnVcj0ij9XpnLBpMtcyDwZ2fCPJ86HPWp8&dib_tag=se&keywords=USB%2BSchreibtischlampe&qid=1757439043&sprefix=usb%2Bschreibtischlampe%2Caps%2C190&sr=8-5-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1",
+      "category": "Beleuchtung",
+      "hero_product": false
+    },
+    {
+      "id": 6,
+      "name": "Sternenhimmel Projektor Kinder Aurora Lampe",
+      "description": "Sternenhimmel Projektor Kinder Aurora Lampe mit 18 Lichtmodi, Fernbedienung, Nachtlicht für Schlafzimmer, Party, Geschenk.",
+      "price": "26,99",
+      "currency": "EUR",
+      "affiliate_link": "https://www.amazon.de/Sternenhimmel-Projektor-18Lichtmodi-Fernbedienung-Nachtlicht/dp/B0DG5F66NW/ref=sr_1_17?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=16F60RWM8WV8P&dib=eyJ2IjoiMSJ9.xxrKEfYCFiSQ2NtNhD1oJmrbzLEC7-jcBgXVZPyCwAsxeVC0K2GEcRwDBTx-hprr_xITCCKsnEZmGCS-keolBTFi2bI9OQgjVMebhAiTsqwcJvT5kJoWW2um0YIhU7zqWBlt1lDeGxSNJE0owZRWS-ztx7c8YcDRI9Mdor17dzGx-Mog-TQrdWYbXxnDl4-6L1N7HSlcx71uhIPcP1iaO8TeK_KNoh3J32QqMIwNh0ANxuRzJ_Pb-cSf-zQB7ORMmOuA1MiHKaFnI8xsN0tOCuSYElTJabR1J_bK5I3w-KU.TTRfZAlDVZ2_CZOLHUYHkmP0JImte9OgPPkaPCfh5Sk&dib_tag=se&keywords=Aurora%2BLED%2BProjektor&qid=1757439768&sprefix=aurora%2Bled%2Bprojektor%2Caps%2C160&sr=8-17&th=1",
+      "category": "Beleuchtung",
+      "hero_product": false
+    },
+    {
+      "id": 7,
+      "name": "Hifree Smart LED Tischlampe Nachttischlampe",
+      "description": "Smarte LED-Nachtlicht für Schlafzimmer, Flur und Bad.",
+      "price": "22,00",
+      "currency": "EUR",
+      "affiliate_link": "https://www.amazon.de/Hifree-Nachttischlampe-Tischlampe-RGB-Farbwechsel-einstellbares/dp/B09BQ637HP/ref=sr_1_1_sspa?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2SNISWLYUPM3X&dib=eyJ2IjoiMSJ9.KlyyR3MwwhjvvTt8p1FPfnq6oIW585Nqf4z3MEF0roq_7CWM6biOf_XXsj9ESgg56sYOHNM1YmoMu0YvDYfjwbLSje0dSttZHA1l7HjxHAlzV607X9uKpB2RdDH8ZhHOxYvlnLE4Svs_3gUjKsFeQ3z0kUAHKfYBR4GvGd_QX-55pLBOctMettCOFHAmddBv04GeepTnwVhkI0VE1oM1Sb-rthaQIjZdjpOIfVPIig1X17Y69v0UhRyz01mmkSZjEQ9PIq6_195bD2aTSXDpTfVFgiF5RZr5ngTmOQwJMgA.q45QSv4_PqWVXudfMMGW0YY9r4j0yqTyilDgeqZmd6g&dib_tag=se&keywords=Smart+Nachtlicht&qid=1757439443&sprefix=smart+nachtlicht%2Caps%2C147&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1",
+      "category": "Alltag",
+      "hero_product": false
+    },
+    {
+      "id": 8,
+      "name": "GY Sunset Lamp 4 Farben Sonnenuntergang Lampe",
+      "description": "LED Tischprojektor mit 4 Farbmodi, dimmbar, USB-C, ideal für Zimmerdeko.",
+      "price": "18,49",
+      "currency": "EUR",
+      "affiliate_link": "https://www.amazon.de/GY-Sunlight-Projector-Swivelling-Decoration/dp/B0DK31QGZ2/ref=sr_1_1_sspa?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=199F05ADRSEDE&dib=eyJ2IjoiMSJ9.4Yjr7ic9Xo-wRaqN4Z_Zs-tWX14ELcDGSXtgabeqNuDQH_43JG4oT-6oAYAqAhYl8xxngOGeu7lueU1-bR0v_52sylQ0Gb88XuXsIZErVzHlRQMvoWxKOXRWgzt-PUMczBuK5su7KzS2qeVyrCDJdq6GPkuTyKEuAFeBm7oBsxw13qyGxvs_DddIdteT7GP3et9FV2yC0J2EeczF_M5B3aJEBPB7ot3BSEJei2Fnx8Ym7mcrev12vAJWm15hnnaP3eIx5IHdmMD1SIpfjwisazKYPEl5kPUizHaFm6y9qzU.eKLSeAWZxTEchBECzZKIEowJSbEgHExEOpZ6v0DIDiQ&dib_tag=se&keywords=LED%2BTischprojektor&qid=1757439556&sprefix=led%2Btischprojektor%2Caps%2C144&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1",
+      "category": "Beleuchtung",
+      "hero_product": false
+    },
+    {
+      "id": 9,
+      "name": "Star LED Kerzen Set (2 Stück)",
+      "description": "Flammenlose LED-Kerzen mit Timer-Funktion, batteriebetrieben, ideal für Dekoration.",
+      "price": "9,65",
+      "currency": "EUR",
+      "affiliate_link": "amazon.de/Star-Kerzen-Stück-Timer-Funktion-batteriebetrieben/dp/B0C2VMG8Y1/ref=sr_1_10?__mk_de_DE=ÅMÅŽÕÑ&crid=120H9OAPW2NMO&dib=eyJ2IjoiMSJ9.r94ylpdFO6SRkIEqPsNsALLuQuq8Mq6e_0OkAYZUXMETFXcOxQgLr5CasCitoid_6Y5iZC2bumGXjBYPPnYqqY7xScj5Tz7hLdjHtYiyEQzDlu8ntGMgs8oJa6mAieMrmrW539svsZ-nJeI8AjzADEpBH8KkBIuG5FwlHlICAv_FkqpfPPQZpeGAmEw8lC1paWZ17XjXhkc7jjhkiSXe6nZ2auog1nFPuDDDodgZ4E-KJyAMbXcyI4awQsC_gsSBhO7bKy5HwsP_pFDv9EQ1zIAVWBladZduRHGhiCWjiOY.tjtYAt2O8efwnEkPrkW0PyJNZvJhklxSX4wcqgQlmlU&dib_tag=se&keywords=LED+Kerzen+%28Set%29&qid=1757439661&sprefix=led+kerzen+set+%2Caps%2C157&sr=8-10",
+      "category": "Dekoration",
+      "hero_product": false
+    },
+    {
+      "id": 10,
+      "name": "UPXNBOR Smarte Glühbirne E27",
+      "description": "Bluetooth LED Glühbirne, dimmbar, 16 Millionen Farben, kompatibel mit Alexa und Google Assistant.",
+      "price": "8,99",
+      "currency": "EUR",
+      "affiliate_link": "https://www.amazon.de/UPXNBOR-Gl%C3%BChbirne-Millionen-Kompatibel-Assistant/dp/B0F1Y923W1/ref=sr_1_11?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2G2DNP7E4GPPZ&dib=eyJ2IjoiMSJ9.C9qUX6YjcsDGeusFuk_riryb9P-KpuULo4Lhn7fylr_LKoNf27UzMs457Jn8BMq1-nsTiq8Qr6EWKayL-Hnukj8uxWkn-T_oiO36kUjR3Vg64svQ_4MLxkcXldNZOv1jGV_nVmZkxG3HYOog1z880Wy4_bVSpNT9Op4L5zew0Bpnm1Lyqmh9qLMIep810mjtu4Syp3obUXl0SERXMn5oF9jDvPwMk_xTqCqlEgOyEWkrNqSufIXPdm9_h7lSWpHbhVXikZM9f8Aq4S3aaHJa4QfcHTlzDmqYnywSz3iesUs.WvNLjyPm6rpKs_awG2aTTKaHuQuyolizIaCqkiGa490&dib_tag=se&keywords=Bluetooth%2BLED%2BGl%C3%BChbirne&qid=1757439886&refinements=p_72%3A225442031&rnid=225441031&sprefix=bluetooth%2Bled%2Bgl%C3%BChbirne%2Caps%2C147&sr=8-11&th=1",
+      "category": "Beleuchtung",
+      "hero_product": false
+    },
+    {
+      "id": 11,
+      "name": "OOWOKS LED Mond Wandleuchte",
+      "description": "3D Mond Lampe mit Fernbedienung, dimmbar, 16 Farben, USB wiederaufladbar, ideal für Schlafzimmer und Wohnzimmer.",
+      "price": "59,99",
+      "currency": "EUR",
+      "affiliate_link": "https://www.amazon.de/Wandleuchte-Fernbedienung-Nachtlichtmodus-Speicherfunktion-Wandbeleuchtung/dp/B09ZPB9RCT/ref=sxin_16_pa_sp_search_thematic_sspa?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&content-id=amzn1.sym.56789df0-f84c-43c2-8f21-75818abeac58%3Aamzn1.sym.56789df0-f84c-43c2-8f21-75818abeac58&crid=1BM30Z739UNE7&cv_ct_cx=LED%2BMoon%2BLight&keywords=LED%2BMoon%2BLight&pd_rd_i=B09ZPB9RCT&pd_rd_r=fde2f7b8-57ff-44fc-970f-f391d63df8af&pd_rd_w=4OjXb&pd_rd_wg=fpCLq&pf_rd_p=56789df0-f84c-43c2-8f21-75818abeac58&pf_rd_r=B7HJAS5HJ9XXG5SV12VY&qid=1757440041&refinements=p_72%3A225442031&rnid=225441031&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&sprefix=led%2Bmoon%2Blight%2Caps%2C160&sr=1-3-c55cf277-3a11-4db5-8ae5-b460ea65183f-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM&th=1",
+      "category": "Dekoration",
+      "hero_product": false
+    }
+  ]
+}
