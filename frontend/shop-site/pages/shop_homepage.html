@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lumio Commerce - Wear Your Light | Premium Fashion & Accessories</title>
+    <meta name="description" content="Entdecke Lumio's Premium Fashion Kollektion. Illuminiere deinen Stil mit unseren kuratierten Pieces. Kostenloser Versand ab €75." />
+    <script src="../js/theme-init.js"></script>
+    <script src="../js/global-search-handler.js" defer></script>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script async type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Flumiocomm8718back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+    <style>
+        .community-card:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease-in-out;
+        }
+        .instagram-image:hover {
+            filter: brightness(1.1);
+            transition: filter 0.3s ease-in-out;
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+        }
+        #scroll-to-top-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        /* Scroll-triggered animations */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Add staggered delay for grid items */
+        .reveal-on-scroll.delay-1 { transition-delay: 0.1s; }
+        .reveal-on-scroll.delay-2 { transition-delay: 0.2s; }
+        .reveal-on-scroll.delay-3 { transition-delay: 0.3s; }
+
+        /* Hero CTA button animation */
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(255, 106, 0, 0.5), 0 0 25px rgba(255, 106, 0, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(255, 106, 0, 0.8), 0 0 50px rgba(255, 106, 0, 0.5);
+            }
+        }
+        .hero-cta-button {
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+
+        /* Interactive Testimonials */
+        .testimonial-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.07);
+        }
+        .dark .testimonial-card:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+
+
+        /* Nav Link Hover Effect */
+        .nav-link-hover {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link-hover::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .nav-link-hover:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* 3D Tilt Effect on Product Cards */
+        .card-product {
+            will-change: transform;
+            transform-style: preserve-3d;
+            transition: transform 0.2s linear; /* Smoother transition */
+        }
+
+        .magnetic-icon {
+            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Hero Canvas */
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* Animated Headline */
+        .animated-headline span {
+            opacity: 0;
+            display: inline-block;
+            animation: reveal-letter 1s forwards;
+            animation-delay: calc(0.08s * var(--i));
+        }
+        @keyframes reveal-letter {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Button Shimmer Effect */
+        .shimmer-button {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .shimmer-button:hover::after {
+            left: 150%;
+        }
+
+    </style>
+</head>
+<body class="bg-white text-text-primary dark:bg-secondary-900 dark:text-secondary-200 transition-colors duration-300">
+
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-white/95 dark:bg-secondary-900/80 backdrop-blur-md border-b border-secondary-100 dark:border-secondary-800 transition-all duration-300 flex flex-col">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="shop_homepage.html" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-400 rounded-full flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                        </div>
+                        <span class="font-headline font-bold text-xl text-secondary-900 dark:text-white">Lumio</span>
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="shop_homepage.html" class="nav-link-hover text-primary-500 font-medium hover:text-primary-600 transition-colors">Shop</a>
+                    <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                        <a href="kollektionen_overview.html" class="nav-link-hover text-secondary-600 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors flex items-center">
+                            Kollektionen
+                            <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </a>
+                        <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-1" class="absolute z-10 -ml-4 mt-3 transform px-2 w-screen max-w-xs sm:px-0">
+                            <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+                                <div class="relative grid gap-6 bg-white dark:bg-secondary-800 px-5 py-6 sm:gap-8 sm:p-8">
+                                    <a href="#" class="category-filter-link -m-3 p-3 flex items-start rounded-lg hover:bg-secondary-50 dark:hover:bg-secondary-700" data-category="damen">
+                                        <div class="ml-4">
+                                            <p class="text-base font-medium text-secondary-900 dark:text-white">Damen</p>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="category-filter-link -m-3 p-3 flex items-start rounded-lg hover:bg-secondary-50 dark:hover:bg-secondary-700" data-category="herren">
+                                        <div class="ml-4">
+                                            <p class="text-base font-medium text-secondary-900 dark:text-white">Herren</p>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="category-filter-link -m-3 p-3 flex items-start rounded-lg hover:bg-secondary-50 dark:hover:bg-secondary-700" data-category="kinder">
+                                        <div class="ml-4">
+                                            <p class="text-base font-medium text-secondary-900 dark:text-white">Kinder</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="inspiration_gallery.html" class="nav-link-hover text-secondary-600 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Inspiration</a>
+                    <a href="about_lumio.html" class="nav-link-hover text-secondary-600 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Über Lumio</a>
+                    <a href="../portfolio-site/dist/index.html" class="nav-link-hover text-secondary-600 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Mein Portfolio</a>
+                </nav>
+
+                <!-- Search Bar -->
+                <div class="hidden lg:flex flex-1 max-w-md mx-8">
+                    <div class="relative w-full">
+                        <input type="text" placeholder="Suche nach Produkten..." class="w-full pl-10 pr-4 py-2 border border-secondary-200 bg-secondary-50 dark:border-secondary-700 dark:bg-secondary-800 rounded-lg focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-500/50 focus:border-primary-500 dark:focus:border-primary-400 transition-all duration-200 outline-none text-secondary-900 dark:text-white" />
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-secondary-400 dark:text-secondary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Actions -->
+                <div class="flex items-center space-x-4">
+                    <!-- Account Dropdown -->
+                    <div x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false" class="relative">
+                        <button class="magnetic-icon p-2 text-secondary-600 hover:text-primary-500 dark:text-secondary-300 dark:hover:text-primary-400 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-1" class="absolute right-0 mt-2 w-48 bg-white dark:bg-secondary-800 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" style="display: none;">
+                            <div class="py-1" id="user-menu">
+                                <div id="auth-links">
+                                    <div class="px-4 py-3">
+                                        <p class="text-xs text-secondary-500 dark:text-secondary-400">Melde dich an, um mehr zu entdecken.</p>
+                                    </div>
+                                    <a href="#" id="login-link" class="block w-full text-left px-4 py-2 text-sm font-semibold text-white bg-primary-500 hover:bg-primary-600 dark:hover:bg-primary-700 transition-colors">Anmelden</a>
+                                    <a href="#" id="register-link" class="block w-full text-left px-4 py-2 text-sm font-medium text-primary-600 hover:bg-secondary-100 dark:text-primary-400 dark:hover:bg-secondary-700 transition-colors">Registrieren</a>
+                                </div>
+                                <div id="user-links" class="hidden">
+                                    <a href="konto.html" id="account-link" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-200 hover:bg-secondary-100 dark:hover:bg-secondary-700 transition-colors">Konto</a>
+                                    <a href="einstellungen.html" id="settings-link" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-200 hover:bg-secondary-100 dark:hover:bg-secondary-700 transition-colors">Einstellungen</a>
+                                    <div class="border-t border-secondary-200 dark:border-secondary-700 my-1"></div>
+                                    <a href="#" id="logout-link" class="block w-full text-left px-4 py-2 text-sm text-secondary-700 dark:text-secondary-200 hover:bg-secondary-100 dark:hover:bg-secondary-700 transition-colors">Abmelden</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="magnetic-icon p-2 text-secondary-600 hover:text-primary-500 dark:text-secondary-300 dark:hover:text-primary-400 transition-colors">
+                        <svg class="w-5 h-5 moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        </svg>
+                        <svg class="w-5 h-5 sun-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M12 5a7 7 0 100 14 7 7 0 000-14z"/>
+                        </svg>
+                    </button>
+
+                    <!-- Wishlist -->
+                    <a href="favorites.html" class="magnetic-icon p-2 text-secondary-600 hover:text-primary-500 dark:text-secondary-300 dark:hover:text-primary-400 transition-colors relative">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                        <span id="favorite-count" class="absolute -top-1 -right-1 bg-primary-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                    </a>
+
+                    <!-- Shopping Cart -->
+                    <a href="shopping_cart_checkout.html" class="magnetic-icon p-2 text-secondary-600 hover:text-primary-500 dark:text-secondary-300 dark:hover:text-primary-400 transition-colors relative">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.293 2.293A1 1 0 005 16h12M7 13v4a2 2 0 002 2h6a2 2 0 002-2v-4"/>
+                        </svg>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-primary-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                    </a>
+
+                    <!-- Mobile Menu Button -->
+                    <button class="md:hidden p-2 text-secondary-600 hover:text-primary-500 dark:text-secondary-300 dark:hover:text-primary-400 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="search-results-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 hidden"></div>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="relative min-h-screen bg-gradient-to-br from-secondary-900 via-secondary-800 to-secondary-900 overflow-hidden">
+            <canvas id="hero-canvas"></canvas>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
+                <div class="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+                    <!-- Hero Content -->
+                    <div class="text-white space-y-8 z-10">
+                        <div class="space-y-4">
+                            <h1 class="font-headline font-bold text-5xl lg:text-6xl leading-tight animated-headline headline-gradient">
+                                <span style="--i:1">I</span><span style="--i:2">l</span><span style="--i:3">l</span><span style="--i:4">u</span><span style="--i:5">m</span><span style="--i:6">i</span><span style="--i:7">n</span><span style="--i:8">a</span><span style="--i:9">t</span><span style="--i:10">e</span>&nbsp;<span style="--i:11">Y</span><span style="--i:12">o</span><span style="--i:13">u</span><span style="--i:14">r</span>&nbsp;<span style="display: inline-block"><span style="--i:15">S</span><span style="--i:16">t</span><span style="--i:17">y</span><span style="--i:18">l</span><span style="--i:19">e</span></span>
+                            </h1>
+                            <p class="text-xl text-secondary-200 max-w-lg reveal-on-scroll delay-3">
+                                Entdecke Fashion, die deine Persönlichkeit erstrahlen lässt. Premium Pieces für selbstbewusste Individualisten.
+                            </p>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="inspiration_gallery.html" class="shimmer-button cta-button hero-cta-button bg-primary-500 hover:bg-primary-600 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 inline-block text-center">
+                                Jetzt entdecken
+                            </a>
+                        </div>
+
+                        <!-- Trust Indicators -->
+                        <div class="flex items-center space-x-6 pt-8">
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-5 h-5 text-success-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-sm text-secondary-300">Kostenloser Versand ab €30</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-5 h-5 text-success-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-sm text-secondary-300">30 Tage Rückgabe</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Product -->
+                    <div class="relative z-10">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Lumio Signature Piece" class="w-full h-auto rounded-2xl shadow-2xl" loading="lazy" fetchpriority="high" onerror="this.src='https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;" />
+                        </div>
+                        <!-- Glow Effects -->
+                        <div class="absolute -inset-4 bg-gradient-to-r from-primary-500/20 to-accent-400/20 rounded-3xl blur-2xl"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Urgency Banner -->
+        <section class="bg-gradient-to-r from-primary-500 to-primary-600 text-white py-4">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-center space-x-4 text-center">
+                    <svg class="w-5 h-5 text-accent-400 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="font-semibold">Nur noch wenige auf Lager!</span>
+                    <span class="hidden sm:inline">Sichere dir jetzt deine Lieblingsstücke bevor sie ausverkauft sind.</span>
+                    <a href="kollektionen_overview.html" class="shimmer-button cta-button bg-white text-primary-600 font-semibold px-4 py-2 rounded-lg hover:bg-secondary-50 transition-colors ml-4">
+                        Jetzt Shoppen
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bestseller Grid -->
+        <section class="py-16 bg-white dark:bg-secondary-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 reveal-on-scroll">
+                    <h2 class="font-headline font-bold text-3xl lg:text-4xl text-secondary-900 dark:text-white mb-4">
+                        Bestseller Kollektion
+                    </h2>
+                    <p class="text-secondary-600 dark:text-secondary-300 text-lg max-w-2xl mx-auto">
+                        Entdecke unsere meistgeliebten Pieces, die bereits tausende Kunden zum Strahlen gebracht haben.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Product 1 -->
+                    <div class="group card-product bg-white dark:bg-secondary-800 rounded-lg overflow-hidden shadow-subtle hover:shadow-product-card dark:shadow-none dark:border dark:border-transparent dark:hover:border-primary-500 flex flex-col reveal-on-scroll" data-product-id="1" data-product-name="Urban Glow Jacket" data-product-price="189.99">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?q=80&w=2905&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Urban Glow Jacket" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;" />
+                            <div class="absolute top-3 left-3 bg-primary-500 text-white text-xs font-semibold px-2 py-1 rounded">
+                                Bestseller
+                            </div>
+                            <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="favorite-btn bg-white/90 dark:bg-secondary-900/80 p-2 rounded-full hover:bg-white dark:hover:bg-secondary-700 transition-colors">
+                                    <svg class="w-4 h-4 text-secondary-600 dark:text-secondary-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-semibold text-secondary-900 dark:text-white mb-2">Urban Glow Jacket</h3>
+                            <p class="text-secondary-600 dark:text-secondary-400 text-sm mb-3">Premium Streetwear mit LED-Akzenten</p>
+                            <div class="flex items-center justify-between mt-auto">
+                                <span class="font-bold text-lg text-secondary-900 dark:text-white">€189,99</span>
+                                <button class="add-to-cart-btn shimmer-button cta-button bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                                    In den Warenkorb
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="group card-product bg-white dark:bg-secondary-800 rounded-lg overflow-hidden shadow-subtle hover:shadow-product-card dark:shadow-none dark:border dark:border-transparent dark:hover:border-primary-500 flex flex-col reveal-on-scroll delay-1" data-product-id="2" data-product-name="Neon Nights Dress" data-product-price="249.99">
+                        <div class="relative overflow-hidden">
+                            <img src="../public/neon-nights-dress.jpg" alt="Neon Nights Dress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+                            <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="favorite-btn bg-white/90 dark:bg-secondary-900/80 p-2 rounded-full hover:bg-white dark:hover:bg-secondary-700 transition-colors">
+                                    <svg class="w-4 h-4 text-secondary-600 dark:text-secondary-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-semibold text-secondary-900 dark:text-white mb-2">Neon Nights Dress</h3>
+                            <p class="text-secondary-600 dark:text-secondary-400 text-sm mb-3">Elegantes Abendkleid mit Glow-Effekt</p>
+                            <div class="flex items-center justify-between mt-auto">
+                                <span class="font-bold text-lg text-secondary-900 dark:text-white">€249,99</span>
+                                <button class="add-to-cart-btn shimmer-button cta-button bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                                    In den Warenkorb
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="group card-product bg-white dark:bg-secondary-800 rounded-lg overflow-hidden shadow-subtle hover:shadow-product-card dark:shadow-none dark:border dark:border-transparent dark:hover:border-primary-500 flex flex-col reveal-on-scroll delay-2" data-product-id="3" data-product-name="Golden Hour Set" data-product-price="89.99">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Golden Hour Accessories" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;" />
+                            <div class="absolute top-3 left-3 bg-accent-500 text-white text-xs font-semibold px-2 py-1 rounded">
+                                Neu
+                            </div>
+                            <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="favorite-btn bg-white/90 dark:bg-secondary-900/80 p-2 rounded-full hover:bg-white dark:hover:bg-secondary-700 transition-colors">
+                                    <svg class="w-4 h-4 text-secondary-600 dark:text-secondary-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-semibold text-secondary-900 dark:text-white mb-2">Golden Hour Set</h3>
+                            <p class="text-secondary-600 dark:text-secondary-400 text-sm mb-3">Luxuriöse Accessoires mit Goldakzenten</p>
+                            <div class="flex items-center justify-between mt-auto">
+                                <span class="font-bold text-lg text-secondary-900 dark:text-white">€89,99</span>
+                                <button class="add-to-cart-btn shimmer-button cta-button bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                                    In den Warenkorb
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 4 -->
+                    <div class="group card-product bg-white dark:bg-secondary-800 rounded-lg overflow-hidden shadow-subtle hover:shadow-product-card dark:shadow-none dark:border dark:border-transparent dark:hover:border-primary-500 flex flex-col reveal-on-scroll delay-3" data-product-id="4" data-product-name="Lumio Signature Sneakers" data-product-price="159.99">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Lumio Signature Sneakers" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='https://images.pixabay.com/photo/2016/11/19/18/06/feet-1840619_1280.jpg'; this.onerror=null;" />
+                            <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="favorite-btn bg-white/90 dark:bg-secondary-900/80 p-2 rounded-full hover:bg-white dark:hover:bg-secondary-700 transition-colors">
+                                    <svg class="w-4 h-4 text-secondary-600 dark:text-secondary-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-semibold text-secondary-900 dark:text-white mb-2">Lumio Signature Sneakers</h3>
+                            <p class="text-secondary-600 dark:text-secondary-400 text-sm mb-3">Limitierte Edition mit LED-Sohle</p>
+                            <div class="flex items-center justify-between mt-auto">
+                                <span class="font-bold text-lg text-secondary-900 dark:text-white">€159,99</span>
+                                <button class="add-to-cart-btn shimmer-button cta-button bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                                    In den Warenkorb
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12">
+                    <a href="kollektionen_overview.html" class="shimmer-button cta-button inline-flex items-center bg-secondary-900 hover:bg-secondary-800 dark:bg-primary-500 dark:hover:bg-primary-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors">
+                        Alle Produkte Ansehen
+                        <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Proof Section -->
+        <section class="py-16 bg-secondary-50 dark:bg-secondary-800/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 reveal-on-scroll">
+                    <h2 class="font-headline font-bold text-3xl text-secondary-900 dark:text-white mb-4">
+                        Was unsere Kunden sagen
+                    </h2>
+                    <p class="text-secondary-600 dark:text-secondary-300 text-lg">
+                        Über 100 zufriedene Kunden vertrauen auf Lumio
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card bg-white dark:bg-secondary-800 p-6 rounded-xl shadow-subtle dark:shadow-none border border-transparent dark:hover:border-primary-500/30 transition-colors reveal-on-scroll">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Sarah M." class="w-12 h-12 rounded-full object-cover mr-4" loading="lazy" onerror="this.src='https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;" />
+                            <div>
+                                <h4 class="font-semibold text-secondary-900 dark:text-white">Sarah M.</h4>
+                                <div class="flex text-accent-400">
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-secondary-600 dark:text-secondary-300">
+                            "Die Urban Glow Jacket ist einfach unglaublich! Ich bekomme ständig Komplimente und fühle mich so selbstbewusst damit."
+                        </p>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card bg-white dark:bg-secondary-800 p-6 rounded-xl shadow-subtle dark:shadow-none border border-transparent dark:hover:border-primary-500/30 transition-colors reveal-on-scroll delay-1">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Marcus K." class="w-12 h-12 rounded-full object-cover mr-4" loading="lazy" onerror="this.src='https://images.pixabay.com/photo/2016/11/29/09/38/adult-1868750_1280.jpg'; this.onerror=null;" />
+                            <div>
+                                <h4 class="font-semibold text-secondary-900 dark:text-white">Marcus K.</h4>
+                                <div class="flex text-accent-400">
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-secondary-600 dark:text-secondary-300">
+                            "Qualität und Design sind top! Die Lumio Sneakers sind mein neues Lieblingspaar. Schnelle Lieferung, perfekter Service."
+                        </p>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card bg-white dark:bg-secondary-800 p-6 rounded-xl shadow-subtle dark:shadow-none border border-transparent dark:hover:border-primary-500/30 transition-colors reveal-on-scroll delay-2">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Lisa R." class="w-12 h-12 rounded-full object-cover mr-4" loading="lazy" onerror="this.src='https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;" />
+                            <div>
+                                <h4 class="font-semibold text-secondary-900 dark:text-white">Lisa R.</h4>
+                                <div class="flex text-accent-400">
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-secondary-600 dark:text-secondary-300">
+                            "Das Neon Nights Dress war der Hit auf der Party! Lumio versteht es, Fashion und Innovation zu verbinden. Absolute Empfehlung!"
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="flex flex-wrap justify-center items-center gap-8 pt-8 border-t border-secondary-200 dark:border-secondary-700">
+                    <div class="flex items-center space-x-2 text-secondary-600 dark:text-secondary-300">
+                        <svg class="w-6 h-6 text-success-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="font-medium">SSL Verschlüsselt</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-secondary-600 dark:text-secondary-300">
+                        <svg class="w-6 h-6 text-success-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="font-medium">DSGVO konform</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-secondary-600 dark:text-secondary-300">
+                        <svg class="w-6 h-6 text-success-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span class="font-medium">30 Tage Rückgabe</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-secondary-600 dark:text-secondary-300">
+                        <svg class="w-6 h-6 text-success-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                        </svg>
+                        <span class="font-medium">Kostenloser Versand ab €75</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-8 border-secondary-200 dark:border-secondary-700">
+
+        <!-- Community Section -->
+        <section class="py-16 bg-white dark:bg-secondary-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="reveal-on-scroll">
+                    <h2 class="font-headline font-bold text-3xl text-secondary-900 dark:text-white mb-4">
+                        Werde Teil der Lumio-Community
+                    </h2>
+                    <p class="text-secondary-600 dark:text-secondary-300 text-lg max-w-2xl mx-auto mb-8">
+                        Mit jedem Kauf erhältst du exklusiven Zugang zu unserer Community und profitierst von zahlreichen Vorteilen.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8 text-left">
+                    <div class="community-card bg-white dark:bg-secondary-800 p-6 rounded-xl shadow-subtle dark:shadow-none border border-transparent hover:border-primary-500/30 transition-colors reveal-on-scroll">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/50 rounded-full flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-primary-500 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3h.01M17 16h.01"/></svg>
+                            </div>
+                            <h3 class="font-semibold text-lg text-secondary-900 dark:text-white">Exklusiver Content</h3>
+                        </div>
+                        <p class="text-secondary-600 dark:text-secondary-300">Erhalte Zugang zu Behind-the-Scenes-Material, Interviews mit Designern und exklusiven Tutorials.</p>
+                    </div>
+                    <div class="community-card bg-white dark:bg-secondary-800 p-6 rounded-xl shadow-subtle dark:shadow-none border border-transparent hover:border-primary-500/30 transition-colors reveal-on-scroll delay-1">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/50 rounded-full flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-primary-500 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.524 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.524 4.674c.3.921-.755 1.688-1.54 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.784.57-1.838-.197-1.539-1.118l1.524-4.674a1 1 0 00-.363-1.118L2.07 10.01c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.524-4.674z"/></svg>
+                            </div>
+                            <h3 class="font-semibold text-lg text-secondary-900 dark:text-white">Early Access</h3>
+                        </div>
+                        <p class="text-secondary-600 dark:text-secondary-300">Sei der Erste, der von neuen Kollektionen erfährt und erhalte vor allen anderen Zugang zu Sales.</p>
+                    </div>
+                    <div class="community-card bg-white dark:bg-secondary-800 p-6 rounded-xl shadow-subtle dark:shadow-none border border-transparent hover:border-primary-500/30 transition-colors reveal-on-scroll delay-2">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/50 rounded-full flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-primary-500 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                            </div>
+                            <h3 class="font-semibold text-lg text-secondary-900 dark:text-white">Vernetze dich</h3>
+                        </div>
+                        <p class="text-secondary-600 dark:text-secondary-300">Tausche dich mit anderen Fashion-Liebhabern aus, teile deine Styles und lass dich inspirieren.</p>
+                    </div>
+                </div>
+                <div class="text-center mt-12">
+                    <a href="kollektionen_overview.html" class="shimmer-button cta-button inline-flex items-center bg-primary-500 hover:bg-primary-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors">
+                        Shoppe jetzt und werde Mitglied
+                        <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-8 border-secondary-200 dark:border-secondary-700">
+
+        <!-- Kollektionen Preview -->
+        <section class="py-16 bg-white dark:bg-secondary-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 reveal-on-scroll">
+                    <h2 class="font-headline font-bold text-3xl lg:text-4xl text-secondary-900 dark:text-white mb-4">
+                        Entdecke unsere Kollektionen
+                    </h2>
+                    <p class="text-secondary-600 dark:text-secondary-300 text-lg max-w-2xl mx-auto">
+                        Jede Kollektion erzählt eine Geschichte des Lichts und der Transformation
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Urban Glow -->
+                    <div class="group relative overflow-hidden rounded-2xl bg-secondary-900 h-96 reveal-on-scroll">
+                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Urban Glow Kollektion" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" onerror="this.src='https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6 text-white">
+                            <h3 class="font-headline font-bold text-2xl mb-2">Urban Glow</h3>
+                            <p class="text-secondary-200 mb-4">Streetwear mit LED-Akzenten für den urbanen Lifestyle</p>
+                            <a href="kollektionen_overview.html" class="shimmer-button cta-button inline-flex items-center bg-primary-500 hover:bg-primary-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
+                                Kollektion Entdecken
+                                <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Neon Nights -->
+                    <div class="group relative overflow-hidden rounded-2xl bg-secondary-900 h-96 reveal-on-scroll delay-1">
+                        <img src="../public/neon-nights-dress.jpg" alt="Neon Nights Dress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6 text-white">
+                            <h3 class="font-headline font-bold text-2xl mb-2">Neon Nights</h3>
+                            <p class="text-secondary-200 mb-4">Elegante Abendmode mit subtilen Glow-Effekten</p>
+                            <a href="kollektionen_overview.html" class="shimmer-button cta-button inline-flex items-center bg-primary-500 hover:bg-primary-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
+                                Kollektion Entdecken
+                                <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Golden Hour -->
+                    <div class="group relative overflow-hidden rounded-2xl bg-secondary-900 h-96 reveal-on-scroll delay-2">
+                        <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Golden Hour Kollektion" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" onerror="this.src='https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6 text-white">
+                            <h3 class="font-headline font-bold text-2xl mb-2">Golden Hour</h3>
+                            <p class="text-secondary-200 mb-4">Luxuriöse Accessoires mit warmen Goldakzenten</p>
+                            <a href="kollektionen_overview.html" class="shimmer-button cta-button inline-flex items-center bg-primary-500 hover:bg-primary-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
+                                Kollektion Entdecken
+                                <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Instagram Feed -->
+        <section class="py-16 bg-secondary-50 dark:bg-secondary-800/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 reveal-on-scroll">
+                    <h2 class="font-headline font-bold text-3xl text-secondary-900 dark:text-white mb-4">
+                        #WearYourLight
+                    </h2>
+                    <p class="text-secondary-600 dark:text-secondary-300 text-lg">
+                        Teile deinen Lumio Style und inspiriere andere
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="aspect-square overflow-hidden rounded-lg reveal-on-scroll">
+                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Customer wearing Lumio" class="instagram-image w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;" />
+                    </div>
+                    <div class="aspect-square overflow-hidden rounded-lg reveal-on-scroll delay-1">
+                        <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?q=80&w=2905&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Customer wearing Lumio" class="instagram-image w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='https://images.pixabay.com/photo/2017/08/01/11/48/woman-2564660_1280.jpg'; this.onerror=null;" />
+                    </div>
+                    <div class="aspect-square overflow-hidden rounded-lg reveal-on-scroll delay-2">
+                        <img src="https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Customer wearing Lumio" class="instagram-image w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;" />
+                    </div>
+                    <div class="aspect-square overflow-hidden rounded-lg reveal-on-scroll delay-3">
+                        <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Customer wearing Lumio" class="instagram-image w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='https://images.pixabay.com/photo/2016/11/19/18/06/feet-1840619_1280.jpg'; this.onerror=null;" />
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <a href="inspiration_gallery.html" class="shimmer-button cta-button inline-flex items-center bg-secondary-900 hover:bg-secondary-800 dark:bg-primary-500 dark:hover:bg-primary-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors">
+                        Mehr Inspiration
+                        <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Affiliate Section -->
+        <section class="py-16 bg-white dark:bg-secondary-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 reveal-on-scroll">
+                    <h2 class="font-headline font-bold text-3xl lg:text-4xl text-secondary-900 dark:text-white mb-4">
+                        Unsere Empfehlungen
+                    </h2>
+                    <p class="text-secondary-600 dark:text-secondary-300 text-lg max-w-2xl mx-auto">
+                        Handverlesene Produkte von unseren Partnern, die perfekt zu deinem Stil passen.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Affiliate Product 1 -->
+                    <div class="group card-product bg-white dark:bg-secondary-800 rounded-lg overflow-hidden shadow-subtle hover:shadow-product-card dark:shadow-none dark:border dark:border-transparent dark:hover:border-primary-500 flex flex-col reveal-on-scroll" data-product-id="aff-1" data-product-name="Exklusives Partner-Angebot" data-product-price="129.99">
+                        <div class="relative overflow-hidden">
+                            <img src="/img/w05.jpg" alt="Partner Produkt 1" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                            <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="favorite-btn bg-white/90 dark:bg-secondary-900/80 p-2 rounded-full hover:bg-white dark:hover:bg-secondary-700 transition-colors">
+                                    <svg class="w-4 h-4 text-secondary-600 dark:text-secondary-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-semibold text-secondary-900 dark:text-white mb-2">Exklusives Partner-Angebot</h3>
+                            <p class="text-secondary-600 dark:text-secondary-400 text-sm mb-3">Einzigartiges Design von einem unserer Partner.</p>
+                            <div class="flex items-center justify-between mt-auto">
+                                <span class="font-bold text-lg text-secondary-900 dark:text-white">€129,99</span>
+                                <button class="add-to-cart-btn shimmer-button cta-button bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                                    In den Warenkorb
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Affiliate Product 2 -->
+                    <div class="group card-product bg-white dark:bg-secondary-800 rounded-lg overflow-hidden shadow-subtle hover:shadow-product-card dark:shadow-none dark:border dark:border-transparent dark:hover:border-primary-500 flex flex-col reveal-on-scroll delay-1" data-product-id="aff-2" data-product-name="Limitierte Edition" data-product-price="99.99">
+                        <div class="relative overflow-hidden">
+                            <img src="/img/w06.jpg" alt="Partner Produkt 2" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                            <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="favorite-btn bg-white/90 dark:bg-secondary-900/80 p-2 rounded-full hover:bg-white dark:hover:bg-secondary-700 transition-colors">
+                                    <svg class="w-4 h-4 text-secondary-600 dark:text-secondary-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-semibold text-secondary-900 dark:text-white mb-2">Limitierte Edition</h3>
+                            <p class="text-secondary-600 dark:text-secondary-400 text-sm mb-3">Nur für kurze Zeit von unserem Partner verfügbar.</p>
+                            <div class="flex items-center justify-between mt-auto">
+                                <span class="font-bold text-lg text-secondary-900 dark:text-white">€99,99</span>
+                                <button class="add-to-cart-btn shimmer-button cta-button bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                                    In den Warenkorb
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Affiliate Product 3 -->
+                    <div class="group card-product bg-white dark:bg-secondary-800 rounded-lg overflow-hidden shadow-subtle hover:shadow-product-card dark:shadow-none dark:border dark:border-transparent dark:hover:border-primary-500 flex flex-col reveal-on-scroll delay-2" data-product-id="aff-3" data-product-name="Top-Empfehlung" data-product-price="149.99">
+                        <div class="relative overflow-hidden">
+                            <img src="/img/w07.jpg" alt="Partner Produkt 3" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                            <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="favorite-btn bg-white/90 dark:bg-secondary-900/80 p-2 rounded-full hover:bg-white dark:hover:bg-secondary-700 transition-colors">
+                                    <svg class="w-4 h-4 text-secondary-600 dark:text-secondary-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-semibold text-secondary-900 dark:text-white mb-2">Top-Empfehlung</h3>
+                            <p class="text-secondary-600 dark:text-secondary-400 text-sm mb-3">Dieses Produkt lieben wir besonders.</p>
+                            <div class="flex items-center justify-between mt-auto">
+                                <span class="font-bold text-lg text-secondary-900 dark:text-white">€149,99</span>
+                                <button class="add-to-cart-btn shimmer-button cta-button bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                                    In den Warenkorb
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Affiliate Product 4 -->
+                    <div class="group card-product bg-white dark:bg-secondary-800 rounded-lg overflow-hidden shadow-subtle hover:shadow-product-card dark:shadow-none dark:border dark:border-transparent dark:hover:border-primary-500 flex flex-col reveal-on-scroll delay-3" data-product-id="aff-4" data-product-name="Online-Special" data-product-price="119.99">
+                        <div class="relative overflow-hidden">
+                            <img src="/img/w08.jpg" alt="Partner Produkt 4" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                            <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="favorite-btn bg-white/90 dark:bg-secondary-900/80 p-2 rounded-full hover:bg-white dark:hover:bg-secondary-700 transition-colors">
+                                    <svg class="w-4 h-4 text-secondary-600 dark:text-secondary-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-semibold text-secondary-900 dark:text-white mb-2">Online-Special</h3>
+                            <p class="text-secondary-600 dark:text-secondary-400 text-sm mb-3">Exklusiv online über unseren Partner erhältlich.</p>
+                            <div class="flex items-center justify-between mt-auto">
+                                <span class="font-bold text-lg text-secondary-900 dark:text-white">€119,99</span>
+                                <button class="add-to-cart-btn shimmer-button cta-button bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                                    In den Warenkorb
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                                    <!-- Affiliate Product 5 -->
+                    <div class="group card-product bg-white dark:bg-secondary-800 rounded-lg overflow-hidden shadow-subtle hover:shadow-product-card dark:shadow-none dark:border dark:border-transparent dark:hover:border-primary-500 flex flex-col reveal-on-scroll" data-product-id="aff-5" data-product-name="Partner-Special A" data-product-price="89.99">
+                        <div class="relative overflow-hidden">
+                            <img src="/img/d01.jpg" alt="Partner Produkt 5" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                            <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="favorite-btn bg-white/90 dark:bg-secondary-900/80 p-2 rounded-full hover:bg-white dark:hover:bg-secondary-700 transition-colors">
+                                    <svg class="w-4 h-4 text-secondary-600 dark:text-secondary-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-semibold text-secondary-900 dark:text-white mb-2">Partner-Special A</h3>
+                            <p class="text-secondary-600 dark:text-secondary-400 text-sm mb-3">Ein weiteres tolles Angebot unserer Partner.</p>
+                            <div class="flex items-center justify-between mt-auto">
+                                <span class="font-bold text-lg text-secondary-900 dark:text-white">€89,99</span>
+                                <button class="add-to-cart-btn shimmer-button cta-button bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                                    In den Warenkorb
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Affiliate Product 6 -->
+                    <div class="group card-product bg-white dark:bg-secondary-800 rounded-lg overflow-hidden shadow-subtle hover:shadow-product-card dark:shadow-none dark:border dark:border-transparent dark:hover:border-primary-500 flex flex-col reveal-on-scroll delay-1" data-product-id="aff-6" data-product-name="Partner-Special B" data-product-price="109.99">
+                        <div class="relative overflow-hidden">
+                            <img src="/img/d02.png" alt="Partner Produkt 6" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                            <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="favorite-btn bg-white/90 dark:bg-secondary-900/80 p-2 rounded-full hover:bg-white dark:hover:bg-secondary-700 transition-colors">
+                                    <svg class="w-4 h-4 text-secondary-600 dark:text-secondary-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-semibold text-secondary-900 dark:text-white mb-2">Partner-Special B</h3>
+                            <p class="text-secondary-600 dark:text-secondary-400 text-sm mb-3">Qualität, die man bei unseren Partnern findet.</p>
+                            <div class="flex items-center justify-between mt-auto">
+                                <span class="font-bold text-lg text-secondary-900 dark:text-white">€109,99</span>
+                                <button class="add-to-cart-btn shimmer-button cta-button bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                                    In den Warenkorb
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Affiliate Product 7 -->
+                    <div class="group card-product bg-white dark:bg-secondary-800 rounded-lg overflow-hidden shadow-subtle hover:shadow-product-card dark:shadow-none dark:border dark:border-transparent dark:hover:border-primary-500 flex flex-col reveal-on-scroll delay-2" data-product-id="aff-7" data-product-name="Partner-Special C" data-product-price="199.99">
+                        <div class="relative overflow-hidden">
+                            <img src="/img/d03.jpg" alt="Partner Produkt 7" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                            <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="favorite-btn bg-white/90 dark:bg-secondary-900/80 p-2 rounded-full hover:bg-white dark:hover:bg-secondary-700 transition-colors">
+                                    <svg class="w-4 h-4 text-secondary-600 dark:text-secondary-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-semibold text-secondary-900 dark:text-white mb-2">Partner-Special C</h3>
+                            <p class="text-secondary-600 dark:text-secondary-400 text-sm mb-3">Ein Must-Have dieser Saison.</p>
+                            <div class="flex items-center justify-between mt-auto">
+                                <span class="font-bold text-lg text-secondary-900 dark:text-white">€149,99</span>
+                                <button class="add-to-cart-btn shimmer-button cta-button bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                                    In den Warenkorb
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Affiliate Product 8 -->
+                    <div class="group card-product bg-white dark:bg-secondary-800 rounded-lg overflow-hidden shadow-subtle hover:shadow-product-card dark:shadow-none dark:border dark:border-transparent dark:hover:border-primary-500 flex flex-col reveal-on-scroll delay-3" data-product-id="aff-8" data-product-name="Partner-Special D" data-product-price="179.99">
+                        <div class="relative overflow-hidden">
+                            <img src="/img/d04.jpg" alt="Partner Produkt 8" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                            <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="favorite-btn bg-white/90 dark:bg-secondary-900/80 p-2 rounded-full hover:bg-white dark:hover:bg-secondary-700 transition-colors">
+                                    <svg class="w-4 h-4 text-secondary-600 dark:text-secondary-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-semibold text-secondary-900 dark:text-white mb-2">Partner-Special D</h3>
+                            <p class="text-secondary-600 dark:text-secondary-400 text-sm mb-3">Stil und Komfort vereint.</p>
+                            <div class="flex items-center justify-between mt-auto">
+                                <span class="font-bold text-lg text-secondary-900 dark:text-white">€179,99</span>
+                                <button class="add-to-cart-btn shimmer-button cta-button bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                                    In den Warenkorb
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Signup -->
+        <section class="py-16 bg-gradient-to-r from-primary-500 to-primary-600 text-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="font-headline font-bold text-3xl lg:text-4xl mb-4">
+                    Bleib im Licht
+                </h2>
+                <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+                    Erhalte exklusive Angebote, Style-Tipps und sei der Erste, der neue Kollektionen entdeckt. Plus 30% Rabatt auf deine erste Bestellung!
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                    <input type="email" placeholder="Deine E-Mail Adresse" class="flex-1 px-4 py-3 rounded-lg text-secondary-900 dark:text-white bg-white/90 dark:bg-white/10 border border-transparent focus:ring-2 focus:ring-white focus:outline-none placeholder-secondary-400" />
+                    <button class="shimmer-button cta-button bg-white text-primary-600 font-semibold px-8 py-3 rounded-lg hover:bg-primary-50 transition-colors">
+                        Anmelden
+                    </button>
+                </div>
+                <p class="text-sm text-primary-200 mt-4">
+                    Jederzeit abmeldbar. Deine Daten sind bei uns sicher.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-secondary-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <!-- Brand -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-400 rounded-full flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                        </div>
+                        <span class="font-headline font-bold text-xl">Lumio</span>
+                    </div>
+                    <p class="text-secondary-300">
+                        Illuminiere deinen Stil mit Premium Fashion, die deine Persönlichkeit zum Strahlen bringt.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="javascript:void(0)" class="text-secondary-400 hover:text-primary-400 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                        </a>
+                        <a href="javascript:void(0)" class="text-secondary-400 hover:text-primary-400 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/></svg>
+                        </a>
+                        <a href="javascript:void(0)" class="text-secondary-400 hover:text-primary-400 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Shop -->
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Shop</h3>
+                    <ul class="space-y-2 text-secondary-300">
+                        <li><a href="kollektionen_overview.html" class="hover:text-primary-400 transition-colors">Alle Kollektionen</a></li>
+                        <li><a href="kollektionen_overview.html" class="hover:text-primary-400 transition-colors">Urban Glow</a></li>
+                        <li><a href="kollektionen_overview.html" class="hover:text-primary-400 transition-colors">Neon Nights</a></li>
+                        <li><a href="kollektionen_overview.html" class="hover:text-primary-400 transition-colors">Golden Hour</a></li>
+                        <li><a href="javascript:void(0)" class="hover:text-primary-400 transition-colors">Sale</a></li>
+                    </ul>
+                </div>
+
+                <!-- Service -->
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Service</h3>
+                    <ul class="space-y-2 text-secondary-300">
+                        <li><a href="contact_support.html" class="hover:text-primary-400 transition-colors">Kontakt</a></li>
+                        <li><a href="javascript:void(0)" class="hover:text-primary-400 transition-colors">Größentabelle</a></li>
+                        <li><a href="javascript:void(0)" class="hover:text-primary-400 transition-colors">Versand & Rückgabe</a></li>
+                        <li><a href="javascript:void(0)" class="hover:text-primary-400 transition-colors">Pflege-Guide</a></li>
+                        <li><a href="javascript:void(0)" class="hover:text-primary-400 transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Unternehmen -->
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Unternehmen</h3>
+                    <ul class="space-y-2 text-secondary-300">
+                        <li><a href="about_lumio.html" class="hover:text-primary-400 transition-colors">Über Lumio</a></li>
+                        <li><a href="inspiration_gallery.html" class="hover:text-primary-400 transition-colors">Inspiration</a></li>
+                        <li><a href="javascript:void(0)" class="hover:text-primary-400 transition-colors">Nachhaltigkeit</a></li>
+                        <li><a href="javascript:void(0)" class="hover:text-primary-400 transition-colors">Karriere</a></li>
+                        <li><a href="javascript:void(0)" class="hover:text-primary-400 transition-colors">Presse</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-secondary-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-secondary-400 text-sm">
+                    © 2025 Lumio Commerce. Alle Rechte vorbehalten.
+                </p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="javascript:void(0)" class="text-secondary-400 hover:text-primary-400 text-sm transition-colors">Datenschutz</a>
+                    <a href="javascript:void(0)" class="text-secondary-400 hover:text-primary-400 text-sm transition-colors">AGB</a>
+                    <a href="javascript:void(0)" class="text-secondary-400 hover:text-primary-400 text-sm transition-colors">Impressum</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scroll-to-top-btn" title="Nach oben scrollen">
+        &uarr;
+    </button>
+
+    <script>
+        // Consolidated script for all animations and interactions
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // --- CORE UI & POPUPS ---
+            // Simple smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href.length > 1) { // if it's not just "#"
+                        const target = document.querySelector(href);
+                        if (target) {
+                            e.preventDefault();
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }
+                });
+            });
+
+            // Scroll to top button
+            const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
+            if(scrollToTopBtn) {
+                window.onscroll = function() {
+                    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                        scrollToTopBtn.style.display = "block";
+                    } else {
+                        scrollToTopBtn.style.display = "none";
+                    }
+                };
+                scrollToTopBtn.addEventListener('click', function(){
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // Newsletter Popup
+            const popup = document.getElementById('newsletter-popup');
+            const closeButton = document.getElementById('close-popup');
+            const newsletterPopupClosed = localStorage.getItem('newsletterPopupClosed');
+
+            if (popup && closeButton && !newsletterPopupClosed) {
+                setTimeout(() => {
+                    popup.classList.remove('hidden');
+                    popup.classList.add('flex');
+                    setTimeout(() => {
+                        const popupDiv = popup.querySelector('div');
+                        if(popupDiv) popupDiv.classList.remove('scale-95');
+                    }, 50);
+                }, 5000); // Delay popup a bit longer
+            }
+
+            function closePopup() {
+                if(popup) {
+                    const popupDiv = popup.querySelector('div');
+                    if(popupDiv) popupDiv.classList.add('scale-95');
+                    setTimeout(() => {
+                        popup.classList.add('hidden');
+                        popup.classList.remove('flex');
+                        localStorage.setItem('newsletterPopupClosed', 'true');
+                    }, 300);
+                }
+            }
+
+            if(closeButton) closeButton.addEventListener('click', closePopup);
+            if(popup) popup.addEventListener('click', function(event) {
+                if (event.target === popup) closePopup();
+            });
+
+            // --- PERFORMANCE-FRIENDLY ANIMATIONS ---
+
+            // Intersection Observer for reveal animations
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            revealElements.forEach(el => revealObserver.observe(el));
+
+
+
+            // --- 3D Tilt Effect for Product Cards ---
+            const tiltElements = document.querySelectorAll('.card-product');
+            const tiltStrength = 15;
+            tiltElements.forEach(el => {
+                el.addEventListener('mousemove', (e) => {
+                    const rect = el.getBoundingClientRect();
+                    const { width, height, left, top } = rect;
+                    const x = e.clientX - left;
+                    const y = e.clientY - top;
+                    const rotateX = ((y / height) - 0.5) * -tiltStrength;
+                    const rotateY = ((x / width) - 0.5) * tiltStrength;
+                    el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+                });
+                el.addEventListener('mouseleave', () => {
+                    el.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                });
+            });
+
+            // --- Magnetic Buttons ---
+            const magneticElements = document.querySelectorAll('.magnetic-icon');
+            const magneticStrength = 0.4;
+            magneticElements.forEach(el => {
+                el.addEventListener('mousemove', (e) => {
+                    const rect = el.getBoundingClientRect();
+                    const { width, height, left, top } = rect;
+                    const x = e.clientX - left - width / 2;
+                    const y = e.clientY - top - height / 2;
+                    el.style.transform = `translate(${x * magneticStrength}px, ${y * magneticStrength}px)`;
+                });
+                el.addEventListener('mouseleave', () => {
+                    el.style.transform = 'translate(0, 0)';
+                });
+            });
+
+            // --- OPTIMIZED Particle Canvas --- 
+            const canvas = document.getElementById('hero-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let animationFrameId;
+
+                const setCanvasSize = () => {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                }
+                setCanvasSize();
+
+                let particlesArray;
+                const mouse = { x: null, y: null, radius: 150 };
+
+                window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+
+                class Particle {
+                    constructor(x, y, dX, dY, size, color) {
+                        this.x = x; this.y = y; this.directionX = dX; this.directionY = dY; this.size = size; this.color = color;
+                    }
+                    draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false); ctx.fillStyle = this.color; ctx.fill(); }
+                    update() {
+                        if (this.x > canvas.width || this.x < 0) { this.directionX = -this.directionX; }
+                        if (this.y > canvas.height || this.y < 0) { this.directionY = -this.directionY; }
+                        let dx = mouse.x - this.x; let dy = mouse.y - this.y; let distance = Math.sqrt(dx*dx + dy*dy);
+                        if (distance < mouse.radius + this.size){
+                            if(mouse.x < this.x && this.x < canvas.width - this.size * 10) { this.x += 3; }
+                            if(mouse.x > this.x && this.x > this.size * 10) { this.x -= 3; }
+                            if(mouse.y < this.y && this.y < canvas.height - this.size * 10) { this.y += 3; }
+                            if(mouse.y > this.y && this.y > this.size * 10) { this.y -= 3; }
+                        }
+                        this.x += this.directionX; this.y += this.directionY; this.draw();
+                    }
+                }
+
+                function init() {
+                    particlesArray = [];
+                    let numberOfParticles = (canvas.height * canvas.width) / 25000; // Reduced particle count
+                    for (let i = 0; i < numberOfParticles; i++) {
+                        let size = (Math.random() * 2) + 1;
+                        let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                        let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                        let dX = (Math.random() * .4) - 0.2; let dY = (Math.random() * .4) - 0.2;
+                        let color = 'rgba(173, 216, 230, 0.3)';
+                        particlesArray.push(new Particle(x, y, dX, dY, size, color));
+                    }
+                }
+
+                function animate() {
+                    animationFrameId = requestAnimationFrame(animate);
+                    ctx.clearRect(0,0,innerWidth, innerHeight);
+                    for (let i = 0; i < particlesArray.length; i++) { particlesArray[i].update(); }
+                }
+                
+                const startAnimation = () => { if(!animationFrameId) { animate(); } }
+                const stopAnimation = () => { if(animationFrameId) { cancelAnimationFrame(animationFrameId); animationFrameId = null; } }
+
+                const canvasObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) { startAnimation(); } else { stopAnimation(); }
+                    });
+                }, { threshold: 0 });
+
+                init();
+                canvasObserver.observe(canvas);
+
+                window.addEventListener('resize', () => { setCanvasSize(); init(); });
+            }
+        });
+    </script>
+
+
+<!-- Auth Modal -->
+<div id="auth-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm">
+    <div id="auth-modal-content" class="relative w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl dark:bg-secondary-800 transform transition-all duration-300 ease-in-out scale-95 opacity-0">
+        <!-- Close Button -->
+        <button id="close-auth-modal" class="absolute top-4 right-4 text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+
+        <!-- Login Form -->
+        <form id="login-form" class="space-y-6">
+            <h2 class="text-3xl font-bold text-center text-secondary-900 dark:text-white">Willkommen zurück</h2>
+            <div id="login-error" class="hidden rounded-md bg-red-100 p-3 text-sm text-red-700 dark:bg-red-900/30 dark:text-red-300"></div>
+            <div>
+                <label for="login-email" class="mb-2 block text-sm font-medium text-secondary-700 dark:text-secondary-300">E-Mail</label>
+                <input type="email" id="login-email" class="w-full rounded-lg border border-secondary-300 bg-secondary-50 p-3 text-secondary-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:border-secondary-600 dark:bg-secondary-700 dark:text-white dark:placeholder-secondary-400 transition" required>
+            </div>
+            <div>
+                <label for="login-password" class="mb-2 block text-sm font-medium text-secondary-700 dark:text-secondary-300">Passwort</label>
+                <input type="password" id="login-password" class="w-full rounded-lg border border-secondary-300 bg-secondary-50 p-3 text-secondary-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:border-secondary-600 dark:bg-secondary-700 dark:text-white dark:placeholder-secondary-400 transition" required>
+            </div>
+            <button type="submit" class="w-full rounded-lg bg-primary-500 px-5 py-3 text-center font-semibold text-white hover:bg-primary-600 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 transition-transform transform hover:scale-105">Anmelden</button>
+            <p class="text-sm text-center text-secondary-500 dark:text-secondary-400">
+                Noch kein Konto? <a href="#" id="show-register" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Registrieren</a>
+            </p>
+        </form>
+
+        <!-- Register Form -->
+        <form id="register-form" class="hidden space-y-6">
+            <h2 class="text-3xl font-bold text-center text-secondary-900 dark:text-white">Konto erstellen</h2>
+            <div id="register-error" class="hidden rounded-md bg-red-100 p-3 text-sm text-red-700 dark:bg-red-900/30 dark:text-red-300"></div>
+            <div>
+                <label for="register-username" class="mb-2 block text-sm font-medium text-secondary-700 dark:text-secondary-300">Benutzername</label>
+                <input type="text" id="register-username" class="w-full rounded-lg border border-secondary-300 bg-secondary-50 p-3 text-secondary-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:border-secondary-600 dark:bg-secondary-700 dark:text-white dark:placeholder-secondary-400 transition" required>
+            </div>
+            <div>
+                <label for="register-email" class="mb-2 block text-sm font-medium text-secondary-700 dark:text-secondary-300">E-Mail</label>
+                <input type="email" id="register-email" class="w-full rounded-lg border border-secondary-300 bg-secondary-50 p-3 text-secondary-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:border-secondary-600 dark:bg-secondary-700 dark:text-white dark:placeholder-secondary-400 transition" required>
+            </div>
+            <div>
+                <label for="register-password" class="mb-2 block text-sm font-medium text-secondary-700 dark:text-secondary-300">Passwort</label>
+                <input type="password" id="register-password" class="w-full rounded-lg border border-secondary-300 bg-secondary-50 p-3 text-secondary-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:border-secondary-600 dark:bg-secondary-700 dark:text-white dark:placeholder-secondary-400 transition" required>
+            </div>
+            <button type="submit" class="w-full rounded-lg bg-primary-500 px-5 py-3 text-center font-semibold text-white hover:bg-primary-600 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 transition-transform transform hover:scale-105">Registrieren</button>
+            <p class="text-sm text-center text-secondary-500 dark:text-secondary-400">
+                Bereits ein Konto? <a href="#" id="show-login" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Anmelden</a>
+            </p>
+        </form>
+    </div>
+</div>
+
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js" defer></script>
+<script src="../js/darkmode.js" defer></script>
+<script src="../js/cart.js" defer></script>
+<script src="../js/favorites.js" defer></script>
+    <script src="../js/search.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+</body></html>

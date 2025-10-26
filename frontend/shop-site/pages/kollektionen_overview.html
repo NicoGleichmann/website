@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kollektionen - Lumio Commerce | Kuratierte Fashion Kollektionen</title>
+    <meta name="description" content="Entdecke Lumio's kuratierte Fashion Kollektionen: Urban Glow, Neon Nights, Golden Hour. Premium Pieces organisiert nach Stil und Inspiration." />
+    <script src="../js/theme-init.js"></script>
+    <script src="../js/global-search-handler.js" defer></script>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Flumiocomm8718back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-white text-text-primary dark:bg-secondary-900 dark:text-secondary-200 transition-colors duration-300">
+    <!-- Sticky Header -->
+        <header class="sticky top-0 z-50 bg-white/95 dark:bg-secondary-900/80 backdrop-blur-md border-b border-secondary-100 dark:border-secondary-800 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="shop_homepage.html" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-400 rounded-full flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                        </div>
+                        <span class="font-headline font-bold text-xl text-secondary-900 dark:text-white">Lumio</span>
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="shop_homepage.html" class="text-secondary-600 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Shop</a>
+                    <a href="kollektionen_overview.html" class="text-primary-500 font-medium hover:text-primary-600 transition-colors">Kollektionen</a>
+                    <a href="inspiration_gallery.html" class="text-secondary-600 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Inspiration</a>
+                    <a href="about_lumio.html" class="text-secondary-600 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Über Lumio</a>
+                    <a href="contact_support.html" class="text-secondary-600 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Kontakt</a>
+                    <a href="../portfolio-site/dist/index.html" class="text-secondary-600 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Portfolio</a>
+                </nav>
+
+                <!-- Search Bar -->
+                <div class="hidden lg:flex flex-1 max-w-md mx-8">
+                    <div class="relative w-full">
+                        <input type="text" placeholder="Suche nach Produkten..." class="w-full pl-10 pr-4 py-2 border border-secondary-200 bg-secondary-50 dark:border-secondary-700 dark:bg-secondary-800 rounded-lg focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-500/50 focus:border-primary-500 dark:focus:border-primary-400 transition-all duration-200 outline-none text-secondary-900 dark:text-white" />
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-secondary-400 dark:text-secondary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Actions -->
+                <div class="flex items-center space-x-4">
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="p-2 text-secondary-600 hover:text-primary-500 dark:text-secondary-300 dark:hover:text-primary-400 transition-colors">
+                        <svg class="w-5 h-5 moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        </svg>
+                        <svg class="w-5 h-5 sun-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M12 5a7 7 0 100 14 7 7 0 000-14z"/>
+                        </svg>
+                    </button>
+
+                    <!-- Wishlist -->
+                    <a href="favorites.html" class="p-2 text-secondary-600 hover:text-primary-500 dark:text-secondary-300 dark:hover:text-primary-400 transition-colors relative">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                        <span id="favorite-count" class="absolute -top-1 -right-1 bg-primary-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                    </a>
+
+                    <!-- Shopping Cart -->
+                    <a href="shopping_cart_checkout.html" class="p-2 text-secondary-600 hover:text-primary-500 dark:text-secondary-300 dark:hover:text-primary-400 transition-colors relative">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.293 2.293A1 1 0 005 16h12M7 13v4a2 2 0 002 2h6a2 2 0 002-2v-4"/>
+                        </svg>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-primary-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                    </a>
+
+                    <!-- Mobile Menu Button -->
+                    <button class="md:hidden p-2 text-secondary-600 hover:text-primary-500 dark:text-secondary-300 dark:hover:text-primary-400 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="search-results-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 hidden"></div>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="relative bg-gradient-to-br from-secondary-900 via-secondary-800 to-secondary-900 py-20">
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="font-headline font-bold text-4xl lg:text-5xl text-white mb-6">
+                    Unsere <span class="text-transparent bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text">Kollektionen</span>
+                </h1>
+                <p class="text-xl text-secondary-200 max-w-3xl mx-auto">Jede Kollektion erzählt eine einzigartige Geschichte des Lichts und der Transformation.</p>
+            </div>
+        </section>
+
+        <!-- Urban Glow Collection -->
+        <section id="urban-glow" class="py-16 bg-white dark:bg-secondary-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-headline font-bold text-3xl lg:text-4xl text-secondary-900 dark:text-white mb-4">Urban Glow</h2>
+                <p class="text-secondary-600 dark:text-secondary-300 text-lg max-w-2xl mx-auto">Streetwear mit LED-Akzenten für den urbanen Lifestyle.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="group card-product bg-white dark:bg-secondary-800 rounded-lg overflow-hidden shadow-subtle hover:shadow-product-card dark:shadow-none dark:border dark:border-transparent dark:hover:border-primary-500 transition-all duration-300" data-product-id="1" data-product-name="Urban Glow Jacket" data-product-price="189.99"><div class="relative overflow-hidden"><div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity"><button class="favorite-btn bg-white/90 dark:bg-secondary-900/80 p-2 rounded-full hover:bg-white dark:hover:bg-secondary-700 transition-colors"><svg class="w-4 h-4 text-secondary-600 dark:text-secondary-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg></button></div><img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?q=80&w=2905&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Urban Glow Jacket" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy"/></div><div class="p-4"><h3 class="font-semibold text-secondary-900 dark:text-white mb-2">Urban Glow Jacket</h3><p class="text-secondary-600 dark:text-secondary-400 text-sm mb-3">Premium Streetwear mit LED-Akzenten</p><div class="flex items-center justify-between"><span class="font-bold text-lg text-secondary-900 dark:text-white">€189,99</span><button class="add-to-cart-btn bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">In den Warenkorb</button></div></div></div>
+                <div class="group card-product bg-white dark:bg-secondary-800 rounded-lg overflow-hidden shadow-subtle hover:shadow-product-card dark:shadow-none dark:border dark:border-transparent dark:hover:border-primary-500 transition-all duration-300" data-product-id="4" data-product-name="Lumio Signature Sneakers" data-product-price="159.99"><div class="relative overflow-hidden"><div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity"><button class="favorite-btn bg-white/90 dark:bg-secondary-900/80 p-2 rounded-full hover:bg-white dark:hover:bg-secondary-700 transition-colors"><svg class="w-4 h-4 text-secondary-600 dark:text-secondary-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg></button></div><img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Lumio Signature Sneakers" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy"/></div><div class="p-4"><h3 class="font-semibold text-secondary-900 dark:text-white mb-2">Lumio Signature Sneakers</h3><p class="text-secondary-600 dark:text-secondary-400 text-sm mb-3">Limitierte Edition mit LED-Sohle</p><div class="flex items-center justify-between"><span class="font-bold text-lg text-secondary-900 dark:text-white">€159,99</span><button class="add-to-cart-btn bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">In den Warenkorb</button></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Neon Nights Collection -->
+    <section id="neon-nights" class="py-16 bg-secondary-50 dark:bg-secondary-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-headline font-bold text-3xl lg:text-4xl text-secondary-900 dark:text-white mb-4">Neon Nights</h2>
+                <p class="text-secondary-600 dark:text-secondary-300 text-lg max-w-2xl mx-auto">Elegante Abendmode mit subtilen Glow-Effekten.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="group card-product bg-white dark:bg-secondary-800 rounded-lg overflow-hidden shadow-subtle hover:shadow-product-card dark:shadow-none dark:border dark:border-transparent dark:hover:border-primary-500 transition-all duration-300" data-product-id="2" data-product-name="Neon Nights Dress" data-product-price="249.99"><div class="relative overflow-hidden"><div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity"><button class="favorite-btn bg-white/90 dark:bg-secondary-900/80 p-2 rounded-full hover:bg-white dark:hover:bg-secondary-700 transition-colors"><svg class="w-4 h-4 text-secondary-600 dark:text-secondary-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg></button></div><img src="https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Neon Nights Dress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy"/></div><div class="p-4"><h3 class="font-semibold text-secondary-900 dark:text-white mb-2">Neon Nights Dress</h3><p class="text-secondary-600 dark:text-secondary-400 text-sm mb-3">Elegantes Abendkleid mit Glow-Effekt</p><div class="flex items-center justify-between"><span class="font-bold text-lg text-secondary-900 dark:text-white">€249,99</span><button class="add-to-cart-btn bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">In den Warenkorb</button></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Golden Hour Collection -->
+    <section id="golden-hour" class="py-16 bg-white dark:bg-secondary-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-headline font-bold text-3xl lg:text-4xl text-secondary-900 dark:text-white mb-4">Golden Hour</h2>
+                <p class="text-secondary-600 dark:text-secondary-300 text-lg max-w-2xl mx-auto">Luxuriöse Accessoires mit warmen Goldakzenten.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="group card-product bg-white dark:bg-secondary-800 rounded-lg overflow-hidden shadow-subtle hover:shadow-product-card dark:shadow-none dark:border dark:border-transparent dark:hover:border-primary-500 transition-all duration-300" data-product-id="3" data-product-name="Golden Hour Set" data-product-price="89.99"><div class="relative overflow-hidden"><div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity"><button class="favorite-btn bg-white/90 dark:bg-secondary-900/80 p-2 rounded-full hover:bg-white dark:hover:bg-secondary-700 transition-colors"><svg class="w-4 h-4 text-secondary-600 dark:text-secondary-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg></button></div><img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Golden Hour Accessories" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy"/></div><div class="p-4"><h3 class="font-semibold text-secondary-900 dark:text-white mb-2">Golden Hour Set</h3><p class="text-secondary-600 dark:text-secondary-400 text-sm mb-3">Luxuriöse Accessoires mit Goldakzenten</p><div class="flex items-center justify-between"><span class="font-bold text-lg text-secondary-900 dark:text-white">€89,99</span><button class="add-to-cart-btn bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">In den Warenkorb</button></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-secondary-900 text-white py-16">
+        <!-- Footer content from homepage -->
+    </footer>
+
+<script src="../js/darkmode.js" defer></script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+<script src="../js/cart.js" defer></script>
+<script src="../js/search.js" defer></script>
+</body>
+</html>
